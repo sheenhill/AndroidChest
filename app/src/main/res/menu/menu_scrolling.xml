@@ -1,0 +1,38 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.roy.recycleviewtest.MainActivity">
+    <item
+        android:id="@+id/menu_show"
+        android:title="选项"
+        android:icon="@mipmap/ic_options"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/menu_close"
+        android:title="关闭"
+        android:icon="@mipmap/ic_close"
+        app:showAsAction="always"
+        />
+    <!--<item-->
+        <!--android:id="@+id/action_one"-->
+        <!--android:title="@string/card_name_one"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_two"-->
+        <!--android:title="@string/card_name_two"-->
+        <!--app:showAsAction="never" />-->
+    <!--&lt;!&ndash;<item&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/action_three"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:title="@string/card_name_three"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:showAsAction="never" />&ndash;&gt;-->
+
+    <!--<item-->
+        <!--android:id="@+id/action_four"-->
+        <!--android:title="@string/card_name_four"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_five"-->
+        <!--android:title="@string/card_name_five"-->
+        <!--app:showAsAction="never" />-->
+</menu>

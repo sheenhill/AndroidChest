@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/calculator_activity">
+    <Button
+        android:id="@+id/btn_refresh"
+        android:layout_width="57dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:layout_marginTop="@dimen/margin_l"
+        android:background="@drawable/btn_small"
+        android:text="@string/btn_refresh"
+        android:onClick="refreshClick"
+        />
+
+    <Button
+        android:id="@+id/btn_goon"
+        android:layout_width="57dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="@dimen/margin_l"
+        android:background="@drawable/btn_small"
+        android:text="@string/btn_goon"
+        android:onClick="goonClick"
+         />
+</LinearLayout>

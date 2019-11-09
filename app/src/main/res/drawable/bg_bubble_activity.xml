@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="270"
+        android:startColor="#eacda3"
+        android:endColor="#d6ae7b"/>
+    <!--gradient：渐变-->
+    <!--android:startcolor和android:endcolor分别为起始和结束颜色，-->
+    <!--android:angle是渐变角度，必须为45的整数倍。-->
+    <!--另外渐变默认的模式为android:type="linear"，即线性渐变，-->
+    <!--可以指定渐变为径向渐变，android:type="radial"，-->
+    <!--径向渐变需要指定半径android:gradientradius="50"。-->
+    <!--android:angle网上有各种说法，-->
+    <!--这里，我说说自己的实验结果，渐变的时候，最原始的，-->
+    <!--即android:angle＝“0”时，是从左到右，按照开始颜色到结束颜色来渲染的，-->
+    <!--android:angle＝“90”是从上到下来渲染的，android:angle＝“180”是从右到左来渲染的，-->
+    <!--android:angle＝“360”和android:angle＝“0”是一样的，-->
+    <!--所以这里应该是这样的，渲染时按照最原始的渲染色板（把控件内部看作一块可以绕中心旋转的板子）-->
+    <!--围绕控件中心来旋转相应的度数，即android:angle里面的值就是所需要旋转的角度，-->
+    <!--只是这个旋转角度必须是45的整数倍-->
+</shape>

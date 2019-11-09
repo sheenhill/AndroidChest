@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="3dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/pic_Beauty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        />
+<!--scaleType=“matrix”  是保持原图大小、从左上角的点开始，以矩阵形式绘图。
+scaleType=“fitXY”  是将原图进行横方向（即XY方向）的拉伸后绘制的。
+scaleType=“fitStart” 是将原图沿左上角的点（即matrix方式绘图开始的点），按比例缩放原图绘制而成的。
+scaleType=“fitCenter”  是将原图沿上方居中的点（即matrix方式绘图第一行的居中的点），按比例缩放原图绘制而成的。
+scaleType=“fitEnd” 是将原图沿下方居中的点（即matrix方式绘图最后一行的居中的点），按比例缩放原图绘制而成的。
+scaleType=“Center”  是保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像。
+scaleType=“centerCrop” 不保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像（以填满ImagView为目标，对原图进行裁剪）。
+scaleType=“centerInside” 不保持原图大小，以原图的几何中心点和ImagView的几何中心点为基准，只绘制ImagView大小的图像（以显示完整图片为目标，对原图进行缩放）。
+-->
+</androidx.cardview.widget.CardView>

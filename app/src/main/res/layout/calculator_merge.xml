@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
+    tools:showIn="@layout/calculator_activity"
+    >
+    <TextView
+        android:id="@+id/tv_hint1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_l"
+        android:layout_marginLeft="@dimen/margin_s"
+        android:layout_marginRight="@dimen/margin_s"
+        android:text="@string/tv_hint_loan"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/toolBar" />
+
+    <EditText
+        android:id="@+id/et_loan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_hint_loan"
+        android:inputType="number"
+        android:textSize="@dimen/text_size_big"
+        android:background="@null"
+        android:layout_marginTop="@dimen/margin_s"
+        android:layout_marginBottom="@dimen/margin_s"
+        android:layout_marginStart="@dimen/margin_s"
+        app:layout_constraintEnd_toEndOf="@id/gl_right"
+        app:layout_constraintStart_toStartOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint1" />
+
+    <TextView
+        android:id="@+id/tv_hint2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_s"
+        android:layout_marginRight="@dimen/margin_s"
+        android:layout_marginTop="@dimen/margin_m"
+        android:text="@string/tv_hint_interest"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/et_loan" />
+
+    <EditText
+        android:id="@+id/et_interest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_hint_interest"
+        android:inputType="number"
+        android:textSize="@dimen/text_size"
+        android:background="@null"
+        android:layout_marginTop="@dimen/margin_s"
+        android:layout_marginBottom="@dimen/margin_s"
+        android:layout_marginStart="@dimen/margin_s"
+        app:layout_constraintEnd_toEndOf="@id/gl_right"
+        app:layout_constraintStart_toStartOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint2" />
+
+    <TextView
+        android:id="@+id/tv_hint3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_m"
+        android:layout_marginLeft="@dimen/margin_s"
+        android:layout_marginRight="@dimen/margin_s"
+        android:text="@string/tv_hint_start_end"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/et_interest" />
+
+    <EditText
+        android:id="@+id/et_start_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_s"
+        android:paddingStart="@dimen/margin_m"
+        android:background="@null"
+        android:hint="@string/et_start_time"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_time"
+        app:layout_constraintStart_toStartOf="@id/gl_left"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint3" />
+
+    <Button
+        android:id="@+id/btn_start_time"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/calculator_btn_bg"
+        android:paddingStart="@dimen/margin_s"
+        android:paddingEnd="@dimen/margin_s"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint3"
+        app:layout_constraintEnd_toEndOf="@id/gl_between"
+        />
+
+    <EditText
+        android:id="@+id/et_end_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_s"
+        android:paddingStart="@dimen/margin_m"
+        android:background="@null"
+        android:hint="@string/et_end_time"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/btn_end_time"
+        app:layout_constraintStart_toStartOf="@id/gl_between"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint3" />
+
+    <Button
+        android:id="@+id/btn_end_time"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/calculator_btn_bg"
+        android:paddingStart="@dimen/margin_s"
+        android:paddingEnd="@dimen/margin_s"
+        app:layout_constraintEnd_toEndOf="@id/gl_right"
+        app:layout_constraintTop_toBottomOf="@id/tv_hint3" />
+</merge>
