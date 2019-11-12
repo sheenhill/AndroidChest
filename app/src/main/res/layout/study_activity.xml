@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".activity.StudyActivity">
 
     <com.google.android.material.appbar.AppBarLayout
 
@@ -32,13 +32,13 @@
                 app:layout_collapseMode="pin"
                 tools:ignore="ContentDescription" />
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="@string/card_name_one" />
+                app:title="@string/card_study_plan" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -56,5 +56,5 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         android:src="@mipmap/ic_hour"
-        android:background="@color/colorView"/>
+        android:background="@color/colorPrimaryDark" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

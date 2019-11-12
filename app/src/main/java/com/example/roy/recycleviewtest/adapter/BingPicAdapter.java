@@ -29,20 +29,18 @@ public class BingPicAdapter extends RecyclerView.Adapter<BingPicAdapter.ViewHold
     private Context mContext;
     private List<BingPicBean.ImagesBean> mList;
 
-    private String url;
-    private String copyrightStr;
-    private String[] strArr;
-    private int length0fLineOne;
-    private String tempStr;
-    private SpannableString spannableString;
-    private ForegroundColorSpan colorSpan;
-
     private OnItemClickListener mOnItemClickListener;//给上层暴露接口
 
     public BingPicAdapter(Context mContext, List<BingPicBean.ImagesBean> list) {
         this.mContext = mContext;
         this.mList = list;
         LogUtil.i("BingPicAdapter");
+    }
+
+    //显示不一样的item样式
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @NonNull
@@ -55,24 +53,24 @@ public class BingPicAdapter extends RecyclerView.Adapter<BingPicAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        if(mList.get(position).getUrl()!=null){
-            url="https://www.bing.com"+mList.get(position).getUrl();
-            copyrightStr=mList.get(position).getCopyright().trim();
-            strArr=copyrightStr.split("\\(");
-            length0fLineOne=strArr[0].length();
-            tempStr=strArr[0]+"\n"+strArr[1].replace(")","");
-
-            url=url.replaceFirst("1920x1080", "800x480");
-            spannableString=new SpannableString(tempStr);
-            colorSpan=new ForegroundColorSpan(Color.parseColor("#000000"));
-            spannableString.setSpan(colorSpan,0,length0fLineOne, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            //样式text，参考链接 https://blog.csdn.net/u012551350/article/details/51722893
-
-            Glide.with(mContext).load(url).into(holder.pic);
-            holder.tvCopyright.setText(spannableString);
-        }
-        else
-            LogUtil.i("pic.url=null");
+//        if(mList.get(position).getUrl()!=null){
+//            url="https://www.bing.com"+mList.get(position).getUrl();
+//            copyrightStr=mList.get(position).getCopyright().trim();
+//            strArr=copyrightStr.split("\\(");
+//            length0fLineOne=strArr[0].length();
+//            tempStr=strArr[0]+"\n"+strArr[1].replace(")","");
+//
+//            url=url.replaceFirst("1920x1080", "800x480");
+//            spannableString=new SpannableString(tempStr);
+//            colorSpan=new ForegroundColorSpan(Color.parseColor("#000000"));
+//            spannableString.setSpan(colorSpan,0,length0fLineOne, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+//            //样式text，参考链接 https://blog.csdn.net/u012551350/article/details/51722893
+//
+        Glide.with(mContext).load(mList.get(position).getUrl()).into(holder.pic);
+        holder.tvCopyright.setText(mList.get(position).getNewcopyright());
+//        }
+//        else
+//            LogUtil.i("pic.url=null");
 
         holder.pic.setOnClickListener(new View.OnClickListener() {
             @Override

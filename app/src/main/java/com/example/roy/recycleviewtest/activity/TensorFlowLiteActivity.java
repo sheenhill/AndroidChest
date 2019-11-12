@@ -132,6 +132,11 @@ public class TensorFlowLiteActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
+    protected int setStatusBarColor() {
+        return R.color.colorAccent;
+    }
+
+    @Override
     protected void setContentView() {
         setContentView(R.layout.tensor_flow_lite_activity);
     }

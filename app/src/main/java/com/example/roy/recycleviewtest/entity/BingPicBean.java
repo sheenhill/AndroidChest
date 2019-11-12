@@ -1,5 +1,7 @@
 package com.example.roy.recycleviewtest.entity;
 
+import android.text.SpannableString;
+
 import java.util.List;
 
 public class BingPicBean {
@@ -119,6 +121,17 @@ public class BingPicBean {
         private int top;
         private int bot;
         private List<?> hs;
+        private SpannableString newcopyright;
+
+        public SpannableString getNewcopyright() {
+            return newcopyright;
+        }
+
+        public void setNewcopyright(SpannableString newcopyright) {
+            this.newcopyright = newcopyright;
+        }
+
+
 
         public String getStartdate() {
             return startdate;

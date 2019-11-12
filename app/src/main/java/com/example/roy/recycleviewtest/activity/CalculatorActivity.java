@@ -140,6 +140,10 @@ public class CalculatorActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected int setStatusBarColor() {
+        return R.color.colorAccent;
+    }
 
     @Override
     protected void setContentView() {

@@ -12,8 +12,9 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/app_name" />
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/guide_view_pager"
@@ -29,7 +30,7 @@
         android:layout_height="@dimen/tab_height"
         app:tabMode="fixed"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabIndicatorHeight="@dimen/tab_height"
         app:tabSelectedTextColor="#fff"
         app:layout_constraintStart_toStartOf="parent"

@@ -31,17 +31,17 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
 //        hourPlanAll=LitePal.findAll(HoursPlan.class);
-        HoursPlan mhoursPlanData=mList.get(holder.getAdapterPosition());
+        HoursPlan mhoursPlanData = mList.get(position);
         String getThisStudyTime = String.valueOf(mhoursPlanData.getThisStudyTime());
         String getResidualTime = String.valueOf(mhoursPlanData.getResidualTime());
-        SimpleDateFormat timeSDF = new SimpleDateFormat("MM月dd日 HH:mm");
-        String getTime = timeSDF.format(mhoursPlanData.getTime());
+//        SimpleDateFormat timeSDF = new SimpleDateFormat("MM月dd日 HH:mm");
+        String getTime = mhoursPlanData.getFormatTime();
         holder.tvStudyTime.setText(getThisStudyTime);
-        LogUtil.i("getThisStudyTime");
+//        LogUtil.i("getThisStudyTime");
         holder.tvResidualTime.setText(getResidualTime);
-        LogUtil.i("getResidualTime");
+//        LogUtil.i("getResidualTime");
         holder.tvTime.setText(getTime);
-        LogUtil.i("getTime");
+//        LogUtil.i("getTime");
     }
 
     @NonNull

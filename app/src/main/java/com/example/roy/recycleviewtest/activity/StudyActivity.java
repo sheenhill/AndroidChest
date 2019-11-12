@@ -86,8 +86,8 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.menu_show:
-                return true;
+//            case R.id.menu_show:
+//                return true;
             case R.id.menu_close:
                 finish();
                 return true;
@@ -98,18 +98,25 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initData() {
-        mList = new ArrayList<>();
+//        mList = new ArrayList<>();
         mList = LitePal.findAll(HoursPlan.class);
         LogUtil.i("LitePal.findAll");
-        Intent i = getIntent();
-        data = i.getStringExtra("study_plan");
+//        Intent i = getIntent();
+//        data = i.getStringExtra("study_plan");
+    }
+
+    @Override
+    protected int setStatusBarColor() {
+        return R.color.colorAccent;
     }
 
     @Override
     protected void initView() {
         initSystemBarTint();
         setSupportActionBar(toolbar);
-        toolbar.setTitle(data);
+//        toolbar.setTitle(data);
+        toolbar.setTitle("时光如梭");
+
         emptyView = findViewById(R.id.layout_empty_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(StudyActivity.this, RecyclerView.VERTICAL, true));
         mAdapter = new MyRecyclerViewAdapter(mList);
@@ -126,14 +133,14 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
         studyFab.setOnClickListener(this);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("study_time_return", aPastTime);
-        setResult(RESULT_OK, intent);
-        LogUtil.w(aPastTime);
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent();
+//        intent.putExtra("study_time_return", aPastTime);
+//        setResult(RESULT_OK, intent);
+//        LogUtil.w(aPastTime);
+//        finish();
+//    }
 
     /**
      * 刷新整个页面

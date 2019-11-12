@@ -48,16 +48,17 @@ public class MainActivity extends BaseActivity {
     TabLayout toolbarLayout;
 
     private int count;
-    private StringBuffer sb;
-    private String reData = null;
+    //    private StringBuffer sb;
+//    private String reData = null;
     private IntentFilter intentFilter;
     private MyHandler myHandler;
 
     private NetworkChangeReceiver networkChangeReceiver;
     private TabFragmentAdapter adapter;
-    private String[] titles = {"视界", "器物"};
-    private static final int GET_PIC = 1;
-    private static final int GET_SSQ = 2;
+    //    private String[] titles = {"视界", "器物"};
+    private String[] titles = {"", ""};
+//    private static final int GET_PIC = 1;
+//    private static final int GET_SSQ = 2;
 
     private static class MyHandler extends Handler{
         WeakReference<MainActivity> myHandlerWeakReference;
@@ -80,19 +81,19 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @SuppressLint("MissingSuperCall")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 5:
-                if (resultCode == RESULT_OK) {
-                    reData = data.getStringExtra("study_time_return");
-                    LogUtil.w(reData);
-                }
-                break;
-            default:
-        }
-    }
+//    @SuppressLint("MissingSuperCall")
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        switch (requestCode) {
+//            case 5:
+//                if (resultCode == RESULT_OK) {
+//                    reData = data.getStringExtra("study_time_return");
+//                    LogUtil.w(reData);
+//                }
+//                break;
+//            default:
+//        }
+//    }
 
     @Override
     protected void setContentView() {
@@ -109,31 +110,21 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         setSupportActionBar(toolbar);
-        toolbar.setTitle("如梭  " + sb);
-
+//        toolbar.setTitle("如梭  " + sb); // todo
+        toolbar.setTitle("如梭");
         initViewPager();
         initTabLayout();
-//        mainFragment=guideViewPager.findViewWithTag(R.layout.tabview_main);
-//        mainFragment=(MainFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.guide_view_pager + ":0");
-//        mainFragment=(MainFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
-//        if(mainFragment!=null){
-//            TextView tv=mainFragment.getView().findViewById(R.id.tv_motto_ssq);
-//            LogUtil.i("mainFragment="+mainFragment.toString()+"tv="+tv.toString());
-//        }
-//
-//        LogUtil.i("mainFragment="+mainFragment.toString()+"tv="+tv.toString());
-//        LogUtil.i("mainFragment="+mainFragment.toString()+"\n,id="+mainFragment.getId()+"\n,host="+mainFragment.getHost()+"\n,view="+mainFragment.getView());
-//        LogUtil.i("mainFragment="+mainFragment.toString()+"\n,tabview_main="+guideViewPager.findViewById(R.id.tv_motto_ssq));
-
     }
 
     @Override
-    protected boolean translucentStatusBar() {
-        return true;
+    protected int setStatusBarColor() {
+        return R.color.colorAccent;
     }
+
 
     private void initViewPager() {
         adapter = new TabFragmentAdapter(getSupportFragmentManager(), titles);
+//        adapter = new TabFragmentAdapter(getSupportFragmentManager(), "");
         guideViewPager.setAdapter(adapter);
     }
 
@@ -148,10 +139,10 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
         myHandler=new MyHandler(this);
-        sb = new StringBuffer("已学习");
-        count = LitePal.sum(HoursPlan.class, "thisStudyTime", int.class);
-        sb.append(count);
-        sb.append("小时");
+//        sb = new StringBuffer("已学习");
+//        count = LitePal.sum(HoursPlan.class, "thisStudyTime", int.class);
+//        sb.append(count);
+//        sb.append("小时");
 //        localBroadcastManager = LocalBroadcastManager.getInstance(this);
 
         String[] s = new String[]{Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -174,21 +165,21 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (reData != null) {
-            sb = new StringBuffer("已学习");
-            sb.append(reData);
-            sb.append("小时");
-            toolbar.setTitle(sb);
-            LogUtil.w(reData + "wtf");
-        }
+//        if (reData != null) {
+//            sb = new StringBuffer("已学习");
+//            sb.append(reData);
+//            sb.append("小时");
+//            toolbar.setTitle(sb);
+//            LogUtil.w(reData + "wtf");
+//        }
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -256,7 +247,7 @@ public class MainActivity extends BaseActivity {
 //                getBeauty();
 //                LogUtil.i("有网了！girlPicUrlList:" + girlPicUrlList);
 //                getShuangseqiu();
-                ToastUtils.showShort(context, "network available");
+//                ToastUtils.showShort(context, "network available");
             } else
                 ToastUtils.showShort(context, "network unavailable");
         }

@@ -13,10 +13,11 @@
     <string name="item_content_null"> </string>
     <string name="motto_empty">首先，鼓励自己。</string>
 
-    <string name="card_name_one">编程学习计划</string>
-    <string name="card_name_two">复利计息计算器</string>
-    <string name="card_name_three">气泡</string>
-    <string name="card_name_four">人工智障识图</string>
+    <string name="card_study_plan">编程学习计划</string>
+    <string name="card_calculator">复利计息计算器</string>
+    <string name="card_bubble">气泡</string>
+    <string name="card_TF_lite">人工智障识图</string>
+    <string name="card_nothing">待定...</string>
     <string name="card_name_five">本地广播测试</string>
 
     <string name="text_explanation">实际天数计算，考虑了至少有一年闰年多一天\n

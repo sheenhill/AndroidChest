@@ -16,44 +16,43 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="GoogleAppIndexingWarning">
         <!--欢迎页-->
-        <!--<activity-->
-            <!--android:name=".activity.SplashActivity"-->
-            <!--android:theme="@style/AppTheme.NoActionBar.Fullscreen">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
         <activity
-        android:name=".MainActivity"
-        android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            android:name=".activity.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!--<activity-->
-            <!--android:name=".MainActivity"-->
-            <!--android:label="@string/app_name"-->
-            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <!--android:name=".MainActivity"-->
+        <!--android:theme="@style/AppTheme.NoActionBar">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN" />-->
+        <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
+        <!--</activity>-->
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.StudyActivity"
-            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="com.example.roy.recycleviewtest.STUDY_START" />
+            <!--<intent-filter>-->
+            <!--<action android:name="com.example.roy.recycleviewtest.STUDY_START" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.example.roy.recycleviewtest.STUDY_ACTIVITY" />
-            </intent-filter>
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--<category android:name="com.example.roy.recycleviewtest.STUDY_ACTIVITY" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".activity.CalculatorActivity"
-            android:label="@string/card_name_two"
+            android:label="@string/card_calculator"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.BubbleActivity"
@@ -75,7 +74,9 @@
          android:name="android.support.FILE_PROVIDER_PATHS"
          android:resource="@xml/file_paths"/>
          </provider>
-        <activity android:name=".activity.TensorFlowLiteActivity"></activity>
+        <activity
+            android:name=".activity.TensorFlowLiteActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
