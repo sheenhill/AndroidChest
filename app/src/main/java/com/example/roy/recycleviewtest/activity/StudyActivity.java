@@ -1,7 +1,10 @@
 package com.example.roy.recycleviewtest.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.roy.recycleviewtest.R;
-import com.example.roy.recycleviewtest.adapter.MyRecyclerViewAdapter;
+import com.example.roy.recycleviewtest.adapter.StudyPlanRViewAdapter;
 import com.example.roy.recycleviewtest.base.BaseActivity;
 import com.example.roy.recycleviewtest.entity.HoursPlan;
 import com.example.roy.recycleviewtest.util.LogUtil;
@@ -53,17 +56,34 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
 
+    private static final int STUDY_PLAN_ALL_FOUND=1;
 
-    private List<HoursPlan> mList;
-    MyRecyclerViewAdapter mAdapter;
+    private static List<HoursPlan> mList;
+    private static StudyPlanRViewAdapter mAdapter;
     private String data;
     private String aPastTime;
+    private int counts;
+
+    @SuppressLint("HandlerLeak")
+    static Handler mHandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case STUDY_PLAN_ALL_FOUND:
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    };
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.study_fab) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//                LogUtil.v("onClick","fab click");
+                LogUtil.v("onClick","fab click");
             addOneTimeData(1);
         }
     }
@@ -98,11 +118,37 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initData() {
-//        mList = new ArrayList<>();
-        mList = LitePal.findAll(HoursPlan.class);
+        mList = new ArrayList<>();
+        findStudyListFromLocalDBAsync();
         LogUtil.i("LitePal.findAll");
 //        Intent i = getIntent();
 //        data = i.getStringExtra("study_plan");
+    }
+
+    // 分段读取数据库数据
+    private void findStudyListFromLocalDBAsync() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mList.clear();
+                counts=LitePal.count(HoursPlan.class); // HoursPlan表中数据条数
+                LogUtil.i("counts:"+counts);
+                mList.addAll(LitePal.limit(20).offset(0).find(HoursPlan.class));
+                mHandler.sendEmptyMessage(STUDY_PLAN_ALL_FOUND);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int i;
+                        for(i=1;i<counts/20;i++)
+                        mList.addAll(LitePal.limit(20).offset(i*20).find(HoursPlan.class));
+                i++;
+                mList.addAll(LitePal.limit(counts%20).offset(i*20).find(HoursPlan.class));
+                LogUtil.i("mList.size():"+mList.size());
+                    mHandler.sendEmptyMessage(STUDY_PLAN_ALL_FOUND);
+                    }
+                }).start();
+            }
+        }).start();
     }
 
     @Override
@@ -118,8 +164,8 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
         toolbar.setTitle("时光如梭");
 
         emptyView = findViewById(R.id.layout_empty_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(StudyActivity.this, RecyclerView.VERTICAL, true));
-        mAdapter = new MyRecyclerViewAdapter(mList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(StudyActivity.this, RecyclerView.VERTICAL, true)); // 倒序显示
+        mAdapter = new StudyPlanRViewAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setEmptyView(emptyView);
 //        //不将数据copy，再进行数据刷新，会导致recyclerView无法显示本次登录的数据

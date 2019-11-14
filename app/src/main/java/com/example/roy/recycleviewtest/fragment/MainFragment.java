@@ -61,13 +61,13 @@ public class MainFragment extends Fragment implements BingPicAdapter.OnItemClick
     private static final int GET_PIC = 1;
     private static final int GET_SSQ = 2;
 
-    private List<BingPicBean.ImagesBean> bingPicList;
+    private static List<BingPicBean.ImagesBean> bingPicList;
 //    final List<BingPicBean.ImagesBean> bingPicList=new ArrayList<>();
-    private BingPicAdapter bingPicAdapter;
-    private String tv_Shuangseqiu;
+    private static BingPicAdapter bingPicAdapter;
+    private  String tv_Shuangseqiu;
 
         @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
+    private static Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -121,7 +121,7 @@ public class MainFragment extends Fragment implements BingPicAdapter.OnItemClick
     @Override
     public void onItemClick(View view, int position) {
         LogUtil.i("在fragment中获得的recyclerView当前item的图片url：  "+"https://www.bing.com"+bingPicList.get(position).getUrl());
-        Toast.makeText(getActivity(), bingPicList.get(position).getUrl(), Toast.LENGTH_SHORT);
+        Toast.makeText(getActivity(), bingPicList.get(position).getCopyright(), Toast.LENGTH_SHORT).show();
     }
 //    private String yuce() {
 //        Set<Integer> integers = new TreeSet<>();

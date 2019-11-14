@@ -22,7 +22,7 @@ public class BottomDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // 去掉默认的标题
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        frView = inflater.inflate(R.layout.fragment_diaglog_bottom, null);
+        frView = inflater.inflate(R.layout.fragment_dialog_bottom, null);
         return frView;
     }
 

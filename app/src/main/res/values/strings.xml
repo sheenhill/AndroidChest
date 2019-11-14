@@ -20,6 +20,8 @@
     <string name="card_nothing">待定...</string>
     <string name="card_name_five">本地广播测试</string>
 
+    <string name="pending">待定..</string>
+
     <string name="text_explanation">实际天数计算，考虑了至少有一年闰年多一天\n
 本利和=10000*(1+0.00012)^(365*5+1)=12449.64元\n
 收益=12449.64-10000=2449.64元。\n

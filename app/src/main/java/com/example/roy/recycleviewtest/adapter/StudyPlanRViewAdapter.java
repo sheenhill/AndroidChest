@@ -3,6 +3,8 @@ package com.example.roy.recycleviewtest.adapter;
 import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,26 +12,24 @@ import android.widget.TextView;
 
 import com.example.roy.recycleviewtest.R;
 import com.example.roy.recycleviewtest.entity.HoursPlan;
-import com.example.roy.recycleviewtest.util.LogUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+public class StudyPlanRViewAdapter extends RecyclerView.Adapter<StudyPlanRViewAdapter.ViewHolder> {
     private List<HoursPlan> mList;
 
-    public MyRecyclerViewAdapter(List<HoursPlan> list){
+    public StudyPlanRViewAdapter(List<HoursPlan> list){
         this.mList=list;
     }
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList==null?0:mList.size();
     }
 
     @SuppressLint("SimpleDateFormat")
     @Override
-    public void onBindViewHolder(@NonNull final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final StudyPlanRViewAdapter.ViewHolder holder, int position) {
 //        hourPlanAll=LitePal.findAll(HoursPlan.class);
         HoursPlan mhoursPlanData = mList.get(position);
         String getThisStudyTime = String.valueOf(mhoursPlanData.getThisStudyTime());
@@ -45,7 +45,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     @NonNull
-    public MyRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StudyPlanRViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card,parent,false);
         return new ViewHolder(view);
     }

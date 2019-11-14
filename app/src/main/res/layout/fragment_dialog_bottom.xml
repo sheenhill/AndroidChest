@@ -9,18 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_m"
         android:background="@drawable/btn_big"
-        android:text="明明就"/>
+        android:hint="@string/pending"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_m"
         android:background="@drawable/btn_big"
-        android:text="算什么男人"/>
+        android:hint="@string/pending"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_m"
         android:background="@drawable/btn_big"
-        android:text="说好别哭"/>
+        android:hint="@string/pending"/>
 
 </LinearLayout>
