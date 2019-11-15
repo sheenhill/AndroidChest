@@ -29,6 +29,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -56,10 +58,12 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
 
-    private static final int STUDY_PLAN_ALL_FOUND=1;
+    private static final int STUDY_PLAN_PART_FOUND=1;
+    private static final int STUDY_PLAN_LEFTOVER_FOUND=2;
 
     private static List<HoursPlan> mList;
     private static StudyPlanRViewAdapter mAdapter;
+    private static int countOfHoursPlanList; // HoursPlan表中数据条数
     private String data;
     private String aPastTime;
     private int counts;
@@ -69,8 +73,14 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
-                case STUDY_PLAN_ALL_FOUND:
+                case STUDY_PLAN_PART_FOUND:
                     mAdapter.notifyDataSetChanged();
+                    AsyncAddStudyPlanFromLocalDB();
+                    break;
+                case STUDY_PLAN_LEFTOVER_FOUND:
+//                    mAdapter.notifyItemRangeInserted(20,countOfHoursPlanList-20);
+                    mAdapter.notifyItemInserted(mList.size());
+//                    mAdapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
@@ -119,34 +129,50 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initData() {
         mList = new ArrayList<>();
-        findStudyListFromLocalDBAsync();
+        countOfHoursPlanList=LitePal.count(HoursPlan.class);
+
+        if(countOfHoursPlanList>20){
+            AsyncfindStudyListFromLocalDB();
+        }else{
+            mList.addAll(LitePal.findAll(HoursPlan.class));
+            Collections.reverse(mList);
+        }
+
         LogUtil.i("LitePal.findAll");
 //        Intent i = getIntent();
 //        data = i.getStringExtra("study_plan");
     }
 
     // 分段读取数据库数据
-    private void findStudyListFromLocalDBAsync() {
+    private void AsyncfindStudyListFromLocalDB() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 mList.clear();
-                counts=LitePal.count(HoursPlan.class); // HoursPlan表中数据条数
-                LogUtil.i("counts:"+counts);
-                mList.addAll(LitePal.limit(20).offset(0).find(HoursPlan.class));
-                mHandler.sendEmptyMessage(STUDY_PLAN_ALL_FOUND);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        int i;
-                        for(i=1;i<counts/20;i++)
-                        mList.addAll(LitePal.limit(20).offset(i*20).find(HoursPlan.class));
-                i++;
-                mList.addAll(LitePal.limit(counts%20).offset(i*20).find(HoursPlan.class));
-                LogUtil.i("mList.size():"+mList.size());
-                    mHandler.sendEmptyMessage(STUDY_PLAN_ALL_FOUND);
-                    }
-                }).start();
+                    mList.addAll(LitePal.limit(20).offset(countOfHoursPlanList-20).find(HoursPlan.class));
+                    Collections.reverse(mList);
+//                    HoursPlan hp=new HoursPlan();
+//                    for(int i=0;i<countOfHoursPlanList-20;i++){
+//                        mList.add(hp);
+//                    }
+                    mHandler.sendEmptyMessage(STUDY_PLAN_PART_FOUND);
+            }
+        }).start();
+    }
+    private static void AsyncAddStudyPlanFromLocalDB() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<HoursPlan> list=new ArrayList<>();
+                list.addAll(LitePal.limit(countOfHoursPlanList-20).offset(0).find(HoursPlan.class));
+                Collections.reverse(list);
+                int i;
+                for(i=0;i<list.size();i++){
+                    mList.add(list.get(i));
+//                            mList.addAll(list);
+//                            LogUtil.i("mList.size():"+mList.size());
+                    mHandler.sendEmptyMessage(STUDY_PLAN_LEFTOVER_FOUND);
+                }
             }
         }).start();
     }
@@ -164,7 +190,7 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
         toolbar.setTitle("时光如梭");
 
         emptyView = findViewById(R.id.layout_empty_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(StudyActivity.this, RecyclerView.VERTICAL, true)); // 倒序显示
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(StudyActivity.this, RecyclerView.VERTICAL, false));
         mAdapter = new StudyPlanRViewAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setEmptyView(emptyView);
@@ -242,11 +268,13 @@ refreshData();
         LogUtil.i("addOneTimeData");
         if (hoursPlan.isSaved()) {
             LogUtil.i("isSaved!");
-            int count = LitePal.count(HoursPlan.class);
-            if (mList == null)
-                LogUtil.i("mList为空");
+//            int count = LitePal.count(HoursPlan.class)
+            List<HoursPlan> list=new ArrayList<>();
+            list.addAll(mList);
+            mList.clear();
             mList.add(hoursPlan);
-            mAdapter.notifyItemInserted(count);
+            mList.addAll(list);
+            mAdapter.notifyItemInserted(0);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             aPastTime = String.valueOf(pastTime);
 //        toolbar.setTitle("已学习"+count+"小时");  TODO:实时更新title数据

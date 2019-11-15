@@ -18,6 +18,7 @@ import java.util.List;
 
 public class StudyPlanRViewAdapter extends RecyclerView.Adapter<StudyPlanRViewAdapter.ViewHolder> {
     private List<HoursPlan> mList;
+    HoursPlan mhoursPlanData;
 
     public StudyPlanRViewAdapter(List<HoursPlan> list){
         this.mList=list;
@@ -31,17 +32,15 @@ public class StudyPlanRViewAdapter extends RecyclerView.Adapter<StudyPlanRViewAd
     @Override
     public void onBindViewHolder(@NonNull final StudyPlanRViewAdapter.ViewHolder holder, int position) {
 //        hourPlanAll=LitePal.findAll(HoursPlan.class);
-        HoursPlan mhoursPlanData = mList.get(position);
-        String getThisStudyTime = String.valueOf(mhoursPlanData.getThisStudyTime());
-        String getResidualTime = String.valueOf(mhoursPlanData.getResidualTime());
-//        SimpleDateFormat timeSDF = new SimpleDateFormat("MM月dd日 HH:mm");
-        String getTime = mhoursPlanData.getFormatTime();
-        holder.tvStudyTime.setText(getThisStudyTime);
+        mhoursPlanData= mList.get(position);
+        if(mhoursPlanData!=null){
+            holder.tvStudyTime.setText(mhoursPlanData.getThisStudyTime());
 //        LogUtil.i("getThisStudyTime");
-        holder.tvResidualTime.setText(getResidualTime);
+            holder.tvResidualTime.setText(mhoursPlanData.getResidualTime());
 //        LogUtil.i("getResidualTime");
-        holder.tvTime.setText(getTime);
+            holder.tvTime.setText(mhoursPlanData.getFormatTime());
 //        LogUtil.i("getTime");
+        }
     }
 
     @NonNull

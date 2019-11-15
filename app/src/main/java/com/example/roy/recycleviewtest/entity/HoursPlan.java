@@ -12,11 +12,10 @@ public class HoursPlan extends LitePalSupport{
     private int residualTime;
     private Date time;
 
-
     private String formatTime;
 
-    public int getThisStudyTime() {
-        return thisStudyTime;
+    public String getThisStudyTime() {
+        return String.valueOf(thisStudyTime);
     }
 
     public void setThisStudyTime(int thisStudyTime) {
@@ -33,8 +32,8 @@ public class HoursPlan extends LitePalSupport{
     }
 
 
-    public int getResidualTime() {
-        return residualTime;
+    public String getResidualTime() {
+        return String.valueOf(residualTime);
     }
 
     public void setResidualTime(int residualTime) {
@@ -42,8 +41,11 @@ public class HoursPlan extends LitePalSupport{
     }
 
     public String getFormatTime() {
+        if(getTime()!=null){
         SimpleDateFormat timeSDF = new SimpleDateFormat("MM月dd日 HH:mm");
         return timeSDF.format(getTime());
+        }
+        return null;
     }
 
 }
