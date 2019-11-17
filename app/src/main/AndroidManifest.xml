@@ -29,7 +29,7 @@
         <!--</activity>-->
         <activity
         android:name=".MainActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.Light.NoActionBar">
         <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -42,7 +42,7 @@
             <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".activity.StudyActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Light.NoActionBar">
             <!--<intent-filter>-->
             <!--<action android:name="com.example.roy.recycleviewtest.STUDY_START" />-->
 
@@ -53,16 +53,16 @@
         <activity
             android:name=".activity.CalculatorActivity"
             android:label="@string/card_calculator"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Light.NoActionBar" />
         <activity
             android:name=".activity.BubbleActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Light.NoActionBar" />
         <activity
             android:name=".activity.ShareActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Light.NoActionBar" />
         <activity
             android:name=".activity.GuideActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Light.NoActionBar" />
 
         <!-- FileProvider配置访问路径，适配7.0及其以上 -->
          <provider
@@ -76,7 +76,7 @@
          </provider>
         <activity
             android:name=".activity.TensorFlowLiteActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

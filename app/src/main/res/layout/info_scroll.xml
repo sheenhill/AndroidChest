@@ -8,5 +8,5 @@
         android:id="@+id/tv_aggregate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_big" />
+        android:textSize="@dimen/text_size_Title" />
 </androidx.core.widget.NestedScrollView>

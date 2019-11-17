@@ -290,7 +290,7 @@ public class TensorFlowLiteActivity extends BaseActivity implements View.OnClick
             if (hasNetwork) {
                 sendRequestWithHttpURLConnection(r);
             } else {
-                transText.setTextColor(getResources().getColor(R.color.colorText));
+                transText.setTextColor(getResources().getColor(R.color.textColorPrimary));
                 transText.setTextSize(14);
                 transText.setText("小老弟，你是不是网不好哇！");
             }

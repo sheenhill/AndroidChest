@@ -184,7 +184,7 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initView() {
-        initSystemBarTint();
+//        initSystemBarTint();
         setSupportActionBar(toolbar);
 //        toolbar.setTitle(data);
         toolbar.setTitle("时光如梭");

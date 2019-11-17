@@ -3,10 +3,10 @@
 <item android:state_pressed="false" >
     <shape >
         <corners android:radius="@dimen/margin_m" />
-        <solid android:color="@color/colorAir"/>
+        <solid android:color="@color/textColorUnimportant"/>
         <stroke
             android:width="2dp"
-            android:color="@color/colorView"/></shape>
+            android:color="@color/colorViewBackground"/></shape>
 </item>
 
 <item android:state_pressed="true" >
@@ -14,7 +14,7 @@
         <corners android:radius="@dimen/margin_m" />
         <stroke
             android:width="2dp"
-            android:color="@color/colorAir"/>
+            android:color="@color/textColorUnimportant"/>
     </shape>
     </item>
 </selector>
