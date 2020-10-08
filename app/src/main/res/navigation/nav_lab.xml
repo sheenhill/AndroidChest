@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/laboratoryFragment">
+
+    <fragment
+        android:id="@+id/typeSwitcherFragment"
+        android:name="com.example.roy.recycleviewtest.laboratory.TypeSwitcherFragment"
+        android:label="TypeSwitcherFragment" />
+    <fragment
+        android:id="@+id/laboratoryFragment"
+        android:name="com.example.roy.recycleviewtest.fragment.LaboratoryFragment"
+        android:label="LaboratoryFragment" >
+        <action
+            android:id="@+id/action_laboratoryFragment_to_typeSwitcherFragment"
+            app:destination="@id/typeSwitcherFragment" />
+        <action
+            android:id="@+id/action_laboratoryFragment_to_pageIndicatorFragment"
+            app:destination="@id/pagerIndicatorFragment" />
+        <action
+            android:id="@+id/action_laboratoryFragment_to_countdownFragment"
+            app:destination="@id/countdownFragment"
+            app:enterAnim="@android:anim/accelerate_decelerate_interpolator"
+            app:exitAnim="@anim/pickerview_dialog_scale_in" />
+        <action
+            android:id="@+id/action_laboratoryFragment_to_crawlerFragment"
+            app:destination="@id/crawlerFragment"
+            app:enterAnim="@anim/enter_left_to_right_accelerate_decelerate"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/pagerIndicatorFragment"
+        android:name="com.example.roy.recycleviewtest.laboratory.PageIndicatorFragment"
+        android:label="PagerIndicatorFragment" />
+    <fragment
+        android:id="@+id/countdownFragment"
+        android:name="com.example.roy.recycleviewtest.laboratory.CountdownFragment"
+        android:label="CountdownFragment" />
+    <fragment
+        android:id="@+id/crawlerFragment"
+        android:name="com.sheenhill.lotterydemo.CrawlerFragment"
+        android:label="CrawlerFragment" />
+</navigation>

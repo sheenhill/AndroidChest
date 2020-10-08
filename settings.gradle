@@ -1,1 +1,4 @@
-include ':app'
+include ':animatordemo'
+include ':ar_solarsystem'
+include ':common'
+include ':app', ':pageindicator', ':typeswitcher',':lotterydemo'

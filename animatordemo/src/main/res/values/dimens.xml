@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp_0">0dp</dimen>
+    <integer name="angle_0">0</integer>
+
+    <dimen name="dp_300">300dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+
+    <dimen name="dp_170">170dp</dimen>
+    <dimen name="dp_150">150dp</dimen>
+    <dimen name="dp_130">130dp</dimen>
+    <dimen name="dp_120">120dp</dimen>
+    <dimen name="dp_85">85dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_69">69dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_35">35dp</dimen>
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_125">125dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+
+
+    <dimen name="u_dp_170">-170dp</dimen>
+    <dimen name="u_dp_150">-150dp</dimen>
+    <dimen name="u_dp_130">-130dp</dimen>
+    <dimen name="u_dp_120">-120dp</dimen>
+    <dimen name="u_dp_85">-85dp</dimen>
+    <dimen name="u_dp_50">-50dp</dimen>
+    <dimen name="u_dp_69">-69dp</dimen>
+    <dimen name="u_dp_40">-40dp</dimen>
+    
+    <integer name="angle_30">30</integer>
+    <integer name="angle_60">60</integer>
+    <integer name="angle_90">90</integer>
+    <integer name="u_angle_30">-30</integer>
+    <integer name="u_angle_60">-60</integer>
+    <integer name="u_angle_90">-90</integer>
+
+</resources>

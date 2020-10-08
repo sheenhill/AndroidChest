@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.roy.recycleviewtest.R;
 import com.example.roy.recycleviewtest.entity.BingPicBean;
+import com.example.roy.recycleviewtest.interfaces.ItemClickListener;
 import com.example.roy.recycleviewtest.util.LogUtil;
 
 import java.util.List;
@@ -29,7 +30,8 @@ public class BingPicAdapter extends RecyclerView.Adapter<BingPicAdapter.ViewHold
     private Context mContext;
     private List<BingPicBean.ImagesBean> mList;
 
-    private OnItemClickListener mOnItemClickListener;//给上层暴露接口
+
+    private ItemClickListener mItemClickListener;//回调接口
 
     public BingPicAdapter(Context mContext, List<BingPicBean.ImagesBean> list) {
         this.mContext = mContext;
@@ -52,7 +54,6 @@ public class BingPicAdapter extends RecyclerView.Adapter<BingPicAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-
 //        if(mList.get(position).getUrl()!=null){
 //            url="https://www.bing.com"+mList.get(position).getUrl();
 //            copyrightStr=mList.get(position).getCopyright().trim();
@@ -75,7 +76,7 @@ public class BingPicAdapter extends RecyclerView.Adapter<BingPicAdapter.ViewHold
         holder.pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOnItemClickListener.onItemClick(view,position);
+                mItemClickListener.onItemClick(view,position);
             }
         });
     }
@@ -99,10 +100,10 @@ public class BingPicAdapter extends RecyclerView.Adapter<BingPicAdapter.ViewHold
     }
 
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-    }
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
+//    public interface OnItemClickListener {
+//        void onItemClick(View view, int position);
+//    }
+    public void setOnItemClickListener(ItemClickListener onItemClickListener) {
+        mItemClickListener = onItemClickListener;
     }
 }

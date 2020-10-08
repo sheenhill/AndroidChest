@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    TypeSwitcher  -->
+    <declare-styleable name="TypeSwitcher">
+        <attr name="text_size" format="dimension" />
+        <attr name="selected_text_size" format="dimension" />
+        <attr name="unselected_text_size" format="dimension" />
+        <attr name="unselected_text_color" format="reference" />
+        <attr name="unselected_color" format="reference" />
+        <attr name="selected_color" format="reference" />
+        <attr name="selected_text_color" format="reference" />
+<!--        圆角-->
+        <attr name="corners_radius" format="dimension" />
+
+        <attr name="item_arrays" format="string" />
+<!--        回调中返回的数组  eg:"1,3,商品"-->
+        <attr name="value_arrays" format="string" />
+<!--        是否等宽-->
+        <attr name="equal_width" format="boolean" />
+<!--        是否撑满-->
+        <attr name="stretch" format="boolean" />
+<!--        默认选择的位置-->
+        <attr name="default_selection" format="integer" />
+<!--        标识位-->
+        <attr name="identifier" format="string" />
+    </declare-styleable>
+</resources>

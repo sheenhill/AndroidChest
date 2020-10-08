@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AnimatorDemo</string>
+
+    <integer name="animator_duration">1000</integer>
+</resources>

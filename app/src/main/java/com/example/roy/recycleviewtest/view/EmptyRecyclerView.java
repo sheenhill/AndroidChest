@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
+/* 判断显示空数据的rv */
 public class EmptyRecyclerView extends RecyclerView {
     private View emptyView;
-   // private static final String TAG = "hiwhitley";
 
     final private AdapterDataObserver observer = new AdapterDataObserver() {
         @Override
@@ -17,7 +17,6 @@ public class EmptyRecyclerView extends RecyclerView {
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
-   //         Log.i(TAG, "onItemRangeInserted" + itemCount);
             checkIfEmpty();
         }
 
@@ -40,6 +39,7 @@ public class EmptyRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
     }
 
+    // 判断数据是否为空
     private void checkIfEmpty() {
         if (emptyView != null && getAdapter() != null) {
             final boolean emptyViewVisible =

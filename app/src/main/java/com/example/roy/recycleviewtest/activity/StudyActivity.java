@@ -1,8 +1,6 @@
 package com.example.roy.recycleviewtest.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
@@ -10,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -30,12 +29,10 @@ import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class StudyActivity extends BaseActivity implements View.OnClickListener {
 
@@ -58,29 +55,19 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
 
-    private static final int STUDY_PLAN_PART_FOUND=1;
-    private static final int STUDY_PLAN_LEFTOVER_FOUND=2;
+    private static final int OTHERS_FOUND = 0x0001;
 
     private static List<HoursPlan> mList;
     private static StudyPlanRViewAdapter mAdapter;
     private static int countOfHoursPlanList; // HoursPlan表中数据条数
-    private String data;
-    private String aPastTime;
-    private int counts;
 
     @SuppressLint("HandlerLeak")
-    static Handler mHandler=new Handler(){
+    static Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
-                case STUDY_PLAN_PART_FOUND:
+            switch (msg.what) {
+                case OTHERS_FOUND:
                     mAdapter.notifyDataSetChanged();
-                    AsyncAddStudyPlanFromLocalDB();
-                    break;
-                case STUDY_PLAN_LEFTOVER_FOUND:
-//                    mAdapter.notifyItemRangeInserted(20,countOfHoursPlanList-20);
-                    mAdapter.notifyItemInserted(mList.size());
-//                    mAdapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
@@ -92,15 +79,49 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.study_fab) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                LogUtil.v("onClick","fab click");
-            addOneTimeData(1);
+            LogUtil.v("onClick", "fab click");
+            if (mList.isEmpty())
+                addOneTimeData(1);
+            else if (new Date().getDay() != mList.get(mList.size() - 1).getTime().getDay())
+                addOneTimeData(1);
+            else {
+                LogUtil.i("今日已打卡");
+            }
         }
     }
 
     @Override
-    protected void setContentView() {
-        setContentView(R.layout.study_activity);
+    protected int getLayoutId() {
+        return R.layout.study_activity;
+    }
+
+    @Override
+    protected void initView() {
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("时光如梭");
+        mList = new ArrayList<>();
+        emptyView = findViewById(R.id.layout_empty_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(StudyActivity.this, RecyclerView.VERTICAL, true));
+        mAdapter = new StudyPlanRViewAdapter(mList);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setEmptyView(emptyView);
+    }
+
+    @Override
+    protected void initData() {
+        countOfHoursPlanList = LitePal.count(HoursPlan.class);
+        if (countOfHoursPlanList > 20) {
+            findPartData();
+        } else {
+            mList.addAll(LitePal.findAll(HoursPlan.class));
+            mAdapter.notifyDataSetChanged();
+        }
+        LogUtil.i("LitePal.findAll:"+Arrays.toString(mList.toArray()));
+    }
+
+    @Override
+    protected void initEvent() {
+        studyFab.setOnClickListener(this);
     }
 
     /**
@@ -116,8 +137,9 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-//            case R.id.menu_show:
-//                return true;
+            case R.id.menu_show:
+                deleteAll();
+                return true;
             case R.id.menu_close:
                 finish();
                 return true;
@@ -126,53 +148,22 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
 //        return true;
     }
 
-    @Override
-    protected void initData() {
-        mList = new ArrayList<>();
-        countOfHoursPlanList=LitePal.count(HoursPlan.class);
-
-        if(countOfHoursPlanList>20){
-            AsyncfindStudyListFromLocalDB();
-        }else{
-            mList.addAll(LitePal.findAll(HoursPlan.class));
-            Collections.reverse(mList);
-        }
-
-        LogUtil.i("LitePal.findAll");
-//        Intent i = getIntent();
-//        data = i.getStringExtra("study_plan");
-    }
 
     // 分段读取数据库数据
-    private void AsyncfindStudyListFromLocalDB() {
+    private void findPartData() {
+        mList.addAll(LitePal.limit(20).find(HoursPlan.class));
+        mAdapter.notifyDataSetChanged();
+        findOthersDataAsync();
+    }
+
+    /* 加载剩余代码 */
+    private static void findOthersDataAsync() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 mList.clear();
-                    mList.addAll(LitePal.limit(20).offset(countOfHoursPlanList-20).find(HoursPlan.class));
-                    Collections.reverse(mList);
-//                    HoursPlan hp=new HoursPlan();
-//                    for(int i=0;i<countOfHoursPlanList-20;i++){
-//                        mList.add(hp);
-//                    }
-                    mHandler.sendEmptyMessage(STUDY_PLAN_PART_FOUND);
-            }
-        }).start();
-    }
-    private static void AsyncAddStudyPlanFromLocalDB() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<HoursPlan> list=new ArrayList<>();
-                list.addAll(LitePal.limit(countOfHoursPlanList-20).offset(0).find(HoursPlan.class));
-                Collections.reverse(list);
-                int i;
-                for(i=0;i<list.size();i++){
-                    mList.add(list.get(i));
-//                            mList.addAll(list);
-//                            LogUtil.i("mList.size():"+mList.size());
-                    mHandler.sendEmptyMessage(STUDY_PLAN_LEFTOVER_FOUND);
-                }
+                mList.addAll(LitePal.findAll(HoursPlan.class));
+                mHandler.sendEmptyMessage(OTHERS_FOUND);
             }
         }).start();
     }
@@ -182,74 +173,19 @@ public class StudyActivity extends BaseActivity implements View.OnClickListener 
         return R.color.colorAccent;
     }
 
-    @Override
-    protected void initView() {
-//        initSystemBarTint();
-        setSupportActionBar(toolbar);
-//        toolbar.setTitle(data);
-        toolbar.setTitle("时光如梭");
-
-        emptyView = findViewById(R.id.layout_empty_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(StudyActivity.this, RecyclerView.VERTICAL, false));
-        mAdapter = new StudyPlanRViewAdapter(mList);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setEmptyView(emptyView);
-//        //不将数据copy，再进行数据刷新，会导致recyclerView无法显示本次登录的数据
-//        mHourPlanList.clear();
-//        mHourPlanList.addAll(mList);
-//        mAdapter.notifyDataSetChanged();
+    /*  写入测试，100条数据 */
+    public void test100Times(){
+    for (int i=0;i<=100;i++){
+    addOneTimeData(2);
+    }
     }
 
-    @Override
-    protected void initEvent() {
-        studyFab.setOnClickListener(this);
-    }
-
-//    @Override
-//    public void onBackPressed() {
-//        Intent intent = new Intent();
-//        intent.putExtra("study_time_return", aPastTime);
-//        setResult(RESULT_OK, intent);
-//        LogUtil.w(aPastTime);
-//        finish();
-//    }
-
-    /**
-     * 刷新整个页面
-     */
-    private void refresh() {
-//        finish();
-        Intent intent = new Intent(this, StudyActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * 刷新recyclerView局部数据
-     */
-    private void refreshData() {
-        mAdapter.notifyDataSetChanged();
-        LogUtil.i("refreshData");
-
-    }
-
-/*
-/**
-* 写入测试，100条数据
-* /
-public void test100Times(){
-for (int i=0;i<=100;i++){
-addOneTimeData();
-}
-refreshData();
-}
-*/
-
-    /**
-     * 删除所有数据
-     */
+        /*  删除所有数据 */
     private void deleteAll() {
         LitePal.deleteAll(HoursPlan.class);
-        refresh();
+        mList.clear();
+        Toast.makeText(this,"clean all",Toast.LENGTH_SHORT).show();
+        mAdapter.notifyDataSetChanged();
         LogUtil.i("deleteAll");
     }
 
@@ -261,30 +197,21 @@ refreshData();
     private void addOneTimeData(int n) {
         HoursPlan hoursPlan = new HoursPlan();
         hoursPlan.setThisStudyTime(n);
-        int pastTime = LitePal.sum(HoursPlan.class, "thisStudyTime", int.class);
+        int pastTime = mList.size();
         hoursPlan.setResidualTime(2000 - n - pastTime);
         hoursPlan.setTime(new Date());
         hoursPlan.save();
         LogUtil.i("addOneTimeData");
         if (hoursPlan.isSaved()) {
             LogUtil.i("isSaved!");
-//            int count = LitePal.count(HoursPlan.class)
-            List<HoursPlan> list=new ArrayList<>();
-            list.addAll(mList);
-            mList.clear();
             mList.add(hoursPlan);
-            mList.addAll(list);
-            mAdapter.notifyItemInserted(0);
+            mAdapter.notifyItemInserted(mList.size());  // 局部刷新
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            aPastTime = String.valueOf(pastTime);
-//        toolbar.setTitle("已学习"+count+"小时");  TODO:实时更新title数据
         }
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void setTheme(int resId) {
+        super.setTheme(resId);
     }
 }

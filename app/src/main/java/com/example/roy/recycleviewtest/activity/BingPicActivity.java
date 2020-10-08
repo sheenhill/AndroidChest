@@ -13,9 +13,10 @@ public class BingPicActivity extends BaseActivity {
     @BindView(R.id.rv_bing_pic)
     EmptyRecyclerView rvBingPic;
 
+
     @Override
-    protected void setContentView() {
-        setContentView(R.layout.bing_pic_activity);
+    protected int getLayoutId() {
+        return R.layout.bing_pic_activity;
     }
 
     @Override

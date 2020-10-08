@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
+    <!--step_1-->
+    <set>
+        <objectAnimator
+            android:duration="@integer/animator_duration"
+            android:propertyName="translationX"
+            android:valueFrom="@dimen/dp_170"
+            android:valueTo="@dimen/dp_150" />
+        <objectAnimator
+            android:duration="@integer/animator_duration"
+            android:propertyName="scaleY"
+            android:valueFrom="1"
+            android:valueTo="0.75" />
+        <!--旋转-->
+        <objectAnimator
+            android:duration="@integer/animator_duration"
+            android:propertyName="rotationY"
+            android:valueFrom="@integer/angle_90"
+            android:valueTo="@integer/angle_60" />
+    </set>
+</set>

@@ -1,12 +1,11 @@
 package com.example.roy.recycleviewtest.fragment;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,61 +13,55 @@ import androidx.fragment.app.Fragment;
 
 import com.example.roy.recycleviewtest.R;
 import com.example.roy.recycleviewtest.activity.CalculatorActivity;
+import com.example.roy.recycleviewtest.activity.NewCustomViewActivity;
+import com.example.roy.recycleviewtest.laboratory.CountdownFragment;
 import com.example.roy.recycleviewtest.activity.StudyActivity;
 import com.example.roy.recycleviewtest.activity.TensorFlowLiteActivity;
-import com.example.roy.recycleviewtest.util.ToastUtils;
+import com.example.roy.recycleviewtest.adapter.OtherFragmentGVAdapter;
+import com.example.roy.recycleviewtest.interfaces.ItemClickListener;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class OtherFragment extends Fragment implements View.OnClickListener {
-    @BindView(R.id.btn_study_plan)
-    Button btnStudyPlan;
-    @BindView(R.id.btn_calculator)
-    Button btnCalculator;
-    @BindView(R.id.btn_tf_lite_test)
-    Button btnTfLiteTest;
-    @BindView(R.id.btn_hold)
-    Button btnHold;
-//    @BindView(R.id.tv_study_plan)
-//    TextView tvStudyPlan;
-//    @BindView(R.id.tv_calculator)
-//    TextView tvCalculator;
-//    @BindView(R.id.tv_tf_lite_test)
-//    TextView tvTfLiteTest;
-//    @BindView(R.id.tv_hold)
-//    TextView tvHold;
+public class OtherFragment extends Fragment {
 
+    @BindView(R.id.gv)
+    GridView gv;
+    private OtherFragmentGVAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_other, container, false);
         ButterKnife.bind(this, view);
+        List<String> cateList = new ArrayList<>();
+        cateList.add(getResources().getString(R.string.card_study_plan));
+        cateList.add(getResources().getString(R.string.card_calculator));
+        cateList.add(getResources().getString(R.string.card_TF_lite));
+        cateList.add("组件实验室");
+        cateList.add("下班倒计时");
+        cateList.add("爬虫");
+//        cateList.add(getResources().getString(R.string.card_TF_lite));
+        adapter = new OtherFragmentGVAdapter(getActivity(), cateList);
+        gv.setAdapter(adapter);
+        initListener();
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        btnCalculator.setOnClickListener(this);
-        btnStudyPlan.setOnClickListener(this);
-        btnTfLiteTest.setOnClickListener(this);
-        btnHold.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.btn_study_plan:
-                StudyActivity.actionStart(getActivity(), StudyActivity.class);
-                //隐式intent
+    private void initListener() {
+        adapter.setOnItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                switch (position) {
+                    case 0: // 学习计划页面
+                        StudyActivity.actionStart(getActivity(), StudyActivity.class);
+                        //隐式intent
 //                Intent intent = new Intent("com.example.roy.recycleviewtest.STUDY_START");
 //                intent.addCategory("com.example.roy.recycleviewtest.STUDY_ACTIVITY");
-////                intent.putExtra("study_plan", (Serializable) sb);//todo
+////                intent.putExtra("study_plan", (Serializable) sb);
 ////                intent.putExtra("study_plan", (Serializable) "123");
 //                //按照Alibaba android开发手册所规范：
 //                //Activity 间通过隐式 Intent 的跳转，在发出 Intent 之前必须通过 resolveActivity 检查，
@@ -77,20 +70,32 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
 //                    startActivityForResult(intent, 5);
 //                else
 //                    ToastUtils.showShort(getActivity(), "该功能暂时未开通");
-                break;
-            case R.id.btn_calculator:
-                Intent intent1 = new Intent(getActivity(), CalculatorActivity.class);
+                        break;
+                    case 1: // 复利计算器页面
+                        Intent intent1 = new Intent(getActivity(), CalculatorActivity.class);
 //                intent1.intent1putExtra("tool_title", tvTwo.getText());
-                startActivity(intent1);
-                break;
-            case R.id.btn_tf_lite_test:
-                //静态方法，直接用类使用方法
-                TensorFlowLiteActivity.actionStart(getActivity(), TensorFlowLiteActivity.class);
-                break;
-            default:
-                break;
-
-        }
-
+                        startActivity(intent1);
+                        break;
+                    case 2: // 人工智障识图页面
+                        //静态方法，直接用类使用方法
+                        TensorFlowLiteActivity.actionStart(getActivity(), TensorFlowLiteActivity.class);
+                        break;
+                    case 3: // 自定义view页面
+//                        CustomViewActivity.actionStart(getActivity(), CustomViewActivity.class)
+                        Intent intent2 = new Intent(getActivity(), NewCustomViewActivity.class);
+//                intent1.intent1putExtra("tool_title", tvTwo.getText());
+                        startActivity(intent2);
+                        break;
+                    case 4: // 下班倒计时
+                        startActivity(new Intent(getActivity(), CountdownFragment.class));
+                        break;
+                    case 5: // 爬虫
+//                        Intent intent = new Intent(getActivity(), CrawlerActivity.class);
+//                        startActivity(intent);
+                        break;
+                }
+            }
+        });
     }
+
 }

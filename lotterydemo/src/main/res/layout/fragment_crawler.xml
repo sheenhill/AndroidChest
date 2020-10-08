@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sheenhill.lotterydemo.JCrawlerViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
+
+        <variable
+            name="adapterDLT"
+            type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
+
+        <variable
+            name="listener"
+            type="com.sheenhill.lotterydemo.CrawlerFragment.Listener" />
+
+        <variable
+            name="activity"
+            type="android.app.Activity" />
+
+        <import type="android.view.View"/>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp">
+
+            <RelativeLayout
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="最近30期"
+                    android:layout_marginStart="8dp" />
+
+                <TextView
+                    android:id="@+id/btn_luck_num"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:onClick="@{()->listener.editLuckNum()}"
+                    android:text="幸运号码"
+                    android:textColor="#333"
+                    android:elevation="8dp"
+                    android:layout_marginEnd="8dp"
+                    tools:text="转换" />
+                <Button
+                    android:id="@+id/btn_convert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{()->listener.convert()}"
+                    android:text="@{viewModel.pageInfoType?`双色球`:`大乐透`}"
+                    android:background="@drawable/border_black_m"
+                    android:translationZ="@dimen/dp_16"
+                    android:elevation="@dimen/dp_16"
+                    android:layout_marginEnd="8dp"
+                    tools:text="转换" />
+
+
+            </RelativeLayout>
+<!--            "-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ssq"
+                adapter="@{adapter}"
+                resource="@{viewModel.infoListSsq}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingBottom="40dp"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
+<!--            android:visibility="@{!viewModel.pageInfoType?View.VISIBLE:View.INVISIBLE}"-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_dlt"
+                adapter="@{adapterDLT}"
+                resource="@{viewModel.infoListDlt}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingBottom="40dp"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -38,7 +38,9 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="@string/card_study_plan" />
+                app:title="@string/card_study_plan"
+                app:subtitleTextColor="@color/colorPrimary"
+                app:titleTextColor="@color/colorAccent" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

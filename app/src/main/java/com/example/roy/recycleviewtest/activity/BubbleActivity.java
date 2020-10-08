@@ -5,8 +5,8 @@ import com.example.roy.recycleviewtest.base.BaseActivity;
 
 public class BubbleActivity extends BaseActivity {
     @Override
-    protected void setContentView() {
-        setContentView(R.layout.activity_bubble);
+    protected int getLayoutId() {
+        return R.layout.activity_bubble;
     }
 
     @Override

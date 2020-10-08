@@ -1,0 +1,40 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--no actionBar-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+<!--    彩票圆环-蓝-->
+    <style name="AppTheme.BlueRing">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#39f</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_ring_blue</item>
+    </style>
+<!--    彩票圆环-红-->
+    <style name="AppTheme.RedRing">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#f54646</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_ring_red</item>
+    </style>
+    <style name="AppTheme.CardRedRing">
+        <item name="cardBackgroundColor">@color/lottery_red</item>
+    </style>
+
+<!--    <style name="AppTheme.CardBorder">-->
+<!--        <item name="cardBackgroundColor"></item>-->
+<!--    </style>-->
+
+
+
+</resources>

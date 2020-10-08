@@ -146,8 +146,8 @@ public class CalculatorActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    protected void setContentView() {
-        setContentView(R.layout.calculator_activity);
+    protected int getLayoutId() {
+        return R.layout.calculator_activity;
     }
 
     /**
@@ -173,6 +173,7 @@ public class CalculatorActivity extends BaseActivity implements View.OnClickList
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     protected void initData() {

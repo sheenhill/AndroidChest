@@ -35,8 +35,8 @@ public class ShareActivity extends BaseActivity {
     StringBuffer stringBuffer;
 
     @Override
-    protected void setContentView() {
-        setContentView(R.layout.share_activity);
+    protected int getLayoutId() {
+        return R.layout.share_activity;
     }
 
     @Override

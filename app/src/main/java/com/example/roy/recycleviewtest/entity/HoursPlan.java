@@ -1,5 +1,7 @@
 package com.example.roy.recycleviewtest.entity;
 
+import androidx.annotation.NonNull;
+
 import org.litepal.crud.LitePalSupport;
 
 import java.text.SimpleDateFormat;
@@ -12,7 +14,6 @@ public class HoursPlan extends LitePalSupport{
     private int residualTime;
     private Date time;
 
-    private String formatTime;
 
     public String getThisStudyTime() {
         return String.valueOf(thisStudyTime);
@@ -48,4 +49,9 @@ public class HoursPlan extends LitePalSupport{
         return null;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "本次学习"+getThisStudyTime()+"h  剩余时间："+getResidualTime()+"h  时间："+getThisStudyTime();
+    }
 }

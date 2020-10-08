@@ -1,17 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+//相当于引入头文件 将 config中的内容引入进来
+apply from: "config.gradle"
 buildscript {
-    
+    ext.kotlin_version = '1.4.0'
+    ext.kotlin_version = '1.3.72'
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
-        
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        def nav_version = "2.3.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath 'com.google.ar.sceneform:plugin:1.15.0'
     }
 }
 
@@ -22,6 +25,21 @@ allprojects {
     }
 }
 
+// 额外属性，所有组件都可用（包括app）
+/**
+ * tip:虽然 Gradle 可让您在模块级别定义项目全局属性，
+ * 但您应<b>避免</b>这样做，因为这样会导致共享这些属性的模块进行耦合。
+ * 模块耦合使得以后将模块作为独立项目导出更加困难，
+ * 并实际<b>妨碍 Gradle 利用并行项目执行加快多模块构建</b>。
+  */
+ext {
+    // eg
+    compileSdkVersion = 28
+    supportLibVersion = "28.0.0"
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+//apply

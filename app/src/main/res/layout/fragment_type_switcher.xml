@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/holder">
+
+        <com.stanza.typeswitcher.TypeSwitcher
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:corners_radius="20dp"
+            app:equal_width="true"
+            app:text_size="@dimen/margin_l"
+            app:item_arrays="销售分析,利润分析,改价记录,资料修改记录"
+            app:value_arrays="销售分析,利润分析,改价记录,资料修改记录" />
+    </LinearLayout>
+</layout>

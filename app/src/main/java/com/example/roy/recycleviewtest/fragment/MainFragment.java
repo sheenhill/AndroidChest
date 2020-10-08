@@ -2,6 +2,7 @@ package com.example.roy.recycleviewtest.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.os.Message;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import com.example.roy.recycleviewtest.adapter.BingPicAdapter;
 import com.example.roy.recycleviewtest.base.APIs;
 import com.example.roy.recycleviewtest.entity.BingPicBean;
 import com.example.roy.recycleviewtest.entity.ShuangseqiuBean;
+import com.example.roy.recycleviewtest.interfaces.ItemClickListener;
 import com.example.roy.recycleviewtest.util.LogUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -49,7 +52,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainFragment extends Fragment implements BingPicAdapter.OnItemClickListener{
+public class MainFragment extends Fragment{
     //    @BindView(R.id.tv_motto_ssq)
 //    TextView tvMottoSsq;
 //    @BindView(R.id.tv_prophecy_ssq)
@@ -57,6 +60,7 @@ public class MainFragment extends Fragment implements BingPicAdapter.OnItemClick
     @BindView(R.id.re_pic_display)
     RecyclerView rePicDisplay;
     private View view;
+
 
     private static final int GET_PIC = 1;
     private static final int GET_SSQ = 2;
@@ -99,9 +103,40 @@ public class MainFragment extends Fragment implements BingPicAdapter.OnItemClick
 //        beautyAdapter = new BeautyAdapter(getActivity(), girlPicUrlList);
             rePicDisplay.setAdapter(bingPicAdapter);
 //        }
-
+        testSparseArray();
+        initListener();
 //        LogUtil.i("MainFragment:tvMottoSsq="+tvMottoSsq.toString());
         return view;
+    }
+
+    private void initListener() {
+        bingPicAdapter.setOnItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                LogUtil.i("在fragment中获得的recyclerView当前item的图片url：  "+"https://www.bing.com"+bingPicList.get(position).getUrl());
+                Toast.makeText(getActivity(), bingPicList.get(position).getCopyright(), Toast.LENGTH_SHORT).show();
+                SharedPreferences sharedPreferences
+                        =getActivity().getSharedPreferences("景色",0);
+                sharedPreferences.edit()
+                        .putString("地址",bingPicList.get(position).getCopyright()).commit();
+            }
+        });
+    }
+
+    private void testSparseArray() {
+        SparseArray<String> list=new SparseArray<>();
+        list.put(1,"hhhhh1");
+        list.put(1,"hhhhh2");
+        list.put(2,"hhhhh3");
+        list.put(4,"hhhhh4");
+        list.put(3,"hhhhh5");
+        list.put(1123,"hhhhh6");
+        list.put(34436,"hhhhh7");
+        list.put(345,"hhhhh8");
+        list.put(346,"hhhhh9");
+        list.size();
+        LogUtil.i("testSparseArray():"+list.size()+"   "+list.toString());
+
     }
 
 
@@ -115,14 +150,8 @@ public class MainFragment extends Fragment implements BingPicAdapter.OnItemClick
         }
 
 //        tvProphecySsq.setText(yuce());
-        bingPicAdapter.setOnItemClickListener(this);
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        LogUtil.i("在fragment中获得的recyclerView当前item的图片url：  "+"https://www.bing.com"+bingPicList.get(position).getUrl());
-        Toast.makeText(getActivity(), bingPicList.get(position).getCopyright(), Toast.LENGTH_SHORT).show();
-    }
 //    private String yuce() {
 //        Set<Integer> integers = new TreeSet<>();
 //        int a = 0;

@@ -63,6 +63,14 @@
         <activity
             android:name=".activity.GuideActivity"
             android:theme="@style/AppTheme.Light.NoActionBar" />
+        <activity
+            android:name=".laboratory.CountdownFragment"
+            android:theme="@style/AppTheme.Light.NoActionBar" />
+        <activity
+            android:name=".activity.CrawlerActivity"
+            android:theme="@style/AppTheme.Light.NoActionBar" /><activity
+            android:name=".activity.NewCustomViewActivity"
+            android:theme="@style/AppTheme.Light.NoActionBar" />
 
         <!-- FileProvider配置访问路径，适配7.0及其以上 -->
          <provider

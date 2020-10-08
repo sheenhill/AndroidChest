@@ -35,16 +35,6 @@
         app:tabSelectedTextColor="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-        <!--<com.google.android.material.tabs.TabItem-->
-            <!--android:id="@+id/ti_1"-->
-            <!--android:icon="@mipmap/pic"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<com.google.android.material.tabs.TabItem-->
-            <!--android:id="@+id/ti_2"-->
-            <!--android:icon="@mipmap/toolbox"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
     </com.google.android.material.tabs.TabLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.roy.recycleviewtest.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
@@ -16,6 +18,8 @@ import com.example.roy.recycleviewtest.R;
 public class BottomDialogFragment extends DialogFragment {
     private View frView;
     private Window window;
+
+
 
     @Nullable
     @Override

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -22,29 +23,27 @@ import com.example.roy.recycleviewtest.util.ToastUtils;
 
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtil.i(getClass().getSimpleName());//获取当前activity名字
 //        initSystemBarTint();
-        setContentView();
-        // TODO: add setContentView(...) invocation
+        setContentView(getLayoutId());
         ButterKnife.bind(this);
-        initData();
         initView();
+        initData();
         initEvent();
     }
 
-    /**
-     * setContentView
-     *
-     * @return
-     */
-    protected abstract void setContentView();
+
+    protected abstract @LayoutRes
+    int getLayoutId();
 
     /**
      * 初始化View
@@ -213,5 +212,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         intent.putExtra("param2",data2);
         intent.putExtra("param3",data3);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(unbinder != null && unbinder != Unbinder.EMPTY){
+            unbinder.unbind();
+            unbinder = null;
+        }
     }
 }

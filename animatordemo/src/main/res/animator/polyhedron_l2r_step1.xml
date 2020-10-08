@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+        <objectAnimator
+            android:duration="@integer/animator_duration"
+            android:propertyName="translationX"
+            android:valueFrom="@dimen/u_dp_170"
+            android:valueTo="@dimen/u_dp_170" />
+        <objectAnimator
+            android:duration="@integer/animator_duration"
+            android:propertyName="scaleY"
+            android:valueFrom="1"
+            android:valueTo="0.7" />
+        <!--旋转-->
+        <objectAnimator
+            android:duration="@integer/animator_duration"
+            android:propertyName="rotationY"
+            android:valueFrom="@integer/angle_0"
+            android:valueTo="@integer/u_angle_90" />
+</set>

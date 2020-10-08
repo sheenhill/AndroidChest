@@ -137,8 +137,8 @@ public class TensorFlowLiteActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
-    protected void setContentView() {
-        setContentView(R.layout.tensor_flow_lite_activity);
+    protected int getLayoutId() {
+        return R.layout.tensor_flow_lite_activity;
     }
 
     @Override
@@ -202,7 +202,7 @@ public class TensorFlowLiteActivity extends BaseActivity implements View.OnClick
 
     /**
      * 把模型文件读取成MappedByteBuffer，之后给Interpreter类初始化模型，这个模型存放在main的assets目录下。
-     * Memory-map the model file in Assets.
+     * Memory-point the model file in Assets.
      */
     private MappedByteBuffer loadModelFile(String model) throws IOException {
         AssetFileDescriptor fileDescriptor=getApplicationContext().getAssets().openFd(model+".tflite");

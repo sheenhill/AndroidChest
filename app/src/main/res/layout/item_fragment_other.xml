@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.example.roy.recycleviewtest.view.MyCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_s"
+        app:cardMaxElevation="@dimen/margin_xs"
+        app:cardCornerRadius="@dimen/margin_m"
+        app:cardElevation="@dimen/margin_xs">
+        <TextView
+            android:id="@+id/tv_cate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_s"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+    </com.example.roy.recycleviewtest.view.MyCardView>
+
+</RelativeLayout>

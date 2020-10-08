@@ -28,10 +28,6 @@ import com.example.roy.recycleviewtest.entity.HoursPlan;
 import com.example.roy.recycleviewtest.util.LogUtil;
 import com.example.roy.recycleviewtest.util.ToastUtils;
 import com.google.android.material.tabs.TabLayout;
-
-import org.litepal.LitePal;
-
-import java.io.Serializable;
 import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
@@ -95,9 +91,10 @@ public class MainActivity extends BaseActivity {
 //        }
 //    }
 
+
     @Override
-    protected void setContentView() {
-        setContentView(R.layout.activity_main);
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
