@@ -56,8 +56,4 @@ public class PageIndicatorAdapter extends RecyclerView.Adapter<PageIndicatorAdap
     public interface ItemClickListener{
         void onItemClick(View v, int position);
     }
-
-
-
-
 }

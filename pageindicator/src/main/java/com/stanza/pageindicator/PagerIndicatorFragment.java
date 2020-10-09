@@ -51,10 +51,10 @@ public class PagerIndicatorFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_indicator, container, false);
-        rv=view.findViewById(R.id.rv);
-        btnPre=view.findViewById(R.id.btn_pre);
+        rv = view.findViewById(R.id.rv);
+        btnPre = view.findViewById(R.id.btn_pre);
         btnPre.setOnClickListener(this);
-        btnNext=view.findViewById(R.id.btn_next);
+        btnNext = view.findViewById(R.id.btn_next);
         btnNext.setOnClickListener(this);
         rv.setLayoutManager(new CenterLinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         rv.addItemDecoration(new PageItemDecoration());
@@ -62,8 +62,8 @@ public class PagerIndicatorFragment extends Fragment implements View.OnClickList
         adapter = new PageIndicatorAdapter(getActivity(), mList);
         rv.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ?R.drawable.ic_next_666:R.drawable.ic_next_ccc));
-        btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ?R.drawable.ic_pre_666:R.drawable.ic_pre_ccc));
+        btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ? R.drawable.ic_next_666 : R.drawable.ic_next_ccc));
+        btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ? R.drawable.ic_pre_666 : R.drawable.ic_pre_ccc));
         initListener();
         return view;
     }
@@ -77,8 +77,8 @@ public class PagerIndicatorFragment extends Fragment implements View.OnClickList
             pageFlag = position;// 通过pageFlag记录上一次点击item的位置，避免了遍历mList
             smoothScrollToItem(position);
             fragmentCallback.whichPage(mList.get(position).getPageNum().toString());
-            btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ?R.drawable.ic_next_666:R.drawable.ic_next_ccc));
-            btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ?R.drawable.ic_pre_666:R.drawable.ic_pre_ccc));
+            btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ? R.drawable.ic_next_666 : R.drawable.ic_next_ccc));
+            btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ? R.drawable.ic_pre_666 : R.drawable.ic_pre_ccc));
         });
 
     }
@@ -108,8 +108,8 @@ public class PagerIndicatorFragment extends Fragment implements View.OnClickList
             smoothScrollToItem(pageFlag);
             fragmentCallback.whichPage(mList.get(pageFlag).getPageNum().toString());
         }
-        btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ?R.drawable.ic_next_666:R.drawable.ic_next_ccc));
-        btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ?R.drawable.ic_pre_666:R.drawable.ic_pre_ccc));
+        btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ? R.drawable.ic_next_666 : R.drawable.ic_next_ccc));
+        btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ? R.drawable.ic_pre_666 : R.drawable.ic_pre_ccc));
 //        if (!hasPre()){
 //            btnPre.setTextColor(getActivity().getResources().getColor(R.color.ccc));
 //        }
@@ -131,8 +131,8 @@ public class PagerIndicatorFragment extends Fragment implements View.OnClickList
             smoothScrollToItem(pageFlag);
             fragmentCallback.whichPage(mList.get(pageFlag).getPageNum().toString());
         }
-        btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ?R.drawable.ic_next_666:R.drawable.ic_next_ccc));
-        btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ?R.drawable.ic_pre_666:R.drawable.ic_pre_ccc));
+        btnNext.setImageDrawable(getActivity().getResources().getDrawable(hasNext() ? R.drawable.ic_next_666 : R.drawable.ic_next_ccc));
+        btnPre.setImageDrawable(getActivity().getResources().getDrawable(hasPre() ? R.drawable.ic_pre_666 : R.drawable.ic_pre_ccc));
 
 //        if (!hasNext()){
 //            btnNext.setTextColor(getActivity().getResources().getColor(R.color.ccc));
@@ -143,7 +143,6 @@ public class PagerIndicatorFragment extends Fragment implements View.OnClickList
     private void smoothScrollToItem(int position) {
         rv.getLayoutManager().smoothScrollToPosition(rv, new RecyclerView.State(), position);
     }
-
 
 
     /**
@@ -207,7 +206,6 @@ class CenterLinearLayoutManager extends LinearLayoutManager {
     }
 
     private static class CenterSmoothScroller extends LinearSmoothScroller {
-
         public CenterSmoothScroller(Context context) {
             super(context);
         }
@@ -222,5 +220,4 @@ class CenterLinearLayoutManager extends LinearLayoutManager {
             return 100f / displayMetrics.densityDpi;
         }
     }
-
 }
