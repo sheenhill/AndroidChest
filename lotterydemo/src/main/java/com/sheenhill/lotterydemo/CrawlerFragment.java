@@ -37,6 +37,7 @@ public class CrawlerFragment extends Fragment {
         final LotteryVPAdapter lotteryAdapter = new LotteryVPAdapter(this);
         binding.vpLottery.setAdapter(lotteryAdapter);
         binding.vpLottery.setPageTransformer(vpAnimotion);
+        binding.vpLottery.setOffscreenPageLimit(1);
 
 
 //        adapterSSQ = new LotterySSQAdapter();
@@ -109,8 +110,9 @@ public class CrawlerFragment extends Fragment {
     }
 
     /**
-     * 右滑：1.0(新) -> 0.0（新，旧） -> -1.0（旧）
-     * 左滑：-1.0(新) -> 0.0（新，旧） -> 1.0（旧）
+     * 左滑：1.0(新) -> 0.0（新，旧） -> -1.0（旧）
+     * 右滑：-1.0(新) -> 0.0（新，旧） -> 1.0（旧）
+     * 这个方法会调用N次（测试中滑动一次page会调用47次）
      */
     private ViewPager2.PageTransformer vpAnimotion = (page, position) -> {
         // 很舒服的方块滑屏动效
@@ -125,16 +127,23 @@ public class CrawlerFragment extends Fragment {
 //        page.setCameraDistance(scale); //设置镜头距离
 //        page.setRotationY(180f * position);
 
-//        page.setTranslationY(page.getHeight() * 0.5f);// 位移
-//        page.setTranslationX(page.getWidth() * 0.5f);
-        page.setAlpha((position > -0.5f && position < 0.5f) ? 1 : 0);
-//        page.setTranslationX(page.getWidth() * -position);
-        page.setPivotX((1.0f - Math.abs(position))*page.getWidth());// 水平偏转量  貌似有初始偏转量
-//        page.setPivotX(page.getWidth() * 0.5f);// 水平偏转量
-
-        page.setScaleX(1.0f - Math.abs(position));  // 参数是比例
-//        page.setScaleX((1-Math.abs(position))*page.getWidth());
-
+        /**
+         * 使用canvas实现卡片翻转
+         * 视图被-1页影响了(是位移的问题)
+         */
+        if (position >= -1 && position <= 1) {
+            // 位移
+            page.setTranslationX((Math.abs(position)) * page.getWidth());
+            // 透明度
+            page.setAlpha((float) Math.pow(Math.abs(Math.abs(position) - 1.0f), 3.0));// 用3次方来防止转换开始底色混合，影响视觉效果
+            // 坐标系偏转量    (固定)
+            LogUtil.d("page.getWidth():" + page.getWidth());
+//            page.setPivotX(page.getWidth() * (0.5f+position>=0.5f?1:position<-0.5f?-1:0));
+            page.setPivotX((position>0&&position<=1?-1.5f:0.5f)*page.getWidth());
+            // 比例缩放大小
+//            page.setScaleX(1.0f - Math.abs(position));  // 简单一次分段函数,在图像切换时显示效果很差,次方为负数的幂函数来优化
+            page.setScaleX((float) Math.pow(Math.abs(Math.abs(position) - 1.0f), 4));
+        }
 
         // 卡片上下替换动效
 //        final float MAX_SCALE = 1.0f;
