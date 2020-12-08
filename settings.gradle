@@ -1,3 +1,4 @@
+include ':rxjavademo'
 include ':animatordemo'
 include ':ar_solarsystem'
 include ':common'

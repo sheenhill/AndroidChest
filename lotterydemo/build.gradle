@@ -1,15 +1,19 @@
-
 //根据isModule标签动态的切换 集成模块/单组件模式
+
 if (isModule) {
     apply plugin: 'com.android.library'
 } else {
     apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
 }
-
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+
+    def TEST_STR_1 = "松鼠桂鱼"
+    def TEST_STR_2 = "藏书羊肉"
 
     defaultConfig {
         //作为一个集成模块应该不应该有applicationId
@@ -21,6 +25,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "LOG_TEST", "\"${TEST_STR_1}\"")
     }
 
     buildTypes {
@@ -28,6 +33,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+//        bate1 {
+//            buildConfigField "String", "LOG_TEST", "${TEST_STR_1}"
+//        }
+//        bate2 {
+//            buildConfigField "String", "LOG_TEST", "${TEST_STR_2}"
+//        }
     }
     sourceSets {
         main() {
@@ -41,13 +52,17 @@ android {
         }
     }
 
+    productFlavors {
+
+    }
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
 
-    dataBinding{
-        enabled=true
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -56,6 +71,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.android.material:material:1.1.0-rc01'
+
+    def nav_version = "2.3.1"
+
+    api "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    api "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     implementation project(path: ':common')
 

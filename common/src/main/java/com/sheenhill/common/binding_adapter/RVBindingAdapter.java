@@ -39,9 +39,9 @@ public class RVBindingAdapter {
         if (newList != null) {
             if(null==rv.getAdapter())
             rv.setAdapter(newAdapter);
-            LogUtil.d("updateListCommon.adapter:"+newAdapter);
+            LogUtil.d("updateListCommon.adapter:"+rv.getAdapter());
             LogUtil.d("updateListCommon.newList:"+newList);
-            ((BaseRVAdapter) rv.getAdapter()).setList(newList);//todo  newList==null?
+            ((BaseRVAdapter) rv.getAdapter()).setList(newList);//todo  上一句newList能打印出来值,到这边就未定义了
             if(newCallback!=null){
                 newCallback.setOldList(oldList);
                 newCallback.setNewList(newList);

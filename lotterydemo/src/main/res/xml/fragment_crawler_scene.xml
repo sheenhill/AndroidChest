@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+<!--对幸运数字区域的动画-->
+    <Transition
+        motion:constraintSetStart="@+id/vp_luck_num_start"
+        motion:constraintSetEnd="@+id/vp_luck_num_end"
+        motion:duration="300">
+        <OnClick
+            motion:targetId="@+id/btn_luck_num"
+            motion:clickAction="toggle"/>
+    </Transition>
+    <ConstraintSet android:id="@+id/vp_luck_num_start">
+        <Constraint
+            android:id="@+id/rv_luck_num"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            motion:layout_constraintBottom_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/vp_luck_num_end">
+        <Constraint
+            android:id="@+id/rv_luck_num"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+</MotionScene>
