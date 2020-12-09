@@ -19,7 +19,7 @@
 
         <variable
             name="adapterLuckyNum"
-            type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
+            type="com.sheenhill.common.base.BaseRVAdapter" />
 
         <variable
             name="listener"
@@ -50,32 +50,6 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent" />
-        <!--        <HorizontalScrollView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            android:id="@+id/group_luck_num"-->
-        <!--            app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="100dp"-->
-        <!--                android:orientation="horizontal">-->
-
-        <!--                <androidx.recyclerview.widget.RecyclerView-->
-        <!--                    android:id="@+id/rv_luck_num"-->
-        <!--                    adapter="@{adapterLuckyNum}"-->
-        <!--                    resource="@{viewModel.listLuckyNum}"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="80dp"-->
-        <!--                    android:orientation="horizontal"-->
-        <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
-
-        <!--                <Button-->
-        <!--                    android:layout_width="200dp"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="添加一组随机幸运数字" />-->
-        <!--            </LinearLayout>-->
-        <!--        </HorizontalScrollView>-->
 
         <RelativeLayout
             android:id="@+id/tool_bar"
@@ -123,37 +97,36 @@
             android:id="@+id/vp_lottery"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="@dimen/dp_16"
             app:layout_constraintTop_toBottomOf="@id/tool_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_ssq"
-            adapter="@{adapterSSQ}"
-            resource="@{viewModel.infoListSsq}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:paddingBottom="40dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/tool_bar"
-            android:visibility="gone"
-            tools:visibility="visible" />
-        <!--            android:visibility="@{!viewModel.pageInfoType?View.VISIBLE:View.INVISIBLE}"-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_dlt"
-            adapter="@{adapterDLT}"
-            resource="@{viewModel.infoListDlt}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:paddingBottom="40dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/tool_bar"
-            android:visibility="gone"
-            tools:visibility="visible" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_ssq"-->
+<!--            adapter="@{adapterSSQ}"-->
+<!--            resource="@{viewModel.infoListSsq}"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:paddingBottom="40dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tool_bar"-->
+<!--            android:visibility="gone"-->
+<!--            tools:visibility="visible" />-->
+<!--        &lt;!&ndash;            android:visibility="@{!viewModel.pageInfoType?View.VISIBLE:View.INVISIBLE}"&ndash;&gt;-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_dlt"-->
+<!--            adapter="@{adapterDLT}"-->
+<!--            resource="@{viewModel.infoListDlt}"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:paddingBottom="40dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tool_bar"-->
+<!--            android:visibility="gone"-->
+<!--            tools:visibility="visible" />-->
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>

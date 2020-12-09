@@ -1,4 +1,4 @@
-package com.sheenhill.lotterydemo;
+package com.sheenhill.lotterydemo.data_store;
 
 import android.os.Build;
 
@@ -11,7 +11,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LuckNumberGenerator {
+public class J_LuckNumberGenerator {
     // 前区1-35个号码
     private static ArrayList<String> ticket1 = (ArrayList<String>) Stream.of("01", "02", "03", "04", "05", "06", "07", "08",
             "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25",

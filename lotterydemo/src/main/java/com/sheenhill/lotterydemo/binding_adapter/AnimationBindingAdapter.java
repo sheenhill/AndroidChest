@@ -1,4 +1,4 @@
-package com.sheenhill.lotterydemo;
+package com.sheenhill.lotterydemo.binding_adapter;
 
 import android.view.View;
 

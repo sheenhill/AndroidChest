@@ -1,9 +1,10 @@
-package com.sheenhill.lotterydemo;
+package com.sheenhill.lotterydemo.adapter;
 
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sheenhill.common.base.SingleTypeBaseRVAdapter;
+import com.sheenhill.lotterydemo.R;
 import com.sheenhill.lotterydemo.databinding.ItemLotteryDltBinding;
 
 import java.util.List;

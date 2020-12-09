@@ -47,7 +47,6 @@ public abstract class SingleTypeBaseRVAdapter<M, B extends ViewDataBinding> exte
         notifyDataSetChanged();
     }
 
-
     protected abstract @LayoutRes
     int getLayoutResId(int viewType);
 

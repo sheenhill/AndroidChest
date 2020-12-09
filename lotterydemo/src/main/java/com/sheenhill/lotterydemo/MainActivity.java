@@ -9,6 +9,7 @@ import com.sheenhill.common.util.LogUtil;
 import com.sheenhill.lotterydemo.databinding.ActivityMainBinding;
 import com.sheenhill.lotterydemo.databinding.FragmentLotteryBinding;
 
+/* 单独为app时，入口是这个activity */
 public class MainActivity extends AppCompatActivity {
 
     @Override

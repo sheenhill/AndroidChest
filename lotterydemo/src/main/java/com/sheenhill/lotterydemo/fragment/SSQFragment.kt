@@ -1,4 +1,4 @@
-package com.sheenhill.lotterydemo.dlt
+package com.sheenhill.lotterydemo.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.sheenhill.lotterydemo.JCrawlerViewModel
 import com.sheenhill.lotterydemo.R
-import com.sheenhill.lotterydemo.databinding.FragmentDltBinding
+import com.sheenhill.lotterydemo.adapter.LotterySSQAdapter
 import com.sheenhill.lotterydemo.databinding.FragmentSsqBinding
 
 class SSQFragment : Fragment(){
@@ -15,6 +17,10 @@ class SSQFragment : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding=DataBindingUtil.inflate(inflater, R.layout.fragment_ssq, container, false);
+        val vm= parentFragment?.let { ViewModelProvider(it).get(JCrawlerViewModel::class.java) }
+        binding.lifecycleOwner=this
+        binding.viewModel=vm
+        binding.adapterSSQ=LotterySSQAdapter()
         return binding.root
     }
 }

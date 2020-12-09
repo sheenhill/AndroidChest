@@ -40,6 +40,6 @@
         android:label="CountdownFragment" />
     <fragment
         android:id="@+id/crawlerFragment"
-        android:name="com.sheenhill.lotterydemo.LotteryFragment"
+        android:name="com.sheenhill.lotterydemo.fragment.J_LotteryFragment"
         android:label="LotteryFragment" />
 </navigation>

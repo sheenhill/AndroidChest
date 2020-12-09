@@ -23,8 +23,8 @@ import okhttp3.*;
 
 
 public class JCrawlerViewModel extends ViewModel {
-    static final boolean SSQ = true;
-    static final boolean DLT = false;
+    public static final boolean SSQ = true;
+    public static final boolean DLT = false;
 
     private MutableLiveData<List<List<String>>> infoListSsq = new MutableLiveData<>();
     private MutableLiveData<List<List<String>>> infoListDlt = new MutableLiveData<>();

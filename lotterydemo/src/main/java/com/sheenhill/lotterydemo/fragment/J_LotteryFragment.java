@@ -1,4 +1,4 @@
-package com.sheenhill.lotterydemo;
+package com.sheenhill.lotterydemo.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.sheenhill.lotterydemo.R;
 import com.sheenhill.lotterydemo.databinding.FragmentLotteryBinding;
 
-public class LotteryFragment extends Fragment {
+public class J_LotteryFragment extends Fragment {
     FragmentLotteryBinding binding;
 
     @Nullable

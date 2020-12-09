@@ -35,13 +35,10 @@ public class RVBindingAdapter {
                                         RecyclerView.ItemDecoration newItemDecoration) {
         if (newItemDecoration != null && itemDecoration == null)
             rv.addItemDecoration(newItemDecoration);
-        LogUtil.i("updateListCommon  invoke");
         if (newList != null) {
             if(null==rv.getAdapter())
             rv.setAdapter(newAdapter);
-            LogUtil.d("updateListCommon.adapter:"+rv.getAdapter());
-            LogUtil.d("updateListCommon.newList:"+newList);
-            ((BaseRVAdapter) rv.getAdapter()).setList(newList);//todo  上一句newList能打印出来值,到这边就未定义了
+            ((BaseRVAdapter) rv.getAdapter()).setList(newList); // 不显示数据应该是adapter被换了
             if(newCallback!=null){
                 newCallback.setOldList(oldList);
                 newCallback.setNewList(newList);
