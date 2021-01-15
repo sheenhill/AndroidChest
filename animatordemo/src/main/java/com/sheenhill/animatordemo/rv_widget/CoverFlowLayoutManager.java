@@ -1,4 +1,4 @@
-package com.sheenhill.animatordemo;
+package com.sheenhill.animatordemo.rv_widget;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;

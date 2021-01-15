@@ -1,4 +1,4 @@
-package com.sheenhill.animatordemo;
+package com.sheenhill.animatordemo.rv_widget;
 import android.view.View;
 import android.view.ViewGroup;
 

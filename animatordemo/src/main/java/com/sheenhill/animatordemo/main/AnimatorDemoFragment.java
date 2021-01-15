@@ -6,11 +6,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.graphics.Camera;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +18,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
-import com.sheenhill.animatordemo.CircleItemAnimator;
 import com.sheenhill.animatordemo.R;
-import com.sheenhill.animatordemo.TestAdapter;
+import com.sheenhill.animatordemo.adapter.TestAdapter;
 import com.sheenhill.animatordemo.databinding.FragmentDemoAnimatorBinding;
 import com.sheenhill.common.util.LogUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AnimatorDemoFragment extends Fragment{
     FragmentDemoAnimatorBinding binding;

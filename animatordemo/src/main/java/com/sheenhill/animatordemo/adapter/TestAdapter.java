@@ -1,4 +1,4 @@
-package com.sheenhill.animatordemo;
+package com.sheenhill.animatordemo.adapter;
 
 
 import android.animation.AnimatorInflater;
@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sheenhill.animatordemo.R;
 import com.sheenhill.animatordemo.databinding.ItemTestBinding;
 import com.sheenhill.common.base.SingleTypeBaseRVAdapter;
 import com.sheenhill.common.util.LogUtil;

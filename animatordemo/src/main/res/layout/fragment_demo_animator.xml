@@ -141,7 +141,7 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="175dp"
             android:layout_marginHorizontal="@dimen/dp_8"
-            app:layoutManager=".CoverFlowLayoutManager"
+            app:layoutManager=".rv_widget.CoverFlowLayoutManager"
             android:orientation="horizontal"
             android:layout_marginTop="36dp"
             app:layout_constraintEnd_toEndOf="parent"
