@@ -166,7 +166,7 @@ class PageItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         int position = parent.getChildAdapterPosition(view);
-        final int count = parent.getLayoutManager().getItemCount();
+        final int count = parent.getLayoutManager().getItemCount();  //  获取准确的Item总个数
         if (position == 0) {
             outRect.set(parent.getLayoutManager().getWidth() / 3, 0, 0, 0);
         } else if (position == count - 1) {

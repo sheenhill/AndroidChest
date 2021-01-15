@@ -57,14 +57,14 @@
             android:layout_height="60dp"
             app:layout_constraintTop_toBottomOf="@id/rv_luck_num">
 
-            <TextView
+            <EditText
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:text="最近30期" />
+                android:hint="最近30期" />
             <!--                android:onClick="@{()->listener.editLuckNum()}"-->
             <TextView
                 android:id="@+id/btn_luck_num"
@@ -76,6 +76,7 @@
                 android:gravity="center"
                 android:text="幸运号码"
                 android:textColor="#333"
+                android:onClick="@{()->listener.showDialog()}"
                 tools:text="转换" />
 
             <Button

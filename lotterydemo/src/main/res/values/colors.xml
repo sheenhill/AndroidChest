@@ -7,4 +7,8 @@
     <color name="lottery_blue">#39f</color>
     <color name="lottery_red">#f54646</color>
     <color name="white">#fff</color>
+
+    <color name="text333">#333</color>
+    <color name="text666">#666</color>
+    <color name="text999">#999</color>
 </resources>

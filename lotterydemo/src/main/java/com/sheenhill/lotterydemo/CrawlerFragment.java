@@ -2,10 +2,7 @@ package com.sheenhill.lotterydemo;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 
@@ -22,8 +22,9 @@ import com.sheenhill.common.util.LogUtil;
 import com.sheenhill.lotterydemo.adapter.LotteryDLTAdapter;
 import com.sheenhill.lotterydemo.adapter.LotterySSQAdapter;
 import com.sheenhill.lotterydemo.adapter.LotteryVPAdapter;
-import com.sheenhill.lotterydemo.adapter.LuckyNumAdapter;
+import com.sheenhill.lotterydemo.adapter.LuckyNumRVAdapter;
 import com.sheenhill.lotterydemo.databinding.FragmentCrawlerBinding;
+import com.sheenhill.lotterydemo.fragment.PrivacyDialog;
 
 /* 彩票主展示页 -- 爬虫页 */
 public class CrawlerFragment extends Fragment {
@@ -39,7 +40,7 @@ public class CrawlerFragment extends Fragment {
         vm = new ViewModelProvider(this).get(JCrawlerViewModel.class);
         binding.setLifecycleOwner(this);
         binding.setActivity(getActivity());
-        binding.setAdapterLuckyNum(new LuckyNumAdapter());
+        binding.setAdapterLuckyNum(new LuckyNumRVAdapter(vm));
         binding.setViewModel(vm);
         binding.setListener(new Listener());
         initVpModeView();
@@ -53,6 +54,7 @@ public class CrawlerFragment extends Fragment {
         final LotteryVPAdapter lotteryAdapter = new LotteryVPAdapter(this);
         binding.vpLottery.setAdapter(lotteryAdapter);
         binding.vpLottery.setPageTransformer(vpAnimation);
+//        binding.vpLottery.setPageTransformer(new MarginPageTransformer(50));
         binding.vpLottery.setOffscreenPageLimit(1);
     }
 
@@ -105,9 +107,16 @@ public class CrawlerFragment extends Fragment {
     }
 
     public class Listener {
+        // 页面转换
         public void convert() {
             LogUtil.i("click convert");
             vm.getPageInfoType().setValue(!(vm.getPageInfoType().getValue()));
+        }
+        // 调起弹框（临时）
+        public void showDialog(){
+            PrivacyDialog comfirmDialog = new PrivacyDialog(getActivity(), R.style.dialog, "您可以在相应功能场景/系统设置中开启权限,请您务必审慎阅读,充分理解《电子银行个人客户服务协议》和《兴福村镇银行APP隐私政策》的各项条款")
+                    .setTitle("服务协议和隐私政策");
+            comfirmDialog.setPositiveButton("同意").setNegativeButton("暂不使用").show();
         }
     }
 

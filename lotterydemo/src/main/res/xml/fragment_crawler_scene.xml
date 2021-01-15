@@ -6,9 +6,9 @@
         motion:constraintSetStart="@+id/vp_luck_num_start"
         motion:constraintSetEnd="@+id/vp_luck_num_end"
         motion:duration="300">
-        <OnClick
-            motion:targetId="@+id/btn_luck_num"
-            motion:clickAction="toggle"/>
+<!--        <OnClick-->
+<!--            motion:targetId="@+id/btn_luck_num"-->
+<!--            motion:clickAction="toggle"/>-->
     </Transition>
     <ConstraintSet android:id="@+id/vp_luck_num_start">
         <Constraint

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.sheenhill.common.util.LogUtil;
 import com.sheenhill.common.util.ToastUtils;
+import com.sheenhill.lotterydemo.data_repository.LuckNumberGeneratorKt;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,21 +27,14 @@ public class JCrawlerViewModel extends ViewModel {
     public static final boolean SSQ = true;
     public static final boolean DLT = false;
 
+    // 双色球集合
     private MutableLiveData<List<List<String>>> infoListSsq = new MutableLiveData<>();
+    // 大乐透集合
     private MutableLiveData<List<List<String>>> infoListDlt = new MutableLiveData<>();
+    // 页面类型
     private MutableLiveData<Boolean> pageInfoType = new MutableLiveData<>(SSQ);
-
+    // 幸运数字集合
     private MutableLiveData<List<List<String>>> listLuckyNum = new MutableLiveData<>();
-
-    public MutableLiveData<List<List<String>>> getListLuckyNum() {
-        listLuckyNum.setValue(new ArrayList<List<String>>() {{
-            add(new ArrayList<>());
-            add(new ArrayList<>());
-            add(new ArrayList<>());
-            add(new ArrayList<>());
-        }});
-        return listLuckyNum;
-    }
 
     public MutableLiveData<List<List<String>>> getInfoListSsq() {
         return infoListSsq;
@@ -54,6 +48,51 @@ public class JCrawlerViewModel extends ViewModel {
         return pageInfoType;
     }
 
+    public MutableLiveData<List<List<String>>> getListLuckyNum() {
+        if (listLuckyNum.getValue() == null) {
+            listLuckyNum.setValue(new ArrayList<List<String>>() {{
+                add(new ArrayList<String>() {{
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                }});
+                add(new ArrayList<String>() {{
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                }});
+                add(new ArrayList<String>() {{
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                }});
+                add(new ArrayList<String>() {{
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                    add("1");
+                }});
+            }});
+        }
+        return listLuckyNum;
+    }
+
+    /* 爬取双色球彩票数据 */
     public void crawlerSsq(Context context, String url) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -89,6 +128,7 @@ public class JCrawlerViewModel extends ViewModel {
         });
     }
 
+    /* 爬取大乐透彩票数据 */
     public void crawlerDLT(Context context, String url) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -123,5 +163,12 @@ public class JCrawlerViewModel extends ViewModel {
 //                LogUtil.i("list:"+arr);
             }
         });
+    }
+
+    /* 从数据库获取最新的幸运数字集合 */
+    public void updateLuckyNumByDB() {
+        List<List<String>> list=listLuckyNum.getValue();
+        list.add(LuckNumberGeneratorKt.getLuckyNums());
+        listLuckyNum.setValue(list);
     }
 }

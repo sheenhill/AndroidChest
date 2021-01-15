@@ -1,4 +1,4 @@
-package com.sheenhill.lotterydemo.data_store
+package com.sheenhill.lotterydemo.data_repository
 
 import com.sheenhill.common.util.LogUtil
 
@@ -9,7 +9,9 @@ val ticket_1 = mutableSetOf("01", "02", "03", "04", "05", "06", "07", "08",
 
 // 后区1-12个号码
 val ticket_2 = mutableSetOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-fun getTickets(): List<String> {
+
+/* 获取幸运数字集合 */
+fun getLuckyNums(): List<String> {
     val res1 = List(5) {
         val s = ticket_1.random()
         ticket_1.remove(s)

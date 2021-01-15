@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="listener"
+            type="com.sheenhill.animatordemo.main.AnimatorDemoFragment.Listener" />
 
     </data>
 
@@ -83,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
             android:text="Button"
+            android:onClick="@{()->listener.clickBtn()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -94,6 +98,7 @@
             android:layout_height="@dimen/dp_40"
             android:layout_marginStart="@dimen/dp_35"
             android:text="L"
+            android:onClick="@{()->listener.clickLeftBtn()}"
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/button"
@@ -105,6 +110,7 @@
             android:layout_height="@dimen/dp_40"
             android:layout_marginEnd="@dimen/dp_35"
             android:text="R"
+            android:onClick="@{()->listener.clickRightBtn()}"
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/button"
@@ -135,7 +141,7 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="175dp"
             android:layout_marginHorizontal="@dimen/dp_8"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager=".CoverFlowLayoutManager"
             android:orientation="horizontal"
             android:layout_marginTop="36dp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,13 +1,9 @@
-package com.sheenhill.lotterydemo.data_store;
+package com.sheenhill.lotterydemo.data_repository;
 
 import android.os.Build;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
