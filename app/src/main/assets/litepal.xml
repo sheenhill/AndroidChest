@@ -32,7 +32,7 @@
     	</list>
     -->
     <list>
-        <mapping class="com.example.roy.recycleviewtest.entity.HoursPlan" />
+        <mapping class="com.sheenhill.rusuo.entity.HoursPlan" />
     </list>
 
     <!--

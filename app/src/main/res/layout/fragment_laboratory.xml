@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-<variable name="listener" type="com.example.roy.recycleviewtest.fragment.LaboratoryFragment.Listener"/>
+<variable name="listener" type="com.sheenhill.rusuo.fragment.LaboratoryFragment.Listener"/>
 
     </data>
 

@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.roy.recycleviewtest"
+        applicationId "com.sheenhill.rusuo"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
@@ -74,7 +74,7 @@ dependencies {
     implementation project(path: ':view_pageindicator')
     implementation project(path: ':view_typeswitcher')
     implementation project(path: ':module_test')
-//    implementation project(path: ':demo_lottery')
+    implementation project(path: ':demo_lottery')
 //    implementation project(path: ':common')
 
 

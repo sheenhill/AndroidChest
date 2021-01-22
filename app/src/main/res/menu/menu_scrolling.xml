@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.roy.recycleviewtest.MainActivity">
+    tools:context="com.sheenhill.rusuo.MainActivity">
     <item
         android:id="@+id/menu_show"
         android:title="选项"

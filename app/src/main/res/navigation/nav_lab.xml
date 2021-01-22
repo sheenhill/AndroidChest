@@ -5,11 +5,11 @@
 
     <fragment
         android:id="@+id/typeSwitcherFragment"
-        android:name="com.example.roy.recycleviewtest.laboratory.TypeSwitcherFragment"
+        android:name="com.sheenhill.rusuo.laboratory.TypeSwitcherFragment"
         android:label="TypeSwitcherFragment" />
     <fragment
         android:id="@+id/laboratoryFragment"
-        android:name="com.example.roy.recycleviewtest.fragment.LaboratoryFragment"
+        android:name="com.sheenhill.rusuo.fragment.LaboratoryFragment"
         android:label="LaboratoryFragment" >
         <action
             android:id="@+id/action_laboratoryFragment_to_typeSwitcherFragment"
@@ -35,15 +35,15 @@
     </fragment>
     <fragment
         android:id="@+id/pagerIndicatorFragment"
-        android:name="com.example.roy.recycleviewtest.laboratory.PageIndicatorFragment"
+        android:name="com.sheenhill.rusuo.laboratory.PageIndicatorFragment"
         android:label="PagerIndicatorFragment" />
     <fragment
         android:id="@+id/countdownFragment"
-        android:name="com.example.roy.recycleviewtest.laboratory.CountdownFragment"
+        android:name="com.sheenhill.rusuo.laboratory.CountdownFragment"
         android:label="CountdownFragment" />
     <fragment
         android:id="@+id/crawlerFragment"
-        android:name="com.sheenhill.demo_lottery.fragment.J_LotteryFragment"
+        android:name="com.sheenhill.demo_lottery.CrawlerFragment"
         android:label="LotteryFragment" />
 
     <fragment

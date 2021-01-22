@@ -21,7 +21,6 @@ import com.sheenhill.demo_lottery.adapter.LotterySSQAdapter;
 import com.sheenhill.demo_lottery.adapter.LotteryVPAdapter;
 import com.sheenhill.demo_lottery.adapter.LuckyNumRVAdapter;
 import com.sheenhill.demo_lottery.databinding.FragmentCrawlerBinding;
-import com.sheenhill.demo_lottery.fragment.PrivacyDialog;
 
 /* 彩票主展示页 -- 爬虫页 */
 public class CrawlerFragment extends Fragment {
@@ -109,12 +108,6 @@ public class CrawlerFragment extends Fragment {
         public void convert() {
             LogUtil.i("click convert");
             vm.getPageInfoType().setValue(!(vm.getPageInfoType().getValue()));
-        }
-        // 调起弹框（临时）
-        public void showDialog(){
-            PrivacyDialog comfirmDialog = new PrivacyDialog(getActivity(), R.style.dialog, "您可以在相应功能场景/系统设置中开启权限,请您务必审慎阅读,充分理解《电子银行个人客户服务协议》和《兴福村镇银行APP隐私政策》的各项条款")
-                    .setTitle("服务协议和隐私政策");
-            comfirmDialog.setPositiveButton("同意").setNegativeButton("暂不使用").show();
         }
     }
 

@@ -1,11 +1,11 @@
-//根据isModule标签切换集成模块/应用模式
+//根据IS_APP_MODE常量切换集成模块/应用模式
 if (IS_APP_MODE) {
     apply plugin: 'com.android.application'
-    apply plugin: 'kotlin-android'
-    apply plugin: 'kotlin-android-extensions'
-}else{
+} else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29

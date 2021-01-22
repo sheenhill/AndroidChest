@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.roy.recycleviewtest">
+    package="com.sheenhill.rusuo">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -44,10 +44,10 @@
             android:name=".activity.StudyActivity"
             android:theme="@style/AppTheme.Light.NoActionBar">
             <!--<intent-filter>-->
-            <!--<action android:name="com.example.roy.recycleviewtest.STUDY_START" />-->
+            <!--<action android:name="com.example.recycleviewtest.STUDY_START" />-->
 
             <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--<category android:name="com.example.roy.recycleviewtest.STUDY_ACTIVITY" />-->
+            <!--<category android:name="com.example.recycleviewtest.STUDY_ACTIVITY" />-->
             <!--</intent-filter>-->
         </activity>
         <activity
@@ -64,11 +64,6 @@
             android:name=".activity.GuideActivity"
             android:theme="@style/AppTheme.Light.NoActionBar" />
         <activity
-            android:name=".laboratory.CountdownFragment"
-            android:theme="@style/AppTheme.Light.NoActionBar" />
-        <activity
-            android:name=".activity.CrawlerActivity"
-            android:theme="@style/AppTheme.Light.NoActionBar" /><activity
             android:name=".activity.NewCustomViewActivity"
             android:theme="@style/AppTheme.Light.NoActionBar" />
 

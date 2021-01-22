@@ -76,7 +76,6 @@
                 android:gravity="center"
                 android:text="幸运号码"
                 android:textColor="#333"
-                android:onClick="@{()->listener.showDialog()}"
                 tools:text="转换" />
 
             <Button
