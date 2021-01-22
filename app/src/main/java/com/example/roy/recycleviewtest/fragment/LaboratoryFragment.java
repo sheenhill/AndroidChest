@@ -44,6 +44,10 @@ public class LaboratoryFragment extends Fragment {
         public void toCrawler(){
             Navigation.findNavController(binding.getRoot()).navigate(R.id.action_laboratoryFragment_to_crawlerFragment);
         }
+        // 测试
+        public void toTest(){
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_laboratoryFragment_to_testFragment);
+        }
         // lottie动画
         public void toLottieMotion(){
 //            Navigation.findNavController(binding.getRoot()).navigate(R.id.);

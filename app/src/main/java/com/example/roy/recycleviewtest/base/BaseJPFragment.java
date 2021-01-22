@@ -68,7 +68,7 @@ public abstract class BaseJPFragment extends Fragment {
 
         ViewDataBinding binding = DataBindingUtil.inflate(inflater, dataBindingConfig.getLayout(), container, false);
         binding.setLifecycleOwner(this);//fixme: lifecycleOwner持有表示livedata当前被持有的范围
-        binding.setVariable(BR.viewModel, dataBindingConfig.getStateViewModel());// fixme:继承这个baseFragment的fragment，管理其数据的viewModel，在data binding中  viewModel的声明都得是  name=viewModel
+        binding.setVariable(dataBindingConfig.getVmVariableId(), dataBindingConfig.getStateViewModel());// fixme:继承这个baseFragment的fragment，管理其数据的viewModel，在data binding中  viewModel的声明都得是  name=viewModel
         SparseArray bindingParams = dataBindingConfig.getBindingParams();
         for (int i = 0, length = bindingParams.size(); i < length; i++) {
             binding.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i));

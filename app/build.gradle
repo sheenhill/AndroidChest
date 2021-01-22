@@ -68,12 +68,17 @@ dependencies {
     // 滚动View
     implementation 'com.contrarywind:wheelview:4.1.0'
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.3.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation project(path: ':pageindicator')
-    implementation project(path: ':typeswitcher')
-    implementation project(path: ':lotterydemo')
+    implementation project(path: ':view_pageindicator')
+    implementation project(path: ':view_typeswitcher')
+    implementation project(path: ':module_test')
+//    implementation project(path: ':demo_lottery')
+//    implementation project(path: ':common')
+
+
+//    api project(path: ':demo_lottery')
 
     // lottie动画
     implementation 'com.airbnb.android:lottie:3.4.1'

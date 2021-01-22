@@ -69,6 +69,17 @@
                 android:layout_marginBottom="@dimen/margin_s"
                 android:onClick="@{()->listener.toLottieMotion()}"
                 android:text="LOTTIE动画" />
+
+            <Button
+                android:id="@+id/btn_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_m"
+                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginEnd="@dimen/margin_m"
+                android:layout_marginBottom="@dimen/margin_s"
+                android:onClick="@{()->listener.toTest()}"
+                android:text="测试页" />
         </LinearLayout>
     </ScrollView>
 </layout>

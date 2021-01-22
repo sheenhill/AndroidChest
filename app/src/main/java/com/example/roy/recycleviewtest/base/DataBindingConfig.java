@@ -3,6 +3,7 @@ package com.example.roy.recycleviewtest.base;
 
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -13,20 +14,27 @@ import androidx.lifecycle.ViewModel;
  */
 public class DataBindingConfig {
 
-    private int layout;
+    private final int layout;
 
-    private ViewModel stateViewModel;
+    private final int vmVariableId;
+
+    private final ViewModel stateViewModel;
 
     private SparseArray bindingParams = new SparseArray();
 
-    public DataBindingConfig(int layout, ViewModel stateViewModel) {
+    public DataBindingConfig(@NonNull Integer layout,
+                             @NonNull Integer vmVariableId,
+                             @NonNull ViewModel stateViewModel) {
         this.layout = layout;
+        this.vmVariableId = vmVariableId;
         this.stateViewModel = stateViewModel;
     }
 
     public int getLayout() {
         return layout;
     }
+
+    public int getVmVariableId(){return vmVariableId;}
 
     public ViewModel getStateViewModel() {
         return stateViewModel;

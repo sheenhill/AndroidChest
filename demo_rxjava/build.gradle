@@ -1,0 +1,48 @@
+//根据isModule标签切换集成模块/应用模式
+if (IS_APP_MODE) {
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        // 作为一个集成模块不应该有applicationId
+        if (IS_APP_MODE) {
+            applicationId "com.sheenhill.rxjavademo"
+        }
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+}
+apply plugin: 'kotlin-android'
+repositories {
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    mavenCentral()
+}

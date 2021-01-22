@@ -1,6 +1,11 @@
-//apply plugin: 'com.android.application'
-apply plugin: 'com.android.library'
-apply from: "config.gradle"
+//根据isModule标签切换集成模块/应用模式
+if (COMMON_APP_MODE) {
+    apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+}else{
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion 29
@@ -9,7 +14,10 @@ android {
     def TEST_STR_1 = "松鼠桂鱼"
 
     defaultConfig {
-//        applicationId "com.sheenhill.common"
+        //作为一个集成模块应该不应该有applicationId
+        if (COMMON_APP_MODE) {
+            applicationId "com.sheenhill.common"
+        }
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -22,6 +30,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main() {
+            //作为一个集成模块 manifest文件中不加任何东西可以防止冲突
+            if (COMMON_APP_MODE) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }else{
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                java.srcDirs 'src/main/module/java', 'src/main/java'
+            }
         }
     }
 
@@ -53,4 +73,10 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    mavenCentral()
 }

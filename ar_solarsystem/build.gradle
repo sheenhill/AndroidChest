@@ -1,11 +1,20 @@
-apply plugin: 'com.android.application'
+//根据isModule标签切换集成模块/应用模式
+//if (IS_APP_MODE) {
+    apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+//}else{
+//    apply plugin: 'com.android.library'
+//}
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.sheenhill.ar_solarsystem"
+        //作为一个集成模块应该不应该有applicationId
+//        if (IS_APP_MODE) {
+            applicationId "com.sheenhill.ar_solarsystem"
+//        }
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
@@ -24,6 +33,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main() {
+            //作为一个集成模块 manifest文件中不加任何东西可以防止冲突
+//            if (IS_APP_MODE) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+//            }else{
+//                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+//                java.srcDirs 'src/main/module/java', 'src/main/java'
+//            }
+        }
+    }
 }
 
 dependencies {
@@ -33,6 +54,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "com.google.ar.sceneform:core:1.15.0"
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 apply plugin: 'com.google.ar.sceneform.plugin'
@@ -87,3 +110,7 @@ sceneform.asset('sampledata/models/Venus/Venus.gltf',
         'default',
         'sampledata/models/Venus/Venus.sfa',
         'src/main/assets/Venus')
+repositories {
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    mavenCentral()
+}

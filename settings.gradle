@@ -1,5 +1,7 @@
-include ':rxjavademo'
-include ':animatordemo'
-include ':ar_solarsystem'
+include ':module_test'
 include ':common'
-include ':app', ':pageindicator', ':typeswitcher',':lotterydemo'
+include ':demo_rxjava'
+include ':demo_animator',":demo_lottery"
+include ':ar_solarsystem'
+include ':view_pageindicator', ':view_typeswitcher'
+include ':app'

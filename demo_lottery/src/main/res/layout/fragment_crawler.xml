@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sheenhill.demo_lottery.JCrawlerViewModel" />
+
+        <variable
+            name="adapterSSQ"
+            type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
+
+        <variable
+            name="adapterDLT"
+            type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
+
+        <variable
+            name="adapterLuckyNum"
+            type="com.sheenhill.common.base.BaseRVAdapter" />
+
+        <variable
+            name="listener"
+            type="com.sheenhill.demo_lottery.CrawlerFragment.Listener" />
+
+        <variable
+            name="activity"
+            type="android.app.Activity" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/ml"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_crawler_scene">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_luck_num"
+            adapter="@{adapterLuckyNum}"
+            resource="@{viewModel.listLuckyNum}"
+
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_luck_num">
+
+            <EditText
+                android:id="@+id/textView"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:hint="最近30期" />
+            <!--                android:onClick="@{()->listener.editLuckNum()}"-->
+            <TextView
+                android:id="@+id/btn_luck_num"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="8dp"
+                android:elevation="8dp"
+                android:gravity="center"
+                android:text="幸运号码"
+                android:textColor="#333"
+                android:onClick="@{()->listener.showDialog()}"
+                tools:text="转换" />
+
+            <Button
+                android:id="@+id/btn_convert"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/border_black_m"
+                android:elevation="@dimen/dp_16"
+                android:onClick="@{()->listener.convert()}"
+                android:text="@{viewModel.pageInfoType?`双色球`:`大乐透`}"
+                android:translationZ="@dimen/dp_16"
+                tools:text="转换" />
+        </RelativeLayout>
+        <!--            "-->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_lottery"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_ssq"-->
+<!--            adapter="@{adapterSSQ}"-->
+<!--            resource="@{viewModel.infoListSsq}"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:paddingBottom="40dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tool_bar"-->
+<!--            android:visibility="gone"-->
+<!--            tools:visibility="visible" />-->
+<!--        &lt;!&ndash;            android:visibility="@{!viewModel.pageInfoType?View.VISIBLE:View.INVISIBLE}"&ndash;&gt;-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_dlt"-->
+<!--            adapter="@{adapterDLT}"-->
+<!--            resource="@{viewModel.infoListDlt}"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:paddingBottom="40dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tool_bar"-->
+<!--            android:visibility="gone"-->
+<!--            tools:visibility="visible" />-->
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</layout>
