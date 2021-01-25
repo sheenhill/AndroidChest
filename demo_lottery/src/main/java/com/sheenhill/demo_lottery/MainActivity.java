@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FragmentLotteryBinding binding=DataBindingUtil.setContentView(this,R.layout.fragment_lottery);
+        DataBindingUtil.setContentView(this,R.layout.fragment_lottery);
         LogUtil.i(BuildConfig.LOG_TEST);
     }
 }

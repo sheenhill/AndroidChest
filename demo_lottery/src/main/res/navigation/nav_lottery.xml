@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/crawlerFragment"
-        android:name="com.sheenhill.demo_lottery.CrawlerFragment"
+        android:name="com.sheenhill.demo_lottery.J_CrawlerFragment"
         android:label="CrawlerFragment" />
 </navigation>

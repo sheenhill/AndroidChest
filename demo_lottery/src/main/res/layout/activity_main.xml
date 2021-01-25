@@ -12,7 +12,7 @@
         tools:context=".MainActivity">
 
         <fragment
-            android:name="com.sheenhill.demo_lottery.CrawlerFragment"
+            android:name="com.sheenhill.demo_lottery.J_CrawlerFragment"
             android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

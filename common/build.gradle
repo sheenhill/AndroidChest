@@ -1,5 +1,5 @@
 //根据IS_APP_MODE常量切换集成模块/应用模式
-if (IS_APP_MODE) {
+if (COMMON_IS_APP_MODE) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         //作为一个集成模块应该不应该有applicationId
-        if (COMMON_APP_MODE) {
+        if (COMMON_IS_APP_MODE) {
             applicationId "com.sheenhill.common"
         }
         minSdkVersion 21
@@ -36,7 +36,7 @@ android {
     sourceSets {
         main() {
             //作为一个集成模块 manifest文件中不加任何东西可以防止冲突
-            if (COMMON_APP_MODE) {
+            if (COMMON_IS_APP_MODE) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }else{
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'

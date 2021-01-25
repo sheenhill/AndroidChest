@@ -23,7 +23,7 @@ import com.sheenhill.demo_lottery.adapter.LuckyNumRVAdapter;
 import com.sheenhill.demo_lottery.databinding.FragmentCrawlerBinding;
 
 /* 彩票主展示页 -- 爬虫页 */
-public class CrawlerFragment extends Fragment {
+public class J_CrawlerFragment extends Fragment {
     private JCrawlerViewModel vm;
     private FragmentCrawlerBinding binding;
     private LotterySSQAdapter adapterSSQ;
@@ -103,9 +103,9 @@ public class CrawlerFragment extends Fragment {
         }
     }
 
-    public class Listener {
+    public static class Listener {
         // 页面转换
-        public void convert() {
+        public void convert(JCrawlerViewModel vm) {
             LogUtil.i("click convert");
             vm.getPageInfoType().setValue(!(vm.getPageInfoType().getValue()));
         }

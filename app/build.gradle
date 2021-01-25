@@ -4,7 +4,6 @@ apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
     defaultConfig {
         applicationId "com.sheenhill.rusuo"
         minSdkVersion 21
@@ -19,7 +18,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
     //set no compress models
     // 这个主要显示不要对tflite的模型进行压缩，压缩之后就无法加载模型了
     aaptOptions {

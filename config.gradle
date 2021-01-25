@@ -1,9 +1,9 @@
 ext { // ext 全局变量关键字
     
     IS_APP_MODE=false
-    COMMON_APP_MODE=false
-    // MODE_MODULE：所有组件都作为主工程资源无法独立编译
-    // MODE_APP：所有组件都可编译成独立应用
+    COMMON_IS_APP_MODE=false
+    // MODULE_MODE：所有组件都作为主工程资源无法独立编译
+    // APP_MODE：所有组件都可编译成独立应用
 
 //    官方不推荐以下方式：统一sdk版本，不利于解耦
 //    android = [

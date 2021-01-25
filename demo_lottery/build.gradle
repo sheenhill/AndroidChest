@@ -6,6 +6,7 @@ if (IS_APP_MODE) {
 }
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -64,6 +65,10 @@ android {
         enabled = true
     }
 
+    kapt {
+        generateStubs = true
+    }
+
 }
 
 dependencies {
@@ -71,6 +76,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.android.material:material:1.1.0-rc01'
+
+    //版本要与gradle版本一致
+    kapt  "com.android.databinding:compiler:6.1.1"
 
     def nav_version = "2.3.1"
 

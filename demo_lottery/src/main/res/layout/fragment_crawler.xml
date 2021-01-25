@@ -23,7 +23,7 @@
 
         <variable
             name="listener"
-            type="com.sheenhill.demo_lottery.CrawlerFragment.Listener" />
+            type="com.sheenhill.demo_lottery.J_CrawlerFragment.Listener" />
 
         <variable
             name="activity"
@@ -87,7 +87,7 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/border_black_m"
                 android:elevation="@dimen/dp_16"
-                android:onClick="@{()->listener.convert()}"
+                android:onClick="@{()->listener.convert(viewModel)}"
                 android:text="@{viewModel.pageInfoType?`双色球`:`大乐透`}"
                 android:translationZ="@dimen/dp_16"
                 tools:text="转换" />
