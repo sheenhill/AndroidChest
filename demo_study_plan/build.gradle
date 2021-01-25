@@ -1,4 +1,9 @@
-apply plugin: 'com.android.application'
+//根据IS_APP_MODE常量切换集成模块/应用模式
+if (IS_APP_MODE) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -8,12 +13,14 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.sheenhill.demo_study_plan"
+        // 作为一个集成模块不应该有applicationId
+        if (IS_APP_MODE) {
+            applicationId "com.sheenhill.demo_study_plan"
+        }
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -21,6 +28,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main() {
+            if (IS_APP_MODE) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {//作为一个集成模块 manifest文件中不加任何东西可以防止冲突
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                java.srcDirs 'src/main/module/java', 'src/main/java'
+            }
         }
     }
 

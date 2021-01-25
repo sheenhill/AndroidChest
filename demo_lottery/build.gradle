@@ -40,6 +40,7 @@ android {
 //            buildConfigField "String", "LOG_TEST", "${TEST_STR_2}"
 //        }
     }
+
     sourceSets {
         main() {
             if (IS_APP_MODE) {
@@ -51,18 +52,13 @@ android {
         }
     }
 
-    productFlavors {
-
-    }
-
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
 
-    dataBinding {
-        //noinspection DataBindingWithoutKapt
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
     kapt {

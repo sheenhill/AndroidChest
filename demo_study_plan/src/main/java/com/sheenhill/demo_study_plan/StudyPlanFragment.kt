@@ -7,6 +7,7 @@ import com.sheenhill.common.fragment.K_DataBindingConfig
 /* 学习打开功能 */
 class StudyPlanFragment:K_BaseJetpackFragment(){
     lateinit var viewModel: StudyPlanViewModel
+
     override fun initViewModel() {
         viewModel= StudyPlanViewModel()
     }
