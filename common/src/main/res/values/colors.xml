@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <!--主色调-->
+    <color name="colorPrimary">#ffffff</color>
+    <!--辅色调-->
+    <color name="colorPrimaryDark">#ffffff</color>
+    <!--重点色调-->
+    <color name="colorAccent">#2a9f93</color>
+    <!--view背景|不可选中-->
+    <color name="colorViewBackground">#c7c7c7</color>
+    <!--分割线-->
+    <color name="colorSplitLine">#efefef</color>
+    <!--字体颜色-->
+    <color name="textColorPrimaryDark">#222222</color>
+    <color name="textColorPrimary">#c5bec2</color>
+    <color name="textColorUnimportant">#c7c7c7</color>
+
+    <color name="ccc">#cccccc</color>
+    <color name="text_666">#666666</color>
+
+    <color name="default_ascv_selected_color">#41BAFF</color>
+    <color name="default_ascv_unselected_color">#FFFFFF</color>
+
+
+    <color name="lottery_blue">#39f</color>
+    <color name="lottery_red">#f54646</color>
+    <color name="white">#fff</color>
+
+    <color name="text333">#333</color>
+    <color name="text666">#666</color>
+    <color name="text999">#999</color>
 </resources>

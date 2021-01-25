@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!--主色调-->
     <color name="colorPrimary">#ffffff</color>
     <!--辅色调-->
@@ -21,13 +20,4 @@
 
     <color name="default_ascv_selected_color">#41BAFF</color>
     <color name="default_ascv_unselected_color">#FFFFFF</color>
-
-
-    <color name="lottery_blue">#39f</color>
-    <color name="lottery_red">#f54646</color>
-    <color name="white">#fff</color>
-
-    <color name="text333">#333</color>
-    <color name="text666">#666</color>
-    <color name="text999">#999</color>
 </resources>
