@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_main"
+    app:startDestination="@id/v2_MainFragment">
+
+    <fragment
+        android:id="@+id/v2_MainFragment"
+        android:name="com.sheenhill.rusuo.v2.V2_IndexFragment"
+        android:label="V2_MainFragment" >
+        <action
+            android:id="@+id/action_v2_MainFragment_to_v2_ChestFragment"
+            app:destination="@id/v2_ChestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/v2_ChestFragment"
+        android:name="com.sheenhill.rusuo.v2.V2_ChestFragment"
+        android:label="V2_ChestFragment" >
+        <action
+            android:id="@+id/action_v2_ChestFragment_to_nav_graph"
+            app:destination="@id/nav_graph" />
+    </fragment>
+    <include app:graph="@navigation/nav_lab" />
+</navigation>

@@ -11,15 +11,21 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.ViewPager;
 
 import com.sheenhill.rusuo.adapter.TabFragmentAdapter;
 import com.sheenhill.rusuo.base.BaseActivity;
+import com.sheenhill.rusuo.databinding.ActivityMainBinding;
 import com.sheenhill.rusuo.util.ToastUtils;
 import com.google.android.material.tabs.TabLayout;
 import java.lang.ref.WeakReference;
@@ -29,13 +35,9 @@ import butterknife.ButterKnife;
 
 
 
-public class MainActivity extends BaseActivity {
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.guide_view_pager)
-    ViewPager guideViewPager;
-    @BindView(R.id.toolbar_layout)
-    TabLayout toolbarLayout;
+public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
+
 
     private int count;
     //    private StringBuffer sb;
@@ -70,8 +72,20 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+        setSupportActionBar(binding.toolbar);
+//        toolbar.setTitle("如梭  " + sb); // todo
+        binding.toolbar.setTitle("如梭");
+        initViewPager();
+        initTabLayout();
+        initData();
+    }
 
-//    @SuppressLint("MissingSuperCall")
+
+    //    @SuppressLint("MissingSuperCall")
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        switch (requestCode) {
@@ -86,49 +100,39 @@ public class MainActivity extends BaseActivity {
 //    }
 
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
 
-    @Override
     protected void initEvent() {
 //        intentFilter = new IntentFilter();
 //        intentFilter.addAction("com.example.broadcasttest.LOCAL_BROADCAST");
 
     }
-
-    @Override
-    protected void initView() {
-        setSupportActionBar(toolbar);
-//        toolbar.setTitle("如梭  " + sb); // todo
-        toolbar.setTitle("如梭");
-        initViewPager();
-        initTabLayout();
-    }
-
-    @Override
-    protected int setStatusBarColor() {
-        return R.color.colorAccent;
-    }
+//
+//    @Override
+//    protected void initView() {
+//
+//    }
+//
+//    @Override
+//    protected int setStatusBarColor() {
+//        return R.color.colorAccent;
+//    }
 
 
     private void initViewPager() {
         adapter = new TabFragmentAdapter(getSupportFragmentManager(), titles);
 //        adapter = new TabFragmentAdapter(getSupportFragmentManager(), "");
-        guideViewPager.setAdapter(adapter);
+        binding.guideViewPager.setAdapter(adapter);
     }
 
     private void initTabLayout() {
-        toolbarLayout.setupWithViewPager(guideViewPager, false);
-        final TabLayout.Tab tab1 = toolbarLayout.getTabAt(0);
-        final TabLayout.Tab tab2 = toolbarLayout.getTabAt(1);
+        binding.toolbarLayout.setupWithViewPager(binding.guideViewPager, false);
+        final TabLayout.Tab tab1 = binding.toolbarLayout.getTabAt(0);
+        final TabLayout.Tab tab2 = binding.toolbarLayout.getTabAt(1);
         tab1.setIcon(getResources().getDrawable(R.mipmap.pic,null));
         tab2.setIcon(getResources().getDrawable(R.mipmap.toolbox,null));
     }
 
-    @Override
-    protected void initData() {
+    private void initData() {
         myHandler=new MyHandler(this);
 //        sb = new StringBuffer("已学习");
 //        count = LitePal.sum(HoursPlan.class, "thisStudyTime", int.class);

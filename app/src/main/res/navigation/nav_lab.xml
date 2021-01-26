@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/laboratoryFragment">
 
-    <fragment
-        android:id="@+id/typeSwitcherFragment"
-        android:name="com.sheenhill.rusuo.laboratory.TypeSwitcherFragment"
-        android:label="TypeSwitcherFragment" />
+
     <fragment
         android:id="@+id/laboratoryFragment"
         android:name="com.sheenhill.rusuo.fragment.LaboratoryFragment"
-        android:label="LaboratoryFragment" >
+        android:label="LaboratoryFragment">
         <action
             android:id="@+id/action_laboratoryFragment_to_typeSwitcherFragment"
             app:destination="@id/typeSwitcherFragment" />
@@ -33,6 +31,10 @@
             android:id="@+id/action_laboratoryFragment_to_testFragment"
             app:destination="@id/testFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/typeSwitcherFragment"
+        android:name="com.sheenhill.rusuo.laboratory.TypeSwitcherFragment"
+        android:label="TypeSwitcherFragment" />
     <fragment
         android:id="@+id/pagerIndicatorFragment"
         android:name="com.sheenhill.rusuo.laboratory.PageIndicatorFragment"

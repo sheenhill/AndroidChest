@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_s"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <ImageView
-            android:id="@+id/pic"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-        <TextView
-            android:id="@+id/tv_copyright"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xs"
-            android:layout_marginStart="@dimen/margin_s"
-            android:layout_marginEnd="@dimen/margin_s"
-            android:bufferType="spannable"
-            android:hint="旧圣胡安的圣费利佩海角城堡，波多黎各 (© grandriver/Getty Images)"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pic" />
-        <!--TextView的bufferType为spannable意为可变的字符串，可添加SpannableString声明的对象实现各种文字效果-->
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="data"
+            type="com.sheenhill.rusuo.entity.BingPicBean.ImagesBean" />
+
+   <variable
+       name="context"
+       type="android.content.Context" /> </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_10"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/pic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                url="@{data.url}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_copyright"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_s"
+                android:layout_marginTop="@dimen/margin_xs"
+                android:layout_marginEnd="@dimen/margin_s"
+                android:bufferType="spannable"
+                android:text="@{data.newcopyright}"
+                android:hint="旧圣胡安的圣费利佩海角城堡，波多黎各 (© grandriver/Getty Images)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <!--TextView的bufferType为spannable意为可变的字符串，可添加SpannableString声明的对象实现各种文字效果-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

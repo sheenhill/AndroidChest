@@ -11,6 +11,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 
 /**
  * JetPack库下的准MVVM规范的BaseFragment
@@ -65,7 +67,7 @@ abstract class K_BaseJetpackFragment : Fragment() {
      */
     protected abstract fun getDataBindingConfig(): K_DataBindingConfig
 
-    
+
     protected open fun <T : ViewModel?> getFragmentViewModel(modelClass: Class<T>): T {
         if (mFragmentProvider == null) {
             mFragmentProvider = ViewModelProvider(this)
@@ -79,8 +81,9 @@ abstract class K_BaseJetpackFragment : Fragment() {
         }
         return mActivityProvider[modelClass]
     }
-    //    protected NavController nav() {
-//        return NavHostFragment.findNavController(this);
-//    }
+
+    protected fun nav(): NavController {
+        return NavHostFragment.findNavController(this);
+    }
 
 }

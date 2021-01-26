@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     defaultConfig {
@@ -29,8 +30,11 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-    dataBinding{
-        enabled=true
+    buildFeatures {
+        dataBinding = true
+    }
+    kapt {
+        generateStubs = true
     }
 }
 
@@ -73,9 +77,11 @@ dependencies {
 
     implementation project(path: ':view_pageindicator')
     implementation project(path: ':view_typeswitcher')
-    implementation project(path: ':module_test')
-    implementation project(path: ':demo_lottery')
-//    implementation project(path: ':common')
+    if(IS_APP_MODE&&!NO_MODULE){
+        implementation project(path: ':module_test')
+        implementation project(path: ':demo_lottery')
+    }
+    implementation project(path: ':common')
 
 
 //    api project(path: ':demo_lottery')

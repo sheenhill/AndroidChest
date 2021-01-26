@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModel
 class K_DataBindingConfig (val layout: Int, val vmVariableId: Int, val stateViewModel: ViewModel) {
     val bindingParams=SparseArray<Any>()
 
-    open fun addBindingParam(variableId: Int, any: Any): K_DataBindingConfig? {
+    open fun addBindingParam(variableId: Int, any: Any): K_DataBindingConfig {
         if (bindingParams[variableId] == null) {
             bindingParams.put(variableId,any)
         }

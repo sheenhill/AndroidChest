@@ -2,6 +2,7 @@ ext { // ext 全局变量关键字
     
     IS_APP_MODE=true
     COMMON_IS_APP_MODE=false
+    NO_MODULE=true
     // MODULE_MODE：所有组件都作为主工程资源无法独立编译
     // APP_MODE：所有组件都可编译成独立应用
 
