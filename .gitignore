@@ -8,3 +8,6 @@
 /build
 /captures
 .externalNativeBuild
+.log
+/replay_pid104264.log
+/hs_err_pid104264.log
