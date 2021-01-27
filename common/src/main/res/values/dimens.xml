@@ -25,6 +25,7 @@
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_4">4dp</dimen>
     <dimen name="title_height">65dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
 
 
 </resources>

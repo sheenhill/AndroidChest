@@ -95,11 +95,10 @@ public abstract class BaseDialog<B extends ViewDataBinding,D extends BaseDialog>
 
 
     /**
+     * fixme:dialogFragment的宽高需要用组件撑起来的问题
+     *
      * 配置params,修改dialog大小，位置等
      * 默认：大小：params.WRAP_CONTENT  位置：Gravity.CENTER
-     *
-     * 宽高应规定为固定px！！！
-     *
      * @return 重新配置的params
      */
     protected WindowManager.LayoutParams setLayout(WindowManager.LayoutParams params) {
