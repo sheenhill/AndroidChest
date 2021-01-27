@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/v2_MainFragment"
-        android:name="com.sheenhill.rusuo.v2.V2_IndexFragment"
+        android:name="com.sheenhill.rusuo.v2.index.V2_IndexFragment"
         android:label="V2_MainFragment" >
         <action
             android:id="@+id/action_v2_MainFragment_to_v2_ChestFragment"

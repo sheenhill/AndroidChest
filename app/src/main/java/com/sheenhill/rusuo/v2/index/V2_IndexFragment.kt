@@ -1,4 +1,4 @@
-package com.sheenhill.rusuo.v2
+package com.sheenhill.rusuo.v2.index
 
 import androidx.navigation.NavController
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
@@ -14,9 +14,9 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
         return K_DataBindingConfig(R.layout.fragment_index_v2, BR.viewModel, viewModel)
-                .addBindingParam(BR.listener,Listener())
+                .addBindingParam(BR.listener, Listener())
                 .addBindingParam(BR.navController,nav())
-                .addBindingParam(BR.adapter,V2_BingPicAdapter())
+                .addBindingParam(BR.adapter, V2_BingPicAdapter())
     }
 
     class Listener{

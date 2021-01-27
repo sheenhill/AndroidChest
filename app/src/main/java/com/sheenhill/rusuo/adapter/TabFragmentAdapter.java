@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.sheenhill.rusuo.fragment.MainFragment;
 import com.sheenhill.rusuo.fragment.OtherFragment;
 
 public class TabFragmentAdapter extends FragmentPagerAdapter {
@@ -21,7 +20,7 @@ public class TabFragmentAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0:
             default:
-                return new MainFragment();
+                return new OtherFragment();
             case 1:
                 return new OtherFragment();
         }

@@ -1,10 +1,9 @@
-package com.sheenhill.rusuo.v2
+package com.sheenhill.rusuo.v2.index
 
 import androidx.recyclerview.widget.RecyclerView
 import com.sheenhill.common.base.SingleTypeBaseRVAdapter
 import com.sheenhill.rusuo.R
 import com.sheenhill.rusuo.databinding.ItemBingPicBinding
-import com.sheenhill.rusuo.entity.BingPicBean
 
 class V2_BingPicAdapter: SingleTypeBaseRVAdapter<BingPicBean.ImagesBean, ItemBingPicBinding>() {
 

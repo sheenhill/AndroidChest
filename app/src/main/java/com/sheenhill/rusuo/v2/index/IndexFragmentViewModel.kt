@@ -1,4 +1,4 @@
-package com.sheenhill.rusuo.v2
+package com.sheenhill.rusuo.v2.index
 
 import android.graphics.Color
 import android.text.SpannableString
@@ -10,13 +10,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import com.sheenhill.rusuo.base.APIs
-import com.sheenhill.rusuo.entity.BingPicBean
-import com.sheenhill.rusuo.entity.BingPicBean.ImagesBean
-import com.sheenhill.rusuo.fragment.MainFragment
+import com.sheenhill.rusuo.v2.index.BingPicBean.ImagesBean
 import com.sheenhill.rusuo.util.LogUtil
 import okhttp3.*
 import java.io.IOException
-import java.util.*
 
 class IndexFragmentViewModel:ViewModel() {
     val bingPicList= MutableLiveData<MutableList<ImagesBean>>()
@@ -45,12 +42,6 @@ class IndexFragmentViewModel:ViewModel() {
                 var resultsBean: ImagesBean
                 val list= MutableList<ImagesBean>(0) { it -> ImagesBean() }
                 var url: String
-                var copyrightStr: String
-                var strArr: Array<String>
-                var length0fLineOne: Int
-                var tempStr: String
-                var spannableString: SpannableString
-                var colorSpan: ForegroundColorSpan
                 for (pic in jsonArray) {
                     resultsBean = Gson().fromJson(pic,
                             object : TypeToken<ImagesBean?>() {}.type)
@@ -58,21 +49,8 @@ class IndexFragmentViewModel:ViewModel() {
                     // Java编译器会把捕获到的泛型信息编译到这个匿名内部类里，然后在运行时就可以被 getType() 方法用反射的 API 提取到。
                     //解释的很官方，实际上就是一句 通俗但不严谨 的话，它将泛型 T 转成 .class 。
                     // 比如上面的resultsBean 经过 getType() 后就是 ResultsBean.class 。
-                    url = "https://www.bing.com" + resultsBean.url
-                    copyrightStr = resultsBean.copyright.trim { it <= ' ' }
-                    strArr = copyrightStr.split("\\(".toRegex()).toTypedArray()
-                    length0fLineOne = strArr[0].length
-                    tempStr = """
-                    ${strArr[0]}
-                    ${strArr[1].replace(")", "")}
-                    """.trimIndent()
-                    url = url.replaceFirst("1920x1080".toRegex(), "800x480")
-                    spannableString = SpannableString(tempStr)
-                    colorSpan = ForegroundColorSpan(Color.parseColor("#000000"))
-                    spannableString.setSpan(colorSpan, 0, length0fLineOne, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                    //样式text，参考链接 https://blog.csdn.net/u012551350/article/details/51722893
+                    url = "https://www.bing.com${resultsBean.url.replaceFirst("1920x1080".toRegex(), "800x480")}"
                     resultsBean.url = url
-                    resultsBean.newcopyright = spannableString
                     list.add(resultsBean)
                     LogUtil.i("bingPicList.url:" + resultsBean.url)
                 }

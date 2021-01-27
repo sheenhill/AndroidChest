@@ -1,4 +1,4 @@
-package com.sheenhill.rusuo.entity;
+package com.sheenhill.rusuo.v2.index;
 
 import android.text.SpannableString;
 
@@ -121,17 +121,6 @@ public class BingPicBean {
         private int top;
         private int bot;
         private List<?> hs;
-        private SpannableString newcopyright;
-
-        public SpannableString getNewcopyright() {
-            return newcopyright;
-        }
-
-        public void setNewcopyright(SpannableString newcopyright) {
-            this.newcopyright = newcopyright;
-        }
-
-
 
         public String getStartdate() {
             return startdate;
