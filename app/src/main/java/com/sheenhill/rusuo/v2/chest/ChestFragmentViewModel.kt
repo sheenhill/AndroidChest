@@ -1,4 +1,4 @@
-package com.sheenhill.rusuo.v2
+package com.sheenhill.rusuo.v2.chest
 
 import androidx.lifecycle.ViewModel
 

@@ -21,7 +21,7 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
 
     class Listener{
         fun jumpTest(navController: NavController) {
-            navController.navigate(R.id.action_v2_MainFragment_to_v2_ChestFragment)
+            navController.navigate(R.id.action_v2_MainFragment_to_ChestFragment)
         }
     }
 }

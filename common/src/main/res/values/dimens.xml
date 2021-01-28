@@ -26,6 +26,9 @@
     <dimen name="dp_4">4dp</dimen>
     <dimen name="title_height">65dp</dimen>
     <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
+    <dimen name="dp_7">7dp</dimen>
 
 
 </resources>

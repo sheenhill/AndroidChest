@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Common</string>
+    <string name="title_module">功能模块</string>
+    <string name="title_AI">人工智障</string>
+    <string name="title_calculator">复利计算器</string>
+    <string name="title_plan">学习计划</string>
+    <string name="title_lottery">彩票爬虫</string>
+    <string name="title_component">组件实验室</string>
+    <string name="title_type_switcher">类型选择组件</string>
+    <string name="title_page_indicator">页面指示组件</string>
+    <string name="title_count_down">倒计时</string>
+    <string name="title_animator_set">动画效果集合</string>
 </resources>
