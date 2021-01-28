@@ -9,16 +9,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sheenhill.common.R
 import com.sheenhill.common.fragment.ImageDialog
+import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.util.ToastUtils
 
-@BindingAdapter(value = ["url"])
-fun showImgByGlide(imgView: ImageView, url: String) {
+@BindingAdapter(value = ["url", "fragment"], requireAll = true)
+fun showImgByGlide(imgView: ImageView, url: String, fragment: K_BaseJetpackFragment?) {
     val options = RequestOptions()
             .placeholder(R.drawable.svg_placeholder)
     Glide.with(imgView).applyDefaultRequestOptions(options).load(url).into(imgView)
     imgView.setOnClickListener { view ->
         ToastUtils.showShort(view.context!!, url)
-        ImageDialog(url).startShow((imgView.context!! as FragmentActivity).supportFragmentManager,"img")
+//        fragment
+        ImageDialog(url).startShow((imgView.context!! as FragmentActivity).supportFragmentManager, "img")
     }
 }
 //

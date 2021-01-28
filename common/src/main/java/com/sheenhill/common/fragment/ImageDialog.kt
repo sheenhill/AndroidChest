@@ -1,8 +1,6 @@
 package com.sheenhill.common.fragment
 
-import android.app.ActionBar
-import android.view.Gravity
-import android.view.View
+import android.content.DialogInterface
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.bumptech.glide.Glide
@@ -33,4 +31,8 @@ import com.sheenhill.common.databinding.DialogImageBinding
          binding.root.setOnClickListener { dismiss() }
      }
 
+     override fun onDismiss(dialog: DialogInterface) {
+         super.onDismiss(dialog)
+         Glide.with(context).clear(getBinding().imageView);
+     }
  }

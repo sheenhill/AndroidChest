@@ -16,10 +16,12 @@ import okhttp3.*
 import java.io.IOException
 
 class IndexFragmentViewModel:ViewModel() {
+    val message=MutableLiveData<String>()
     val bingPicList= MutableLiveData<MutableList<ImagesBean>>()
 
     init {
         getBingPic()
+        message.value=""
     }
 
     fun getBingPic() {

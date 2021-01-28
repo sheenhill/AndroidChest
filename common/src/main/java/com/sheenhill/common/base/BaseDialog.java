@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import com.sheenhill.common.R;
 
 public abstract class BaseDialog<B extends ViewDataBinding,D extends BaseDialog>extends DialogFragment {
-    
+    protected B binding;
     // 通用
     protected Intent intent;
         protected boolean isDismiss;
@@ -29,13 +29,17 @@ public abstract class BaseDialog<B extends ViewDataBinding,D extends BaseDialog>
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        B binding = DataBindingUtil.inflate(requireActivity().getLayoutInflater(), getLayoutId(), null, false);
+        binding = DataBindingUtil.inflate(requireActivity().getLayoutInflater(), getLayoutId(), null, false);
         binding.setLifecycleOwner(this);
         builder.setView(binding.getRoot());
         initView(binding);
         initData(binding);
         initListener(binding);
         return builder.create();
+    }
+
+    protected B getBinding() {
+        return binding;
     }
 
     /* 规定布局*/

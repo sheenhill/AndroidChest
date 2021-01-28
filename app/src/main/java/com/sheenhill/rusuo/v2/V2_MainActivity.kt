@@ -19,7 +19,7 @@ class V2_MainActivity : AppCompatActivity(R.layout.activity_main_v2) {
         val builder = NetworkRequest.Builder()
         val request = builder.build()
         val connMgr = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        connMgr.registerNetworkCallback(request, networkCallback)
+//        connMgr.registerNetworkCallback(request, networkCallback)
         return super.onCreateView(name, context, attrs)
     }
 

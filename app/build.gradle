@@ -110,6 +110,9 @@ dependencies {
 
     // 插值器
     implementation "androidx.interpolator:interpolator:1.0.0"
+
+    // lottie
+    implementation 'com.airbnb.android:lottie:3.4.1'
 }
 repositories {
     mavenCentral()
