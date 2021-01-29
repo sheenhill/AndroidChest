@@ -1,6 +1,5 @@
 package com.sheenhill.rusuo.v2.index
 
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
@@ -24,14 +23,14 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
         super.onStart()
         viewModel.message.observe(this, {
             if (it == "jump") {
-                Listener().jumpTest(nav())
+                viewModel.message.value=""  // 数据倒灌
+                Listener().toChestFragment(nav())
             }
         })
     }
 
     class Listener {
-        fun jumpTest(navController: NavController) {
-
+        fun toChestFragment(navController: NavController) {
             navController.navigate(R.id.action_v2_MainFragment_to_ChestFragment)
         }
     }

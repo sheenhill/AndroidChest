@@ -43,6 +43,7 @@
             android:background="@color/white"
             android:src="@drawable/svg_exit"
             android:text="exit"
+            android:onClick="@{()->listener.backIndex(navController)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

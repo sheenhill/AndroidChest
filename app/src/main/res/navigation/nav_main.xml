@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_ChestFragment_to_nav_graph"
             app:destination="@id/nav_graph" />
+        <action
+            android:id="@+id/action_v2_ChestFragment_to_v2_MainFragment"
+            app:destination="@id/v2_MainFragment" />
     </fragment>
     <include app:graph="@navigation/nav_lab" />
     <dialog

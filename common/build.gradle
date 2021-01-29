@@ -20,7 +20,7 @@ android {
             applicationId "com.sheenhill.common"
         }
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -51,8 +51,8 @@ android {
         targetCompatibility = 1.8
     }
 
-    dataBinding{
-        enabled=true
+    buildFeatures {
+        dataBinding = true
     }
 
     kapt {

@@ -7,17 +7,13 @@
             android:id="@+id/bg_box"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/zero"
-            app:layout_constraintStart_toStartOf="@id/btn_chest"
             app:layout_constraintTop_toTopOf="@id/btn_chest"
-            app:layout_constraintBottom_toBottomOf="@id/btn_chest"
             app:layout_constraintEnd_toEndOf="@id/btn_chest" />
         <Constraint
             android:id="@+id/lottie_box"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/zero"
-            app:layout_constraintStart_toStartOf="@id/btn_chest"
             app:layout_constraintTop_toTopOf="@id/btn_chest"
-            app:layout_constraintBottom_toBottomOf="@id/btn_chest"
             app:layout_constraintEnd_toEndOf="@id/btn_chest"/>
     </ConstraintSet>
 

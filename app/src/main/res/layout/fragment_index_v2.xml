@@ -40,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_15"
-            android:onClick="@{()->listener.jumpTest(navController)}"
             android:text="@string/app_name"
             android:textColor="@color/text333"
             android:textSize="@dimen/sp_35"
@@ -60,29 +59,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
-        <View
-            android:id="@+id/bg_box"
-            android:layout_width="@dimen/zero"
-            android:layout_height="@dimen/zero"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="@id/btn_chest"
-            app:layout_constraintEnd_toEndOf="@id/btn_chest"
-            app:layout_constraintStart_toStartOf="@id/btn_chest"
-            app:layout_constraintTop_toTopOf="@id/btn_chest" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_box"
-            msg="@{viewModel.message}"
-            view_model="@{viewModel}"
-            android:layout_width="@dimen/zero"
-            android:layout_height="@dimen/zero"
-            app:layout_constraintBottom_toBottomOf="@id/btn_chest"
-            app:layout_constraintEnd_toEndOf="@id/btn_chest"
-            app:layout_constraintStart_toStartOf="@id/btn_chest"
-            app:layout_constraintTop_toTopOf="@id/btn_chest"
-            app:lottie_rawRes="@raw/lottie_box" />
 
-<!--        android:onClick="@{()->listener.jumpTest(navController)}" -->
         <ImageButton
             android:id="@+id/btn_chest"
             android:layout_width="@dimen/dp_40"
@@ -93,5 +71,23 @@
             app:layout_constraintBottom_toBottomOf="@id/toolBar"
             app:layout_constraintEnd_toEndOf="@id/toolBar"
             app:layout_constraintTop_toTopOf="@id/toolBar" />
+
+        <View
+            android:id="@+id/bg_box"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/zero"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/btn_chest"
+            app:layout_constraintTop_toTopOf="@id/btn_chest" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_box"
+            msg="@{viewModel.message}"
+            view_model="@{viewModel}"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/zero"
+            app:layout_constraintEnd_toEndOf="@id/btn_chest"
+            app:layout_constraintTop_toTopOf="@id/btn_chest"
+            app:lottie_rawRes="@raw/lottie_box" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
