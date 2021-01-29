@@ -1,6 +1,5 @@
 package com.sheenhill.rusuo.v2.index;
 
-import android.text.SpannableString;
 
 import java.util.List;
 

@@ -87,7 +87,7 @@ public class OtherFragment extends Fragment {
                         startActivity(intent2);
                         break;
                     case 4: // 下班倒计时
-                        startActivity(new Intent(getActivity(), CountdownFragment.class));
+//                        startActivity(new Intent(getActivity(), CountdownFragment.class));
                         break;
                     case 5: // 爬虫
 //                        Intent intent = new Intent(getActivity(), CrawlerActivity.class);
