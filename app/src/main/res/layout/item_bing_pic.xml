@@ -10,12 +10,8 @@
             type="com.sheenhill.rusuo.v2.index.BingPicBean.ImagesBean" />
 
         <variable
-            name="context"
-            type="android.content.Context" />
-
-        <variable
-            name="jpFragment"
-            type="com.sheenhill.common.fragment.K_BaseJetpackFragment" />
+            name="listener"
+            type="com.sheenhill.rusuo.v2.index.V2_BingPicAdapter.Listener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -31,11 +27,11 @@
 
             <ImageView
                 android:id="@+id/pic"
-                fragment="@{jpFragment}"
                 url="@{data.url}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
+                android:onClick="@{(imgView)->listener.showImage(imgView,data.url)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

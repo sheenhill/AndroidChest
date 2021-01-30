@@ -8,12 +8,18 @@ import android.net.NetworkRequest
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.sheenhill.common.base.MainActivityViewModel
 import com.sheenhill.rusuo.R
 import com.sheenhill.rusuo.util.LogUtil
 
 
 class V2_MainActivity : AppCompatActivity(R.layout.activity_main_v2) {
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+
+        ViewModelProvider(this).get(MainActivityViewModel::class.java)
+
+
 //        LogUtil.d("是否有可用网络:${isNetSuccessFul(connectivityManager)}")
         val networkCallback = netWorkStateListener()
         val builder = NetworkRequest.Builder()

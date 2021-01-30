@@ -9,6 +9,10 @@
             type="com.sheenhill.rusuo.v2.index.IndexFragmentViewModel" />
 
         <variable
+            name="mainVM"
+            type="com.sheenhill.common.base.MainActivityViewModel" />
+
+        <variable
             name="listener"
             type="com.sheenhill.rusuo.v2.index.V2_IndexFragment.Listener" />
 

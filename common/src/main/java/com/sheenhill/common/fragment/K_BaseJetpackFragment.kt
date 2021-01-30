@@ -29,6 +29,7 @@ abstract class K_BaseJetpackFragment : Fragment() {
     protected lateinit var mActivityProvider: ViewModelProvider
 
 
+    // 此方法之后执行onCreate
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mActivity = context as AppCompatActivity
@@ -68,14 +69,14 @@ abstract class K_BaseJetpackFragment : Fragment() {
     protected abstract fun getDataBindingConfig(): K_DataBindingConfig
 
 
-    protected open fun <T : ViewModel?> getFragmentViewModel(modelClass: Class<T>): T {
+    protected open fun <T : ViewModel> getFragmentViewModel(modelClass: Class<T>): T {
         if (mFragmentProvider == null) {
             mFragmentProvider = ViewModelProvider(this)
         }
         return mFragmentProvider[modelClass]
     }
 
-    protected open fun <T : ViewModel?> getActivityViewModel(modelClass: Class<T>): T {
+    protected open fun <T : ViewModel> getActivityViewModel(modelClass: Class<T>): T {
         if (mActivityProvider == null) {
             mActivityProvider = ViewModelProvider(mActivity)
         }

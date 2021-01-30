@@ -28,10 +28,13 @@
     <include app:graph="@navigation/nav_lab" />
     <dialog
         android:id="@+id/imageDialog"
-        android:name="com.sheenhill.common.fragment.ImageDialog"
-        android:label="ImageDialog" >
-        <action
-            android:id="@+id/action_imageDialog_to_v2_MainFragment"
-            app:destination="@id/v2_MainFragment" />
-    </dialog>
+        android:name="com.sheenhill.common.widget.ImageDialog"
+        android:label="ImageDialog" />
+    <fragment
+        android:id="@+id/imageShowFragment"
+        android:name="com.sheenhill.common.widget.ImageShowFragment"
+        android:label="ImageShowFragment" />
+    <action
+        android:id="@+id/action_global_imageShowFragment"
+        app:destination="@id/imageShowFragment" />
 </navigation>
