@@ -25,8 +25,8 @@ abstract class K_BaseJetpackFragment : Fragment() {
      * 目前的方案是在 debug 模式下，对获取实例的情况给予提示。
      */
     protected lateinit var mBinding: ViewDataBinding
-    protected lateinit var mFragmentProvider: ViewModelProvider
-    protected lateinit var mActivityProvider: ViewModelProvider
+    protected val mFragmentProvider: ViewModelProvider by lazy { ViewModelProvider(this) } // 懒加载fragment级VMP
+    protected val mActivityProvider: ViewModelProvider by lazy { ViewModelProvider(mActivity) } // 懒加载Activity级VMP
 
 
     // 此方法之后执行onCreate
@@ -70,16 +70,9 @@ abstract class K_BaseJetpackFragment : Fragment() {
 
 
     protected open fun <T : ViewModel> getFragmentViewModel(modelClass: Class<T>): T {
-        if (mFragmentProvider == null) {
-            mFragmentProvider = ViewModelProvider(this)
-        }
         return mFragmentProvider[modelClass]
     }
-
-    protected open fun <T : ViewModel> getActivityViewModel(modelClass: Class<T>): T {
-        if (mActivityProvider == null) {
-            mActivityProvider = ViewModelProvider(mActivity)
-        }
+    fun <T : ViewModel> getActivityViewModel(modelClass: Class<T>): T {
         return mActivityProvider[modelClass]
     }
 

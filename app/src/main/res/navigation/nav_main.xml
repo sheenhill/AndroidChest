@@ -10,9 +10,7 @@
         <action
             android:id="@+id/action_v2_MainFragment_to_ChestFragment"
             app:destination="@id/v2_ChestFragment" />
-        <action
-            android:id="@+id/action_v2_MainFragment_to_imageDialog"
-            app:destination="@id/imageDialog" />
+
     </fragment>
     <fragment
         android:id="@+id/v2_ChestFragment"
@@ -26,13 +24,10 @@
             app:destination="@id/v2_MainFragment" />
     </fragment>
     <include app:graph="@navigation/nav_lab" />
-    <dialog
-        android:id="@+id/imageDialog"
-        android:name="com.sheenhill.common.widget.ImageDialog"
-        android:label="ImageDialog" />
+
     <fragment
         android:id="@+id/imageShowFragment"
-        android:name="com.sheenhill.common.widget.ImageShowFragment"
+        android:name="com.sheenhill.rusuo.v2.index.ImageShowFragment"
         android:label="ImageShowFragment" />
     <action
         android:id="@+id/action_global_imageShowFragment"

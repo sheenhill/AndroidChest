@@ -5,6 +5,6 @@ import androidx.lifecycle.ViewModel
 import java.io.File
 
 class MainActivityViewModel:ViewModel() {
-    val imageData=MutableLiveData<File>()
+    val imageData=MutableLiveData<String>()
 
 }

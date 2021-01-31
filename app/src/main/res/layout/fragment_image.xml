@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        
+
         <variable
             name="viewModel"
-            type="androidx.lifecycle.ViewModel" />
+            type="com.sheenhill.common.base.MainActivityViewModel" />
 
     </data>
 
@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            url="@{viewModel.imageData}"
             android:transitionName="https://www.bing.com/th?id=OHR.ChuDangYa_ZH-CN6673735912_800x480.jpg&amp;rf=LaDigue_1920x1080.jpg&amp;pid=hp"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
