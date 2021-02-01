@@ -28,22 +28,20 @@ class V2_BingPicAdapter(val fragment: V2_IndexFragment) : SingleTypeBaseRVAdapte
         return R.layout.item_bing_pic
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return super.onCreateViewHolder(parent, viewType)
-    }
-
     override fun onBindItem(binding: ItemBingPicBinding, item: BingPicBean.ImagesBean, holder: RecyclerView.ViewHolder) {
         binding.data = item
+        binding.position=holder.adapterPosition
         binding.mainViewModel = vm
         binding.listener = Listener()
         binding.glideRequestManager = glideRequestManager
     }
 
     class Listener {
-        fun showImage(view: View, url: String, vm: MainActivityViewModel) {
+        fun showImage(view: View, url: String,position:Int, vm: MainActivityViewModel) {
             LogUtil.i("RV.item触发showImage")
             ToastUtils.showShort(view.context!!, url)
             vm.imageData.value = url
+            vm.clickedViewPosition.value=position
             val extras = FragmentNavigatorExtras(view to url)
             view.findNavController().navigate(R.id.action_global_imageShowFragment, null, null, extras)
         }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sheenhill.common.base.MainActivityViewModel
@@ -13,6 +14,11 @@ import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
 import com.sheenhill.rusuo.BR
 import com.sheenhill.rusuo.R
+import com.sheenhill.rusuo.util.LogUtil
+import com.sheenhill.rusuo.util.ToastUtils
+import com.sheenhill.rusuo.v2.network.NetworkLiveData
+import com.sheenhill.rusuo.v2.network.NetworkState
+import kotlinx.android.synthetic.main.activity_custom_view_new.*
 import kotlinx.android.synthetic.main.fragment_index_v2.view.*
 
 class V2_IndexFragment : K_BaseJetpackFragment() {
@@ -29,9 +35,32 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
                 .addBindingParam(BR.adapter, V2_BingPicAdapter(this))
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // 网络状态监听
+        NetworkLiveData.getInstance().observe(this, Observer {
+            when (it) {
+                NetworkState.WIFI -> {
+                    LogUtil.i("NETWORK_STATE>>>>>>>wifi已链接")
+                    ToastUtils.showShort(activity,"wifi已链接")
+                    viewModel.bingPicList.value?:viewModel.getBingPic()
+                }
+                NetworkState.CELLULAR->{
+                    LogUtil.i("NETWORK_STATE>>>>>>>4G已链接")
+                    ToastUtils.showShort(activity,"4G已链接")
+                    viewModel.bingPicList.value?:viewModel.getBingPic()
+                }
+                NetworkState.NONE->{
+                    ToastUtils.showShort(activity,"没有网络了")
+                }
+            }
+        })
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         prepareTransitions()
+
         return mBinding.root
     }
 
@@ -65,7 +94,7 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
                     override fun onMapSharedElements(names: List<String>, sharedElements: MutableMap<String, View>) {
                         // Locate the ViewHolder for the clicked position.
                         val selectedViewHolder: RecyclerView.ViewHolder = mBinding.root.rv_pic_display
-                                .findViewHolderForAdapterPosition(1)
+                                .findViewHolderForAdapterPosition(getActivityViewModel(MainActivityViewModel::class.java).clickedViewPosition.value!!)
                                 ?: return
 
                         // Map the first shared element name to the child ImageView.

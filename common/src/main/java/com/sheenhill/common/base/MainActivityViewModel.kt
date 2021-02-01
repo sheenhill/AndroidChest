@@ -6,5 +6,6 @@ import java.io.File
 
 class MainActivityViewModel:ViewModel() {
     val imageData=MutableLiveData<String>()
+    val clickedViewPosition=MutableLiveData<Int>()
 
 }

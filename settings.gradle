@@ -1,3 +1,4 @@
+include ':module_mature'
 include ':demo_study_plan'
 include ':module_test'
 include ':common'
