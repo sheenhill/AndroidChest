@@ -7,30 +7,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
-import com.sheenhill.common.BR
+import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.sheenhill.common.base.MainActivityViewModel
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
+import com.sheenhill.rusuo.BR
 import com.sheenhill.rusuo.R
+import com.sheenhill.rusuo.util.LogUtil
 
 class ImageShowFragment:K_BaseJetpackFragment() {
     lateinit var viewModel:MainActivityViewModel
+    lateinit var glideRequestManager:RequestManager
     override fun initViewModel() {
 //        viewModel= getActivityViewModel(MainActivityViewModel::class.java)
     }
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
         return K_DataBindingConfig(R.layout.fragment_image, BR.viewModel, getActivityViewModel(MainActivityViewModel::class.java))
+                .addBindingParam(BR.glideRequestManager, glideRequestManager)
+                .addBindingParam(BR.listener,Listener())
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        glideRequestManager = Glide.with(context)
+                .applyDefaultRequestOptions(
+                        RequestOptions().placeholder(R.drawable.svg_placeholder)
+                                .diskCacheStrategy(DiskCacheStrategy.DATA))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         prepareSharedElementTransition()
        return mBinding.root
+    }
+
+    class Listener{
+        fun back(view: View){
+            LogUtil.i("ImageShowFragment.listener.back()")
+            view.findNavController().navigateUp()
+        }
     }
 
     /**

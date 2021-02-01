@@ -25,8 +25,8 @@ abstract class K_BaseJetpackFragment : Fragment() {
      * 目前的方案是在 debug 模式下，对获取实例的情况给予提示。
      */
     protected lateinit var mBinding: ViewDataBinding
-    protected val mFragmentProvider: ViewModelProvider by lazy { ViewModelProvider(this) } // 懒加载fragment级VMP
-    protected val mActivityProvider: ViewModelProvider by lazy { ViewModelProvider(mActivity) } // 懒加载Activity级VMP
+    protected val mFragmentProvider: ViewModelProvider by lazy { ViewModelProvider(this) } // fragment级VMP
+    protected val mActivityProvider: ViewModelProvider by lazy { ViewModelProvider(mActivity) } // Activity级VMP
 
 
     // 此方法之后执行onCreate

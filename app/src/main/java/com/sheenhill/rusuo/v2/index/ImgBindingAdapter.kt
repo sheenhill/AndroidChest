@@ -4,21 +4,16 @@ package com.sheenhill.common.binding_adapter
 import android.widget.ImageView
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.sheenhill.common.fragment.K_BaseJetpackFragment
-import com.sheenhill.common.util.ToastUtils
 import com.sheenhill.rusuo.R
 
-@BindingAdapter(value = ["url"], requireAll = true)
-fun showImgByGlide(imgView: ImageView, url: String) {
-    val options = RequestOptions()
-            .placeholder(R.drawable.svg_placeholder)
+@BindingAdapter(value = ["url","glide_manager"], requireAll = true)
+fun showImgByGlide(imgView: ImageView, url: String,glideRequestManager:RequestManager) {
     ViewCompat.setTransitionName(imgView, url)
-    Glide.with(imgView).applyDefaultRequestOptions(options).load(url).into(imgView)
+    glideRequestManager.load(url).into(imgView)
 //    Glide.getPhotoCacheDir()
 //    imgView.setOnClickListener { view ->
 //        ToastUtils.showShort(view.context!!, url)

@@ -14,6 +14,10 @@
             type="com.sheenhill.common.base.MainActivityViewModel" />
 
         <variable
+            name="glideRequestManager"
+            type="com.bumptech.glide.RequestManager" />
+
+        <variable
             name="listener"
             type="com.sheenhill.rusuo.v2.index.V2_BingPicAdapter.Listener" />
     </data>
@@ -32,6 +36,7 @@
             <ImageView
                 android:id="@+id/pic"
                 url="@{data.url}"
+                glide_manager="@{glideRequestManager}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"

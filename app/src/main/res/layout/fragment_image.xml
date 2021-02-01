@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,6 +7,14 @@
         <variable
             name="viewModel"
             type="com.sheenhill.common.base.MainActivityViewModel" />
+
+        <variable
+            name="glideRequestManager"
+            type="com.bumptech.glide.RequestManager" />
+
+        <variable
+            name="listener"
+            type="com.sheenhill.rusuo.v2.index.ImageShowFragment.Listener" />
 
     </data>
 
@@ -22,6 +29,8 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             url="@{viewModel.imageData}"
+            glide_manager="@{glideRequestManager}"
+            android:onClick="@{(view)->listener.back(view)}"
             android:transitionName="https://www.bing.com/th?id=OHR.ChuDangYa_ZH-CN6673735912_800x480.jpg&amp;rf=LaDigue_1920x1080.jpg&amp;pid=hp"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
