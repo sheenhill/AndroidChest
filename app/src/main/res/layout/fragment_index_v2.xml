@@ -10,7 +10,7 @@
 
         <variable
             name="mainVM"
-            type="com.sheenhill.common.base.MainActivityViewModel" />
+            type="com.sheenhill.common.share_view_model.MainActivityViewModel" />
 
         <variable
             name="listener"

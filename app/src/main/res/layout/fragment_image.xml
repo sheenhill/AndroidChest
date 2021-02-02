@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.sheenhill.common.base.MainActivityViewModel" />
+            type="com.sheenhill.common.share_view_model.MainActivityViewModel" />
 
         <variable
             name="glideRequestManager"

@@ -20,7 +20,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         android:hardwareAccelerated = "true">
         <activity
-            android:name=".v2.V2_MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.Light.NoActionBar">
         <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -30,12 +30,6 @@
         <activity
             android:name=".activity.StudyActivity"
             android:theme="@style/AppTheme.Light.NoActionBar">
-            <!--<intent-filter>-->
-            <!--<action android:name="com.example.recycleviewtest.STUDY_START" />-->
-
-            <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--<category android:name="com.example.recycleviewtest.STUDY_ACTIVITY" />-->
-            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".activity.CalculatorActivity"

@@ -6,30 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.sheenhill.common.base.MainActivityViewModel
+import com.sheenhill.common.share_view_model.MainActivityViewModel
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
+import com.sheenhill.common.lifecycle_observer.MyObserver
+import com.sheenhill.common.network_state.NetworkState
 import com.sheenhill.rusuo.BR
 import com.sheenhill.rusuo.R
-import com.sheenhill.rusuo.util.LogUtil
-import com.sheenhill.rusuo.util.ToastUtils
-import com.sheenhill.rusuo.v2.network.NetworkLiveData
-import com.sheenhill.rusuo.v2.network.NetworkState
-import kotlinx.android.synthetic.main.activity_custom_view_new.*
 import kotlinx.android.synthetic.main.fragment_index_v2.view.*
 
 class V2_IndexFragment : K_BaseJetpackFragment() {
     private lateinit var viewModel: IndexFragmentViewModel
+    private val mainVM by lazy { getActivityViewModel(MainActivityViewModel::class.java) }
     override fun initViewModel() {
         viewModel = IndexFragmentViewModel()
     }
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
         return K_DataBindingConfig(R.layout.fragment_index_v2, BR.viewModel, viewModel)
-                .addBindingParam(BR.mainVM,getActivityViewModel(MainActivityViewModel::class.java))
+                .addBindingParam(BR.mainVM, mainVM)
                 .addBindingParam(BR.listener, Listener())
                 .addBindingParam(BR.navController, nav())
                 .addBindingParam(BR.adapter, V2_BingPicAdapter(this))
@@ -37,22 +34,11 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 网络状态监听
-        NetworkLiveData.getInstance().observe(this, Observer {
-            when (it) {
-                NetworkState.WIFI -> {
-                    LogUtil.i("NETWORK_STATE>>>>>>>wifi已链接")
-                    ToastUtils.showShort(activity,"wifi已链接")
-                    viewModel.bingPicList.value?:viewModel.getBingPic()
-                }
-                NetworkState.CELLULAR->{
-                    LogUtil.i("NETWORK_STATE>>>>>>>4G已链接")
-                    ToastUtils.showShort(activity,"4G已链接")
-                    viewModel.bingPicList.value?:viewModel.getBingPic()
-                }
-                NetworkState.NONE->{
-                    ToastUtils.showShort(activity,"没有网络了")
-                }
+        lifecycle.addObserver(MyObserver(javaClass.simpleName))
+        mainVM.networkState.observe(requireActivity(), {
+            viewModel.bingPicList.value ?: when (it) {
+                NetworkState.WIFI -> viewModel.getBingPic()
+                NetworkState.CELLULAR -> viewModel.getBingPic()
             }
         })
     }
@@ -74,7 +60,7 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
         })
     }
 
-     class Listener {
+    class Listener {
         fun toChestFragment(navController: NavController) {
             navController.navigate(R.id.action_v2_MainFragment_to_ChestFragment)
         }

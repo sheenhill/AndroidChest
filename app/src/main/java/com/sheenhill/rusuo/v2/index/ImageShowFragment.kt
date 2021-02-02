@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.sheenhill.common.base.MainActivityViewModel
+import com.sheenhill.common.share_view_model.MainActivityViewModel
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
 import com.sheenhill.rusuo.BR
@@ -20,7 +20,7 @@ import com.sheenhill.rusuo.R
 import com.sheenhill.rusuo.util.LogUtil
 
 class ImageShowFragment:K_BaseJetpackFragment() {
-    lateinit var viewModel:MainActivityViewModel
+    lateinit var viewModel: MainActivityViewModel
     lateinit var glideRequestManager:RequestManager
     override fun initViewModel() {
 //        viewModel= getActivityViewModel(MainActivityViewModel::class.java)
@@ -37,7 +37,8 @@ class ImageShowFragment:K_BaseJetpackFragment() {
         glideRequestManager = Glide.with(context)
                 .applyDefaultRequestOptions(
                         RequestOptions().placeholder(R.drawable.svg_placeholder)
-                                .diskCacheStrategy(DiskCacheStrategy.DATA))
+                                .diskCacheStrategy(DiskCacheStrategy.DATA).onlyRetrieveFromCache(true))
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

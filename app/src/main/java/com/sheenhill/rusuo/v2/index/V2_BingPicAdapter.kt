@@ -1,16 +1,13 @@
 package com.sheenhill.rusuo.v2.index
 
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.sheenhill.common.base.MainActivityViewModel
+import com.sheenhill.common.share_view_model.MainActivityViewModel
 import com.sheenhill.common.base.SingleTypeBaseRVAdapter
 import com.sheenhill.common.util.ToastUtils
 import com.sheenhill.rusuo.R

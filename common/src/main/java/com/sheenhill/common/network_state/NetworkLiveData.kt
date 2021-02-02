@@ -1,4 +1,5 @@
-package com.sheenhill.rusuo.v2.network
+package com.sheenhill.common.network_state
+
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -9,7 +10,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
-import com.sheenhill.common.K_BaseActivity
+import com.sheenhill.common.activity.K_BaseActivity
 
 
 /**
@@ -56,26 +57,23 @@ class NetworkLiveData : LiveData<Int>() {
 
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
-            Log.d("onAvailable: ", "网络已连接")
             getInstance().postValue(NetworkState.CONNECT)
         }
 
         override fun onLost(network: Network) {
             super.onLost(network)
-            Log.d("onLost: ", "网络断开")
             getInstance().postValue(NetworkState.NONE)
         }
 
+        // 隔3s左右发送一次
         override fun onCapabilitiesChanged(
                 network: Network,
                 networkCapabilities: NetworkCapabilities
         ) {
             super.onCapabilitiesChanged(network, networkCapabilities)
             if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                Log.d("WIFI: ", "WIFI已连接")
                 getInstance().postValue(NetworkState.WIFI)
             } else if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                Log.d("CELLULAR: ", "移动网络已连接")
                 getInstance().postValue(NetworkState.CELLULAR)
             }
         }

@@ -1,4 +1,4 @@
-package com.sheenhill.rusuo.v2.network
+package com.sheenhill.common.network_state
 
 object NetworkState {
 
