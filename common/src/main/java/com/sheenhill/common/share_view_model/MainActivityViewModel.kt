@@ -10,4 +10,5 @@ class MainActivityViewModel:ViewModel() {
     val clickedViewPosition=MutableLiveData<Int>()
     /* 网络状态 */
     val networkState= MutableLiveData<Int>()
+
 }

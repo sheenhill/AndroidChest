@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import com.sheenhill.common.network_state.NetworkLiveData
 import com.sheenhill.common.network_state.NetworkState
 import com.sheenhill.common.share_view_model.MainActivityViewModel

@@ -6,12 +6,17 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import com.sheenhill.rusuo.base.APIs
 import com.sheenhill.rusuo.v2.index.BingPicBean.ImagesBean
 import com.sheenhill.rusuo.util.LogUtil
+import com.sheenhill.rusuo.v2.db.AppDatabase
+import com.sheenhill.rusuo.v2.db.Plan
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
 

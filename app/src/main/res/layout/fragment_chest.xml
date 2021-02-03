@@ -94,6 +94,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:text="@string/title_plan"
+                        android:onClick="@{(view)->listener.toStudyPlan(view)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/dp_50" />
                 </androidx.cardview.widget.CardView>

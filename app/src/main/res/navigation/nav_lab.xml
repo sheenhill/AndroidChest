@@ -30,7 +30,7 @@
         <action
             android:id="@+id/action_laboratoryFragment_to_testFragment"
             app:destination="@id/testFragment" />
-    </fragment>
+        </fragment>
     <fragment
         android:id="@+id/typeSwitcherFragment"
         android:name="com.sheenhill.rusuo.laboratory.TypeSwitcherFragment"
@@ -52,4 +52,5 @@
         android:id="@+id/testFragment"
         android:name="com.sheenhill.module_test.TestFragment"
         android:label="LotteryFragment" />
+
 </navigation>

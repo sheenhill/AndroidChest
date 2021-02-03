@@ -10,7 +10,6 @@
         <action
             android:id="@+id/action_v2_MainFragment_to_ChestFragment"
             app:destination="@id/v2_ChestFragment" />
-
     </fragment>
     <fragment
         android:id="@+id/v2_ChestFragment"
@@ -22,6 +21,9 @@
         <action
             android:id="@+id/action_v2_ChestFragment_to_v2_MainFragment"
             app:destination="@id/v2_MainFragment" />
+        <action
+            android:id="@+id/action_v2_MainFragment_to_studyPlanFragment"
+            app:destination="@id/studyPlanFragment" />
     </fragment>
     <include app:graph="@navigation/nav_lab" />
 
@@ -32,4 +34,9 @@
     <action
         android:id="@+id/action_global_imageShowFragment"
         app:destination="@id/imageShowFragment" />
+
+    <fragment
+        android:id="@+id/studyPlanFragment"
+        android:name="com.sheenhill.rusuo.v2.study_plan.StudyPlanFragment"
+        android:label="StudyPlanFragment" />
 </navigation>

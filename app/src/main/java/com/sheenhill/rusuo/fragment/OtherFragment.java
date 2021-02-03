@@ -14,8 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.sheenhill.rusuo.R;
 import com.sheenhill.rusuo.activity.CalculatorActivity;
 import com.sheenhill.rusuo.activity.NewCustomViewActivity;
-import com.sheenhill.rusuo.laboratory.CountdownFragment;
-import com.sheenhill.rusuo.activity.StudyActivity;
 import com.sheenhill.rusuo.activity.TensorFlowLiteActivity;
 import com.sheenhill.rusuo.adapter.OtherFragmentGVAdapter;
 import com.sheenhill.rusuo.interfaces.ItemClickListener;
@@ -57,7 +55,6 @@ public class OtherFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 switch (position) {
                     case 0: // 学习计划页面
-                        StudyActivity.actionStart(getActivity(), StudyActivity.class);
                         //隐式intent
 //                Intent intent = new Intent("com.example.recycleviewtest.STUDY_START");
 //                intent.addCategory("com.example.recycleviewtest.STUDY_ACTIVITY");

@@ -1,7 +1,9 @@
 package com.sheenhill.rusuo.v2.chest
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
 import com.sheenhill.common.util.LogUtil
@@ -23,6 +25,10 @@ class ChestFragment: K_BaseJetpackFragment() {
     class Listener {
         fun jumpTest(navController: NavController) {
             navController.navigate(R.id.action_ChestFragment_to_nav_graph)
+        }
+
+        fun toStudyPlan(view:View){
+            view.findNavController().navigate(R.id.action_v2_MainFragment_to_studyPlanFragment)
         }
 
         @SuppressLint("RestrictedApi")
