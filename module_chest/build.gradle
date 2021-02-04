@@ -1,10 +1,6 @@
-//根据IS_APP_MODE常量切换集成模块/应用模式
-if (COMMON_IS_APP_MODE) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
@@ -12,15 +8,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
-    def TEST_STR_1 = "松鼠桂鱼"
-
     defaultConfig {
-        //作为一个集成模块应该不应该有applicationId
-        if (COMMON_IS_APP_MODE) {
-            applicationId "com.sheenhill.common"
-        }
+        applicationId "com.sheenhill.module_chest"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -34,27 +25,13 @@ android {
         }
     }
 
-    sourceSets {
-        main() {
-            //作为一个集成模块 manifest文件中不加任何东西可以防止冲突
-            if (COMMON_IS_APP_MODE) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            }else{
-                manifest.srcFile 'src/main/module/AndroidManifest.xml'
-                java.srcDirs 'src/main/module/java', 'src/main/java'
-            }
-        }
-    }
-
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-
     buildFeatures {
         dataBinding = true
     }
-
     kapt {
         generateStubs = true
     }
@@ -62,13 +39,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
-    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     def lifecycle_version = "2.2.0"
     // ViewModel
@@ -80,6 +60,11 @@ dependencies {
     // alternately - if using Java8, use the following instead of lifecycle-compiler
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 
     def nav_version = "2.3.0"
     // Java language implementation
@@ -89,21 +74,19 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
-    def room_version = "2.2.6"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:$room_version"
-
-
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-    implementation "androidx.core:core-ktx:+"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 
     implementation 'com.github.bumptech.glide:glide:4.3.1'
-}
-repositories {
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
-    mavenCentral()
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+
+    implementation project(path: ':common')
+
+
+
+
+
 }

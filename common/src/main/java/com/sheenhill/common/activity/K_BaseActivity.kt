@@ -12,8 +12,12 @@ import com.sheenhill.common.share_view_model.MainActivityViewModel
 import com.sheenhill.common.util.LogUtil
 import com.sheenhill.common.util.ToastUtils
 
-abstract class K_BaseActivity(activity: Int) : AppCompatActivity(activity) {
+abstract class K_BaseActivity : AppCompatActivity {
     private val shareViewModel by lazy { ViewModelProvider(this).get(MainActivityViewModel::class.java) }
+
+    constructor(id:Int):super(id)
+
+    constructor():super()
 
 
     init {

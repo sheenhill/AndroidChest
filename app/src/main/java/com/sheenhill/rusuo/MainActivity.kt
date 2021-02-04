@@ -1,22 +1,11 @@
 package com.sheenhill.rusuo
 
 
-import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.storage.StorageManager
-import android.os.storage.StorageManager.ACTION_MANAGE_STORAGE
 import androidx.annotation.RequiresApi
-import androidx.core.content.getSystemService
-import androidx.room.Room
 import com.sheenhill.common.activity.K_BaseActivity
 import com.sheenhill.common.lifecycle_observer.MyObserver
-import com.sheenhill.rusuo.util.LogUtil
-import com.sheenhill.rusuo.v2.db.AppDatabase
-import com.sheenhill.rusuo.v2.db.Plan
-import kotlinx.coroutines.MainScope
-import java.util.*
 
 class MainActivity : K_BaseActivity(R.layout.activity_main) {
     val ONE_MB = 1024 * 1024L;

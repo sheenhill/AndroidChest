@@ -8,10 +8,6 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.sheenhill.common.base.BaseDiffCallback
 import com.sheenhill.common.base.BaseRVAdapter
 
-//    @BindingAdapter(value ={"adapter"})
-//    public static void setAdapter(RecyclerView rv,RecyclerView.Adapter adapter){
-//        rv.setAdapter(adapter);
-//    }
 // RecyclerView更新数据
 @BindingAdapter(value = ["resource", "adapter", "diff_callback", "itemDecoration"], requireAll = false)
 fun updateListCommon(rv: RecyclerView,

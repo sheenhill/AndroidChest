@@ -1,9 +1,7 @@
-include ':module_mature'
-include ':demo_study_plan'
+include ':module_chest'
 include ':module_test'
 include ':common'
 include ':demo_rxjava'
 include ':demo_animator',":demo_lottery"
-include ':ar_solarsystem'
 include ':view_pageindicator', ':view_typeswitcher'
 include ':app'

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">杂物箱</string>
+
+
+    <string name="motto">君子终日乾乾,夕惕若厉,无咎。</string>
+    <string name="motto_top">According to research published in the New England Journal of Medicine,10 minutes of ogling is equivalent to a 30-minute gym workout.</string>
+    <string name="record_tip_date">学习打卡</string>
+    <string name="item_content_start">本次学习</string>
+    <string name="item_content">h，剩余</string>
+    <string name="item_content_end">h。</string>
+    <string name="item_content_null"> </string>
+</resources>

@@ -4,6 +4,7 @@
     <string name="title_module">功能模块</string>
     <string name="title_AI">人工智障</string>
     <string name="title_calculator">复利计算器</string>
+    <string name="card_study_plan">编程学习计划</string>
     <string name="title_plan">学习计划</string>
     <string name="title_lottery">彩票爬虫</string>
     <string name="title_component">组件实验室</string>

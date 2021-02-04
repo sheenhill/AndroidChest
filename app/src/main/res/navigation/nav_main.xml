@@ -37,6 +37,6 @@
 
     <fragment
         android:id="@+id/studyPlanFragment"
-        android:name="com.sheenhill.rusuo.v2.study_plan.StudyPlanFragment"
+        android:name="com.sheenhill.module_chest.study_plan.StudyPlanFragment"
         android:label="StudyPlanFragment" />
 </navigation>

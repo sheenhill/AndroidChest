@@ -59,13 +59,14 @@ fun multiStyleText(tv: TextView, style: String, text: String) {
     //  text示例>>>>>> "copyright":"横跨康涅狄格河畔血溪的铁路，新罕布什尔州汉诺威 (© DEEPOL by plainpicture)",
 }
 
+// 给部分文字设置字体
 @BindingAdapter(value = ["type"], requireAll = true)
-fun setTitleFont(tv: TextView, type: String){
-    if(type=="title") {
+fun setTitleFont(tv: TextView, type: String) {
+    if (type == "title") {
         //从asset 读取字体，得到AssetManager
         val mgr: AssetManager = tv.context!!.assets
         //根据路径得到Typeface
-        val tf = Typeface.createFromAsset(mgr,"webfont.ttf")
+        val tf = Typeface.createFromAsset(mgr, "webfont.ttf")
 //        val spannableString = SpannableString(tv.text!!)
 //        spannableString.setSpan(tf, 0, tv.text!!.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
         LogUtil.i("setTitleFont>>>>>>${tv.text}>>>>${tf}")
