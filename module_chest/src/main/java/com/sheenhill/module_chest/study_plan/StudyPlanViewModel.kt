@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sheenhill.common.util.LogUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class StudyPlanViewModel : ViewModel() {
@@ -25,7 +26,9 @@ class StudyPlanViewModel : ViewModel() {
 
 
     init {
-        getPlanList()
+//        getPlanList()
+//        getMottoList()
+        updateNumTest()
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -68,5 +71,25 @@ class StudyPlanViewModel : ViewModel() {
                 .append(str2SpannableString)
                 .append(" h。")
         return spannableString
+    }
+
+
+    private fun getMottoList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = MottoDataBase.instance.mottoDao().getAll()
+            LogUtil.i("motto list>>>>>>${list}")
+        }
+    }
+
+    private fun updateNumTest(){
+         viewModelScope.launch(Dispatchers.IO) {
+             var motto: List<Motto>
+             var updateResult:Int
+            for(i in 0..1000){
+                motto=MottoDataBase.instance.mottoDao().selectOneLowCitedMotto()
+                updateResult=MottoDataBase.instance.mottoDao().updateCitedNum(motto[0].id)
+                LogUtil.d("updateNumTest($i).rowId：${motto[0].id},频率：${motto[0].citedNum},更新数据库结果：${updateResult>0}")
+            }
+        }
     }
 }

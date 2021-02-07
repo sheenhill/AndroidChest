@@ -20,6 +20,7 @@ data class Plan(
         @ColumnInfo(name = "study_time") val studyTime: Float, // 本次时长
         @ColumnInfo(name = "spare_time") val spareTime: Float, // 剩余时长
         @ColumnInfo(name = "note") val note: String?, // 记录
+//        @ColumnInfo(name = "motto") val motto: String?, // 格言
 ) {
     // 对数据的处理应该在获取数据源之后和holder展示之前，在onBindViewHolder中处理数据会影响展示效率
     @Ignore var spannableString: SpannableStringBuilder = SpannableStringBuilder("")
