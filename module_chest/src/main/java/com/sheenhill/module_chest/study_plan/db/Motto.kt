@@ -1,4 +1,4 @@
-package com.sheenhill.module_chest.study_plan
+package com.sheenhill.module_chest.study_plan.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

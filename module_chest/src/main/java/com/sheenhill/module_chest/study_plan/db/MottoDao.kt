@@ -1,4 +1,4 @@
-package com.sheenhill.module_chest.study_plan
+package com.sheenhill.module_chest.study_plan.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -8,8 +8,7 @@ import androidx.room.Query
 interface MottoDao {
 
     @Query("SELECT * FROM `Motto`")
-    suspend fun getAll(): List<Motto>
-
+    suspend fun getAllMotto(): List<Motto>
 
     // 查询引用频率低的格言
     @Query("SELECT * FROM motto WHERE cited_number = ( SELECT MIN(cited_number) FROM motto ) LIMIT 1 ")

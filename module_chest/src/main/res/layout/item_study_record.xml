@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="data"
-            type="com.sheenhill.module_chest.study_plan.Plan" />
+            type="com.sheenhill.module_chest.study_plan.db.PlanRecord" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -50,6 +51,7 @@
                 android:layout_marginStart="@dimen/margin_m"
                 android:layout_marginTop="@dimen/margin_s"
                 android:text="@{data.spannableString}"
+                tools:text="@string/item_content"
                 android:textColor="@color/textColorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -61,7 +63,8 @@
                 android:layout_marginStart="@dimen/margin_m"
                 android:layout_marginTop="@dimen/margin_s"
                 android:layout_marginBottom="@dimen/margin_s"
-                android:text="@string/motto"
+                android:text="@{data.mottoContent}"
+                tools:text="@string/motto"
                 android:textSize="@dimen/text_size_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
