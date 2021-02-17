@@ -1,11 +1,9 @@
 package com.sheenhill.common.activity
 
-import android.app.Activity
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
 import com.sheenhill.common.network_state.NetworkLiveData
 import com.sheenhill.common.network_state.NetworkState
 import com.sheenhill.common.share_view_model.MainActivityViewModel
@@ -25,9 +23,9 @@ abstract class K_BaseActivity : AppCompatActivity {
     }
 
     companion object {
-        private lateinit var INSTANCE: Activity
+        private lateinit var INSTANCE: AppCompatActivity
 
-        fun getInstance(): Activity {
+        fun getInstance(): AppCompatActivity {
             return INSTANCE;
         }
     }

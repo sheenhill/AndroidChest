@@ -5,31 +5,34 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.sheenhill.common.base.BaseDiffCallback
 import com.sheenhill.common.base.BaseRVAdapter
+import com.sheenhill.common.base.KT_BaseDiffCallback
+import com.sheenhill.common.util.LogUtil
+
 
 // RecyclerView更新数据
-@BindingAdapter(value = ["resource", "adapter", "diff_callback", "itemDecoration"], requireAll = false)
-fun updateListCommon(rv: RecyclerView,
-                     oldList: List<*>?,
-                     oldAdapter: RecyclerView.Adapter<*>?,
-                     callback: BaseDiffCallback<*>?,
-                     itemDecoration: ItemDecoration?,
-                     newList: List<*>?,
-                     newAdapter: RecyclerView.Adapter<*>?,
-                     newCallback: BaseDiffCallback<*>?,
-                     newItemDecoration: ItemDecoration?) {
-    if (rv.layoutManager == null) {
-        rv.layoutManager = LinearLayoutManager(rv.context!!)
+@BindingAdapter(value = ["resource", "diff_callback"], requireAll = false)
+fun <T> updateListCommon(rv: RecyclerView,
+                         oldList: List<T>?,
+                         oldDiffCallback: KT_BaseDiffCallback<*>?,
+                         newList: List<T>?,
+                         newDiffCallback: KT_BaseDiffCallback<*>?) {
+    if (newList != null&&newDiffCallback!=null) {
+        newDiffCallback.setOldList(oldList as List<Nothing>?)
+        newDiffCallback.setNewList(newList as List<Nothing>?)
+        LogUtil.d("do dispatchUpdatesToAdapter")
+        DiffUtil.calculateDiff(newDiffCallback).dispatchUpdatesTo(rv.adapter!!)
+        (rv.adapter as BaseRVAdapter<*>?)!!.list = newList as List<Nothing>?
     }
-    if (newItemDecoration != null && itemDecoration == null) rv.addItemDecoration(newItemDecoration)
-    if (newList != null) {
-        if (null == rv.adapter) rv.adapter = newAdapter
-        (rv.adapter as BaseRVAdapter<*>?)!!.setList(newList as List<Nothing>?) // 不显示数据应该是adapter被换了
-        if (newCallback != null) {
-            newCallback.setOldList(oldList as List<Nothing>?)
-            newCallback.setNewList(newList as List<Nothing>?)
-            DiffUtil.calculateDiff(newCallback).dispatchUpdatesTo(newAdapter!!)
-        }
-    }
+}
+
+@BindingAdapter(value = ["adapter", "itemDecoration"], requireAll = false)
+fun setRVCommon(rv: RecyclerView,
+                newAdapter: RecyclerView.Adapter<*>?,
+                newItemDecoration: ItemDecoration?) {
+//    if (rv.layoutManager == null)
+//        rv.layoutManager = LinearLayoutManager(rv.context!!)
+    if (null == rv.adapter) rv.adapter = newAdapter
+    LogUtil.d("new adapter?????")
+    if (newItemDecoration != null) rv.addItemDecoration(newItemDecoration)
 }

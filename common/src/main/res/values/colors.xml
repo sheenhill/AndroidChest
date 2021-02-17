@@ -6,6 +6,7 @@
     <color name="colorPrimaryDark">#ffffff</color>
     <!--重点色调-->
     <color name="colorAccent">#2a9f93</color>
+
     <!--view背景|不可选中-->
     <color name="colorViewBackground">#c7c7c7</color>
     <!--分割线-->

@@ -37,14 +37,16 @@ public abstract class SingleTypeBaseRVAdapter<M, B extends ViewDataBinding> exte
     }
 
     public void setList(List<M> list) {
+//        this.mList.clear();
+//        this.mList.addAll(list);
         this.mList = list;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public void updateList(List<M> list){
         this.mList.clear();
         this.mList.addAll(list);
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     protected abstract @LayoutRes

@@ -1,11 +1,11 @@
 package com.sheenhill.common.activity
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
-import com.sheenhill.common.R
 
 /**
  * 无需activity_main.xml，直接加载fragment为临时首页（测试中使用）
@@ -16,8 +16,16 @@ open class BaseTempActivity(private val fragment: Fragment) : K_BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val fragmentContainerView = FragmentContainerView(this)
-        val params = ViewGroup.LayoutParams(resources.displayMetrics.widthPixels, resources.displayMetrics.heightPixels)
+
+        val params = ViewGroup.LayoutParams(window.decorView.width, window.decorView.width)
         setContentView(fragmentContainerView, params)
+        val flag = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+//                or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // 6.0 以上，状态栏支持字体变灰色
+        window?.decorView?.systemUiVisibility = flag
+        window?.statusBarColor = Color.TRANSPARENT
+        window?.navigationBarColor = Color.TRANSPARENT
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()

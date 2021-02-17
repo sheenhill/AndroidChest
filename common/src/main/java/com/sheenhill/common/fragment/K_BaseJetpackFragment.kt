@@ -1,5 +1,6 @@
 package com.sheenhill.common.fragment
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -18,7 +20,7 @@ import androidx.navigation.fragment.NavHostFragment
  * JetPack库下的准MVVM规范的BaseFragment
  */
 abstract class K_BaseJetpackFragment : Fragment() {
-    protected lateinit var mActivity: AppCompatActivity
+    protected lateinit var mActivity: FragmentActivity
 
     /**
      * TODO tip: 警惕使用。非必要情况下，尽可能不在子类中拿到 binding 实例乃至获取 view 实例。使用即埋下隐患。
@@ -32,7 +34,7 @@ abstract class K_BaseJetpackFragment : Fragment() {
     // 此方法之后执行onCreate
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mActivity = context as AppCompatActivity
+        mActivity = context as FragmentActivity
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +74,7 @@ abstract class K_BaseJetpackFragment : Fragment() {
     protected open fun <T : ViewModel> getFragmentViewModel(modelClass: Class<T>): T {
         return mFragmentProvider[modelClass]
     }
+
     fun <T : ViewModel> getActivityViewModel(modelClass: Class<T>): T {
         return mActivityProvider[modelClass]
     }

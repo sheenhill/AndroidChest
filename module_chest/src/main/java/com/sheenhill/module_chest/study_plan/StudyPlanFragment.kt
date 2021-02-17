@@ -15,9 +15,7 @@ class StudyPlanFragment : K_BaseJetpackFragment() {
     override fun getDataBindingConfig(): K_DataBindingConfig {
         return K_DataBindingConfig(R.layout.fragment_study_plan, BR.viewModel, viewModel)
                 .addBindingParam(BR.adapter, StudyRecordsAdapter())
+                .addBindingParam(BR.diffCallback,StudyPlanDiff())
     }
 
-    class Listener{
-
-    }
 }

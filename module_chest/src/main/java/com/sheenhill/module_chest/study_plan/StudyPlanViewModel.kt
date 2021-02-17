@@ -42,7 +42,7 @@ class StudyPlanViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val list = RusuoDatabase.instance.studyPlanDao().getAllPlanRecords()
             lastSpareTime = list[list.size-1].plan.spareTime
-            planRecords.postValue(list)
+            planRecords.postValue(list.reversed())
             LogUtil.d("getPlanList>>>>>>${list}")
         }
     }

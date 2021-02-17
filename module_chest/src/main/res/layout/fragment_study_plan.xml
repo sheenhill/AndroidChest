@@ -13,17 +13,21 @@
             name="adapter"
             type="com.sheenhill.module_chest.study_plan.StudyRecordsAdapter" />
 
+        <variable
+            name="diffCallback"
+            type="com.sheenhill.common.base.KT_BaseDiffCallback" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height">
+<!--            android:fitsSystemWindows="true">-->
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -53,16 +57,16 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             adapter="@{adapter}"
             resource="@{viewModel.planRecords}"
+            diff_callback="@{diffCallback}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:reverseLayout="true" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/study_fab"
@@ -73,6 +77,9 @@
             android:onClick="@{()->viewModel.addPlanRecord(1)}"
             android:src="@mipmap/ic_hour"
             app:layout_anchor="@id/app_bar"
-            app:layout_anchorGravity="bottom|end" />
+            app:layout_anchorGravity="bottom|end"/>
+
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>
