@@ -18,7 +18,7 @@ data class PlanRecord(
                 parentColumn = "motto_id",
                 entityColumn = "id"
         )
-        val motto: Motto
+        val motto: Motto?
 ) {
 
     val time: String // 打卡时间
@@ -31,10 +31,11 @@ data class PlanRecord(
         get() = !TextUtils.isEmpty(plan.note)
 
     val mottoContent: String   // 学习格言
-        get() = motto.motto
+        get() = motto?.motto?:""
 
     override fun toString(): String {
-        return "PlanRecord(time=$time,spannableString=$spannableString,hasNote=$hasNote,mottoContent=$mottoContent)\n"
+        return "{uid=${plan.uid}}"
+//        return "PlanRecord(time=$time,spannableString=$spannableString,hasNote=$hasNote,mottoContent=$mottoContent)\n"
     }
 }
 

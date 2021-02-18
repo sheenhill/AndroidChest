@@ -7,4 +7,9 @@
     <string name="record_tip_date">学习打卡</string>
     <string name="item_content">本次学习 1 h，剩余 999999 h。</string>
     <string name="item_content_null"> </string>
+    <string name="tip_time">时长</string>
+    <string name="tip_h">小时</string>
+    <string name="tip_m">分钟</string>
+    <string name="tip_note">记录</string>
+
 </resources>

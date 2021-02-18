@@ -17,6 +17,17 @@
             name="diffCallback"
             type="com.sheenhill.common.base.KT_BaseDiffCallback" />
 
+        <variable
+            name="itemDecoration"
+            type="androidx.recyclerview.widget.RecyclerView.ItemDecoration" />
+
+        <variable
+            name="listener"
+            type="com.sheenhill.module_chest.study_plan.StudyPlanFragment.Listener" />
+
+        <variable
+            name="navController"
+            type="androidx.navigation.NavController" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -27,7 +38,7 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height">
-<!--            android:fitsSystemWindows="true">-->
+            <!--            android:fitsSystemWindows="true">-->
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
@@ -56,17 +67,24 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+        <!--<RelativeLayout-->
+        <!--    android:layout_width="match_parent"-->
+        <!--    android:layout_height="match_parent">-->
 
+        <!--diff_callback="@{diffCallback}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             adapter="@{adapter}"
-            resource="@{viewModel.planRecords}"
             diff_callback="@{diffCallback}"
+            itemDecoration="@{itemDecoration}"
+            resource="@{viewModel.planRecords}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <!--            app:reverseLayout="true"-->
+        <!--            app:stackFromEnd="true"/>-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/study_fab"
@@ -74,12 +92,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_m"
             android:background="@color/colorPrimaryDark"
-            android:onClick="@{()->viewModel.addPlanRecord(1)}"
+            android:onClick="@{()->listener.addRecord(navController)}"
             android:src="@mipmap/ic_hour"
             app:layout_anchor="@id/app_bar"
-            app:layout_anchorGravity="bottom|end"/>
+            app:layout_anchorGravity="bottom|end" />
+        <!--        android:onClick="@{()->viewModel.addPlanRecord(1)}"-->
 
 
+        <!--</RelativeLayout>-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

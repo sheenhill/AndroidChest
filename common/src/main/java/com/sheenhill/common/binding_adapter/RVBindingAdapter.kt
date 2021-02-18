@@ -1,6 +1,7 @@
 package com.sheenhill.common.binding_adapter
 
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,10 @@ fun <T> updateListCommon(rv: RecyclerView,
         newDiffCallback.setNewList(newList as List<Nothing>?)
         LogUtil.d("do dispatchUpdatesToAdapter")
         DiffUtil.calculateDiff(newDiffCallback).dispatchUpdatesTo(rv.adapter!!)
-        (rv.adapter as BaseRVAdapter<*>?)!!.list = newList as List<Nothing>?
+        (rv.adapter as BaseRVAdapter<*>?)!!.list = newList
+        if(newList.size>oldList?.size?:0){  // 添加item时，rv滑至顶部
+            rv.layoutManager!!.scrollToPosition(0)
+        }
     }
 }
 
@@ -35,4 +39,5 @@ fun setRVCommon(rv: RecyclerView,
     if (null == rv.adapter) rv.adapter = newAdapter
     LogUtil.d("new adapter?????")
     if (newItemDecoration != null) rv.addItemDecoration(newItemDecoration)
+    rv.itemAnimator=DefaultItemAnimator()
 }

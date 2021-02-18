@@ -26,13 +26,14 @@ class StudyPlanViewModel : ViewModel() {
             val studyPlanDao = db.studyPlanDao()
             // 1.获取格言   2.添加一条记录  3.更新格言频率  4.刷新页面
             val mottoRes = studyPlanDao.selectOneLowCitedMotto()  // 1
+            val mottoId = if (mottoRes.isNotEmpty()) mottoRes[0].id else 0
             studyPlanDao.addOneRecord(  // 2
                     Plan(0,
                             System.currentTimeMillis(),
                             studyTime,
                             lastSpareTime - studyTime,
-                            "xxxxxx", mottoRes[0].id))
-            studyPlanDao.updateCitedNum(mottoRes[0].id) //  3
+                            "xxxxxx", mottoId))
+            studyPlanDao.updateCitedNum(mottoId) //  3
             getPlanRecords()
         }
     }
@@ -41,9 +42,11 @@ class StudyPlanViewModel : ViewModel() {
     fun getPlanRecords() {
         viewModelScope.launch(Dispatchers.IO) {
             val list = RusuoDatabase.instance.studyPlanDao().getAllPlanRecords()
-            lastSpareTime = list[list.size-1].plan.spareTime
+            if (list.isNotEmpty())
+                lastSpareTime = list[list.size - 1].plan.spareTime
             planRecords.postValue(list.reversed())
-            LogUtil.d("getPlanList>>>>>>${list}")
+//            planRecords.postValue(list)
+            LogUtil.d("getPlanList  size=${list.size},>>>>>>${list}")
         }
     }
 

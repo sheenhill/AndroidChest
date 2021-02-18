@@ -28,13 +28,15 @@ class StudyPlanDiff : KT_BaseDiffCallback<PlanRecord>() {
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].plan.uid == newList[oldItemPosition].plan.uid
+//        return oldList[oldItemPosition] == newList[newItemPosition]
+        return oldList[oldItemPosition].plan.uid == newList[newItemPosition].plan.uid
 //        return true
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].mottoContent == newList[oldItemPosition].mottoContent
-//        return true
+//        return oldList[oldItemPosition].plan.uid == newList[oldItemPosition].plan.uid
+//        return oldList[oldItemPosition].mottoContent == newList[oldItemPosition].mottoContent
+        return true
     }
 
 }

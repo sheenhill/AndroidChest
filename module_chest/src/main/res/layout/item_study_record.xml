@@ -4,73 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="data"
             type="com.sheenhill.module_chest.study_plan.db.PlanRecord" />
+
+        <import type="android.view.View"/>
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_78"
         android:layout_marginHorizontal="@dimen/margin_s"
-        android:layout_marginVertical="@dimen/margin_s"
-        android:elevation="@dimen/margin_m"
-        app:cardCornerRadius="@dimen/margin_m">
+        android:elevation="@dimen/dp_16"
+        app:cardCornerRadius="@dimen/dp_16">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_border">
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_m"
-                android:layout_marginTop="@dimen/margin_s"
-                android:text="@string/record_tip_date"
-                android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/text_size_small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_m"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@{data.time}"
                 android:textSize="@dimen/text_size_small"
-                app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                app:layout_constraintStart_toEndOf="@id/textView4"
-                app:layout_constraintTop_toTopOf="@+id/textView4" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="21-01-21 19:20" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_m"
-                android:layout_marginTop="@dimen/margin_s"
                 android:text="@{data.spannableString}"
-                tools:text="@string/item_content"
                 android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/dp_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.453"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.271"
+                tools:text="@string/item_content" />
 
             <TextView
                 android:id="@+id/item_motto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_m"
-                android:layout_marginTop="@dimen/margin_s"
-                android:layout_marginBottom="@dimen/margin_s"
                 android:text="@{data.mottoContent}"
-                tools:text="@string/motto"
                 android:textSize="@dimen/text_size_small"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.465"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                tools:text="@string/motto" />
+
+            <ImageView
+                android:id="@+id/iv_note"
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:visibility="@{data.hasNote?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/textView6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_note" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
 </layout>

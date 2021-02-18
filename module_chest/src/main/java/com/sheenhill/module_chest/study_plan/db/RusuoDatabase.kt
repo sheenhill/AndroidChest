@@ -1,4 +1,4 @@
-package com.sheenhill.module_chest.study_plan
+package com.sheenhill.module_chest.study_plan.db
 
 import androidx.room.Database
 import androidx.room.Room
@@ -6,7 +6,6 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sheenhill.common.activity.K_BaseActivity
-import com.sheenhill.module_chest.study_plan.db.*
 
 @Database(entities = [Plan::class, Motto::class], version = 1)
 abstract class RusuoDatabase : RoomDatabase() {

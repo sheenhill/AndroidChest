@@ -9,8 +9,10 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
-        android:name="com.sheenhill.module_chest.study_plan.StudyPlanFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:tag="@string/card_study_plan"/>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_module_chest"
+        tools:context=".MainActivity"/>
 </layout>
