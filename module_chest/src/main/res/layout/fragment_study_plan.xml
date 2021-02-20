@@ -46,6 +46,8 @@
                 android:layout_height="match_parent"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"
                 app:title="@string/card_study_plan"
+                app:expandedTitleTextAppearance="@style/ToolBarTitleText"
+                app:collapsedTitleTextAppearance="@style/ToolBarTitleText"
                 app:toolbarId="@+id/toolbar">
 
                 <ImageView
@@ -62,16 +64,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:titleTextColor="@color/white" />
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
-        <!--<RelativeLayout-->
-        <!--    android:layout_width="match_parent"-->
-        <!--    android:layout_height="match_parent">-->
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
         <!--diff_callback="@{diffCallback}"-->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             adapter="@{adapter}"
@@ -82,10 +84,9 @@
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior=".study_plan.FixScrollingBehavior" />
         <!--            app:reverseLayout="true"-->
         <!--            app:stackFromEnd="true"/>-->
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/study_fab"
             android:layout_width="wrap_content"
@@ -99,7 +100,7 @@
         <!--        android:onClick="@{()->viewModel.addPlanRecord(1)}"-->
 
 
-        <!--</RelativeLayout>-->
+<!--        </RelativeLayout>-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

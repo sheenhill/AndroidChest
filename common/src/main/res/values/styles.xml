@@ -44,6 +44,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="ToolBarTitleText">
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
     <!--从中间缩放出来的dialog的动画-->
     <style name="DialogFromCenter">
         <item name="android:windowEnterAnimation">@anim/dialog_scale_in</item>

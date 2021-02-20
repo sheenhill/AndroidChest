@@ -40,6 +40,10 @@
     <dimen name="dp_78">78dp</dimen>
     <dimen name="dp_200">200dp</dimen>
     <dimen name="dp_24">24dp</dimen>
+    <dimen name="dp_210">210dp</dimen>
+    <dimen name="dp_160">160dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_140">140dp</dimen>
 
 
 </resources>

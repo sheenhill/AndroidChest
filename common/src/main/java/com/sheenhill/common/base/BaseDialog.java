@@ -103,6 +103,7 @@ public abstract class BaseDialog<B extends ViewDataBinding,D extends BaseDialog>
      *
      * 配置params,修改dialog大小，位置等
      * 默认：大小：params.WRAP_CONTENT  位置：Gravity.CENTER
+     * 竖屏下高度得撑起，宽度要指定
      * @return 重新配置的params
      */
     protected WindowManager.LayoutParams setLayout(WindowManager.LayoutParams params) {

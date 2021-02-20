@@ -23,24 +23,23 @@ class StudyPlanFragment : K_BaseJetpackFragment() {
                 .addBindingParam(BR.adapter, StudyRecordsAdapter())
                 .addBindingParam(BR.diffCallback, StudyPlanDiff())
                 .addBindingParam(BR.itemDecoration, itemDecoration)
-                .addBindingParam(BR.listener,Listener())
+                .addBindingParam(BR.listener, Listener())
                 .addBindingParam(BR.navController, nav())
     }
 
     private val itemDecoration by lazy {
         object : RecyclerView.ItemDecoration() {
-            val margin = dp2px(mActivity, 8)
+            val margin = dp2px(mActivity, 12)
 
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
-                val position = parent.getChildAdapterPosition(view)
-                val count = parent.layoutManager!!.itemCount //  获取准确的Item总个数
+                val position = parent.getChildLayoutPosition(view)
+                val count = parent.adapter!!.itemCount //  获取准确的Item总个数
                 LogUtil.d("itemDecoration.position=$position,count=$count")
-                if (position != (count-1) ){
+                if (position != (count - 1)) {
                     outRect.set(0, margin, 0, 0)
                     LogUtil.d("not last one")
-                }
-                else{
+                } else {
                     outRect.set(0, margin, 0, margin)
                     LogUtil.d("last one")
                 }
@@ -48,8 +47,8 @@ class StudyPlanFragment : K_BaseJetpackFragment() {
         }
     }
 
-    class Listener(){
-        fun addRecord(navController: NavController){
+    class Listener() {
+        fun addRecord(navController: NavController) {
             navController.navigate(R.id.action_global_addRecordDialog)
         }
     }

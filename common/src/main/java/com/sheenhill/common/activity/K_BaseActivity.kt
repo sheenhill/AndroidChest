@@ -1,7 +1,10 @@
 package com.sheenhill.common.activity
 
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.sheenhill.common.network_state.NetworkLiveData
@@ -32,6 +35,13 @@ abstract class K_BaseActivity : AppCompatActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val flag = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+//                or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // 6.0 以上，状态栏支持字体变灰色
+        window?.decorView?.systemUiVisibility = flag
+        window?.statusBarColor = Color.TRANSPARENT
+        window?.navigationBarColor = Color.TRANSPARENT
         var netState = NetworkState.CONNECT
         // 网络状态监听
         NetworkLiveData.getInstance().observe(this, {
