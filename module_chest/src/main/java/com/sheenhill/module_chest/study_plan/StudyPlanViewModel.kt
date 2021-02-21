@@ -1,5 +1,8 @@
 package com.sheenhill.module_chest.study_plan
 
+import android.database.Observable
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,10 +10,19 @@ import com.sheenhill.common.util.LogUtil
 import com.sheenhill.module_chest.study_plan.db.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class StudyPlanViewModel : ViewModel() {
     val planRecords = MutableLiveData<List<PlanRecord>>()
+    val currentRecord = MutableLiveData<Record>(Record(0, 0, ""))
+    val currentRecordH = MutableLiveData<String>()
+    val currentRecordM = MutableLiveData<String>()
+    val currentRecordNote=MutableLiveData<String>()
     private var lastSpareTime: Float = 2000f
+
+
+    data class Record(val hours: Int, val mins: Int, val note: String)
 
     init {
         getPlanRecords()
@@ -20,7 +32,9 @@ class StudyPlanViewModel : ViewModel() {
     }
 
     /* 添加一条记录，并刷新页面 */
-    fun addPlanRecord(studyTime: Float) {
+    fun addPlanRecord() {
+        val studyTime = (currentRecordH.value?:"0").toFloat() + ((currentRecordM.value?:"0").toInt()/ 60f * 10).toInt().toFloat() / 10
+        LogUtil.d("addPlanRecord>>>>>>studyTime=$studyTime,currentRecordNote=${currentRecordNote.value?:""}")
         viewModelScope.launch {
             val db = RusuoDatabase.instance
             val studyPlanDao = db.studyPlanDao()
@@ -32,7 +46,8 @@ class StudyPlanViewModel : ViewModel() {
                             System.currentTimeMillis(),
                             studyTime,
                             lastSpareTime - studyTime,
-                            "xxxxxx", mottoId))
+                            currentRecordNote.value?:"",
+                            mottoId))
             studyPlanDao.updateCitedNum(mottoId) //  3
             getPlanRecords()
         }
@@ -80,4 +95,6 @@ class StudyPlanViewModel : ViewModel() {
             LogUtil.d("getAllPlanRecords>>>>>>${list}")
         }
     }
+
+
 }

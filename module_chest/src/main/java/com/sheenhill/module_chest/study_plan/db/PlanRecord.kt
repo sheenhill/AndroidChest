@@ -34,8 +34,8 @@ data class PlanRecord(
         get() = motto?.motto?:""
 
     override fun toString(): String {
-        return "{uid=${plan.uid}}"
-//        return "PlanRecord(time=$time,spannableString=$spannableString,hasNote=$hasNote,mottoContent=$mottoContent)\n"
+//        return "{uid=${plan.uid}}"
+        return "PlanRecord(time=$time,spannableString=$spannableString,note=${plan.note},mottoContent=$mottoContent)\n"
     }
 }
 

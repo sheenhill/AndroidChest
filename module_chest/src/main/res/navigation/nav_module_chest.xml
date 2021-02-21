@@ -13,7 +13,20 @@
         android:id="@+id/addRecordDialog"
         android:name="com.sheenhill.module_chest.study_plan.AddRecordDialog"
         android:label="AddRecordDialog" />
+
     <action
         android:id="@+id/action_global_addRecordDialog"
         app:destination="@id/addRecordDialog" />
+    <fragment
+        android:id="@+id/pagerIndicatorFragment"
+        android:name="com.sheenhill.module_chest.custom_view.PagerIndicatorFragment"
+        android:label="PagerIndicatorFragment" />
+    <dialog
+        android:id="@+id/showTextDialog"
+        android:name="com.sheenhill.module_chest.study_plan.ShowTextDialog"
+        android:label="ShowTextDialog" >
+    </dialog>
+    <action
+        android:id="@+id/action_global_showTextDialog"
+        app:destination="@id/showTextDialog" />
 </navigation>

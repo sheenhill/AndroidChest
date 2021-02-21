@@ -4,7 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.sheenhill.module_chest.study_plan.StudyPlanViewModel" />
 
+        <variable
+            name="listener"
+            type="com.sheenhill.module_chest.study_plan.AddRecordDialog.Listener" />
+
+        <variable
+            name="nav"
+            type="androidx.navigation.NavController" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,8 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_24"
-                android:layout_marginTop="@dimen/dp_24"
-                android:textSize="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_28"
+                android:textSize="@dimen/dp_12"
                 android:textColor="@color/text333"
                 android:textStyle="bold"
                 android:text="@string/tip_time"
@@ -45,9 +55,10 @@
                 android:textSize="@dimen/dp_20"
                 android:textStyle="bold"
                 android:textColor="@color/text333"
-                android:text="01"
+                android:text="@={viewModel.currentRecordH}"
                 android:layout_marginEnd="@dimen/dp_4"
                 android:inputType="number"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toTopOf="@id/textView"
                 app:layout_constraintBottom_toBottomOf="@id/textView"
@@ -74,7 +85,7 @@
                 android:layout_marginEnd="@dimen/dp_4"
                 android:textStyle="bold"
                 android:textColor="@color/text333"
-                android:text="01"
+                android:text="@={viewModel.currentRecordM}"
                 android:inputType="number"
                 app:layout_constraintTop_toTopOf="@id/textView"
                 app:layout_constraintBottom_toBottomOf="@id/textView"
@@ -97,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_24"
-                android:textSize="@dimen/dp_16"
+                android:textSize="@dimen/dp_12"
                 android:textColor="@color/text333"
                 android:textStyle="bold"
                 android:text="@string/tip_note"
@@ -108,9 +119,13 @@
             <EditText
                 android:id="@+id/ed_note"
                 android:layout_width="@dimen/zero"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginEnd="@dimen/dp_24"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginStart="@dimen/dp_14"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:textSize="@dimen/dp_12"
+                android:maxLines="1"
+                android:text="@={viewModel.currentRecordNote}"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="@id/textView7"
@@ -132,6 +147,7 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="@dimen/dp_50"
                 android:text="confirm"
+                android:onClick="@{()->listener.addOneRecord(nav,viewModel)}"
                 android:background="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_cancel"

@@ -2,7 +2,10 @@ package com.sheenhill.module_chest.study_plan
 
 import android.graphics.Rect
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
@@ -15,7 +18,7 @@ import com.sheenhill.module_chest.R
 class StudyPlanFragment : K_BaseJetpackFragment() {
     lateinit var viewModel: StudyPlanViewModel
     override fun initViewModel() {
-        viewModel = getFragmentViewModel(StudyPlanViewModel::class.java)
+        viewModel = getNavigationViewModel(StudyPlanViewModel::class.java,R.id.nav_module_chest)
     }
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
@@ -35,13 +38,9 @@ class StudyPlanFragment : K_BaseJetpackFragment() {
                 super.getItemOffsets(outRect, view, parent, state)
                 val position = parent.getChildLayoutPosition(view)
                 val count = parent.adapter!!.itemCount //  获取准确的Item总个数
-                LogUtil.d("itemDecoration.position=$position,count=$count")
-                if (position != (count - 1)) {
-                    outRect.set(0, margin, 0, 0)
-                    LogUtil.d("not last one")
-                } else {
-                    outRect.set(0, margin, 0, margin)
-                    LogUtil.d("last one")
+                when (position) {
+                    (count - 1) -> outRect.set(0, margin, 0, margin)
+                    else -> outRect.set(0, margin, 0, 0)
                 }
             }
         }

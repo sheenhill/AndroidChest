@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -13,8 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 
 /**
  * JetPack库下的准MVVM规范的BaseFragment
@@ -73,6 +76,12 @@ abstract class K_BaseJetpackFragment : Fragment() {
 
     protected open fun <T : ViewModel> getFragmentViewModel(modelClass: Class<T>): T {
         return mFragmentProvider[modelClass]
+    }
+
+    protected open fun <T : ViewModel> getNavigationViewModel(modelClass: Class<T>,@IdRes navId:Int):T{
+        val factory: ViewModelProvider.Factory= ViewModelProvider.NewInstanceFactory()
+        val owner: ViewModelStoreOwner =findNavController().getViewModelStoreOwner(navId)
+        return ViewModelProvider(owner,factory)[modelClass]
     }
 
     fun <T : ViewModel> getActivityViewModel(modelClass: Class<T>): T {
