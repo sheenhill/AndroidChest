@@ -18,15 +18,21 @@ fun <T> updateListCommon(rv: RecyclerView,
                          oldDiffCallback: KT_BaseDiffCallback<*>?,
                          newList: List<T>?,
                          newDiffCallback: KT_BaseDiffCallback<*>?) {
-    if (newList != null&&newDiffCallback!=null) {
-        newDiffCallback.setOldList(oldList as List<Nothing>?)
-        newDiffCallback.setNewList(newList as List<Nothing>?)
-        LogUtil.d("do dispatchUpdatesToAdapter")
-        DiffUtil.calculateDiff(newDiffCallback).dispatchUpdatesTo(rv.adapter!!)
-        (rv.adapter as BaseRVAdapter<*>?)!!.list = newList
-        if(newList.size>oldList?.size?:0){  // 添加item时，rv滑至顶部
-            rv.layoutManager!!.scrollToPosition(0)
+    if (newList != null) {
+        if(newDiffCallback!=null){
+            newDiffCallback.setOldList(oldList as List<Nothing>?)
+            newDiffCallback.setNewList(newList as List<Nothing>?)
+            LogUtil.d("do dispatchUpdatesToAdapter")
+            DiffUtil.calculateDiff(newDiffCallback).dispatchUpdatesTo(rv.adapter!!)
+            (rv.adapter as BaseRVAdapter<*>?)!!.list = newList
+            if(newList.size>oldList?.size?:0){  // 添加item时，rv滑至顶部
+                rv.layoutManager!!.scrollToPosition(0)
+            }
+        }else{
+            (rv.adapter as BaseRVAdapter<*>?)!!.list = newList
+            (rv.adapter as BaseRVAdapter<*>?)!!.notifyDataSetChanged()
         }
+
     }
 }
 

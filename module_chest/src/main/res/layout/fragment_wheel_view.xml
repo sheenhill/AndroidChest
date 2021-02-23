@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sheenhill.module_chest.custom_view.WheelViewFragment.WheelViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_300"
+            android:layout_marginTop="@dimen/dp_30"
+            adapter="@{adapter}"
+            resource="@{viewModel.arr1}"
+            app:layoutManager=".custom_view.CircleLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

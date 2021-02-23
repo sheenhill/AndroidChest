@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="String" />
+    </data>
+
+    <TextView
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_20"
+        android:text="@{data}"
+        android:gravity="center"
+        tools:text="0"
+        android:textColor="@color/white"
+        android:background="@color/black"/>
+</layout>
