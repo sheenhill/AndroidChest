@@ -28,6 +28,9 @@
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="transparent">#00000000</color>
+    <color name="half_orange">#6641BAFF</color>
+
+    <color name="white_20pp">#aaFFFFFF</color>
 
     <color name="text333">#333</color>
     <color name="text666">#666</color>

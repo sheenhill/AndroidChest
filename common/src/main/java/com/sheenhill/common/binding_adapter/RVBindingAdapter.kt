@@ -3,7 +3,7 @@ package com.sheenhill.common.binding_adapter
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.sheenhill.common.base.BaseRVAdapter
@@ -19,16 +19,16 @@ fun <T> updateListCommon(rv: RecyclerView,
                          newList: List<T>?,
                          newDiffCallback: KT_BaseDiffCallback<*>?) {
     if (newList != null) {
-        if(newDiffCallback!=null){
+        if (newDiffCallback != null) {
             newDiffCallback.setOldList(oldList as List<Nothing>?)
             newDiffCallback.setNewList(newList as List<Nothing>?)
             LogUtil.d("do dispatchUpdatesToAdapter")
             DiffUtil.calculateDiff(newDiffCallback).dispatchUpdatesTo(rv.adapter!!)
             (rv.adapter as BaseRVAdapter<*>?)!!.list = newList
-            if(newList.size>oldList?.size?:0){  // 添加item时，rv滑至顶部
+            if (newList.size > oldList?.size ?: 0) {  // 添加item时，rv滑至顶部
                 rv.layoutManager!!.scrollToPosition(0)
             }
-        }else{
+        } else {
             (rv.adapter as BaseRVAdapter<*>?)!!.list = newList
             (rv.adapter as BaseRVAdapter<*>?)!!.notifyDataSetChanged()
         }
@@ -45,5 +45,11 @@ fun setRVCommon(rv: RecyclerView,
     if (null == rv.adapter) rv.adapter = newAdapter
     LogUtil.d("new adapter?????")
     if (newItemDecoration != null) rv.addItemDecoration(newItemDecoration)
-    rv.itemAnimator=DefaultItemAnimator()
+    rv.itemAnimator = DefaultItemAnimator()
+}
+
+@BindingAdapter(value = ["hasSnapHelper"])
+fun attachSnapHelper(rv: RecyclerView, hasSnapHelper: Boolean){
+    if(hasSnapHelper)
+        LinearSnapHelper().attachToRecyclerView(rv)
 }

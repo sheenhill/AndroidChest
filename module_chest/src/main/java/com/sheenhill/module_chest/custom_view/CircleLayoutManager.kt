@@ -1,65 +1,81 @@
 package com.sheenhill.module_chest.custom_view
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.sheenhill.common.util.LogUtil
+import java.lang.Math.pow
 
 class CircleLayoutManager : RecyclerView.LayoutManager() {
     override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
         return RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
-//    override fun canScrollHorizontally(): Boolean {
-//        return true
-//    }
-
     override fun canScrollVertically(): Boolean {
         return true
     }
 
+
+    // 初始化布局
     override fun onLayoutChildren(recycler: Recycler, state: RecyclerView.State) {
         if (itemCount <= 0) {
             return
         }
+        LogUtil.d("onLayoutChildren>>>>>>$itemCount")
         if (state.isPreLayout) {
             return
         }
         detachAndScrapAttachedViews(recycler)
-//        var itemLeft = paddingLeft
-        var itemTop=paddingTop
+        var itemTop = paddingTop-20
         var i = 0
         while (true) {
-            if(itemTop>=height-paddingBottom) break
+            if (itemTop >= height - paddingBottom) break
             val itemView = recycler.getViewForPosition(i % itemCount)
+
             // 添加子View
             addView(itemView)
             // 测量
             measureChildWithMargins(itemView, 0, 0)
 
-            val left= paddingLeft
-            val right = left + getDecoratedMeasuredWidth(itemView)-paddingRight
+            val left = paddingLeft
+            val right = left + getDecoratedMeasuredWidth(itemView) - paddingRight
             val bottom = itemTop + getDecoratedMeasuredHeight(itemView)
             // 布局
-//            itemView.scaleY = 0.8f
-//            itemView.scaleX = 0.8f
             layoutDecorated(itemView, left, itemTop, right, bottom)
             itemTop = bottom
             i++
         }
+        for (i in 0 until childCount){
+            val item=getChildAt(i)!!
+            val percent=itemPercentage(item,height)-0.5f  // 距中点的距离比例 [-0.5,0.5]
+            item.rotationX=percent*-90f
+            item.alpha= (-2.4f*pow(percent.toDouble(), 2.0)+1f).toFloat()
+            item.scaleX=(-0.8f*pow(percent.toDouble(), 2.0)+1f).toFloat()
+            item.scaleY=(-0.8f*pow(percent.toDouble(), 2.0)+1f).toFloat()
+        }
     }
-
-//    override fun scrollHorizontallyBy(dx: Int, recycler: Recycler, state: RecyclerView.State): Int {
-//        fill(recycler, dx > 0)
-//        offsetChildrenHorizontal(-dx)
-//        recyclerChildView(dx > 0, recycler)
-//        return dx
-//    }
 
     override fun scrollVerticallyBy(dy: Int, recycler: Recycler, state: RecyclerView.State): Int {
         fill(recycler, dy > 0)
+//        fill(dy, recycler)
         offsetChildrenVertical(-dy)
+        for (i in 0 until childCount){
+            val item=getChildAt(i)!!
+            val percent=itemPercentage(item,height)-0.5f  // 距中点的距离比例 [-0.5,0.5]
+            item.rotationX=percent*-90f
+            item.alpha= (-2.4f*pow(percent.toDouble(), 2.0)+1f).toFloat()
+            item.scaleX=(-0.8f*pow(percent.toDouble(), 2.0)+1f).toFloat()
+            item.scaleY=(-0.8f*pow(percent.toDouble(), 2.0)+1f).toFloat()
+        }
         recyclerChildView(dy > 0, recycler)
         return dy
+    }
+
+    fun itemPercentage(item: View, totalLength: Int): Float {
+       val percent= ((item.top+(item.bottom - item.top) / 2) - paddingTop)/totalLength.toFloat()
+        LogUtil.d("itemPercentage>>>>>>$percent  bottom=${item.bottom},top=${item.top},midLine=${item.bottom-item.top},totalLen=${totalLength}")
+        return percent
     }
 
     // 滑动时填充可见的未填充的空间
@@ -70,18 +86,21 @@ class CircleLayoutManager : RecyclerView.LayoutManager() {
             var anchorView = getChildAt(childCount - 1) // anchorView:当前视图可见的最后一个View，锚点View
             val anchorPosition = getPosition(anchorView!!) // anchorPosition:锚点View下标
             //            for (; anchorView.getRight() < getWidth() - getPaddingRight(); ) { // 当锚点View右侧边界到RV最右边时，循环
-            while (anchorView!!.bottom < height - paddingBottom) {
+            while (anchorView!!.top < height - paddingBottom) {
                 // 此处可增加提前绘制区域，数据无法提前赋予
                 var position = (anchorPosition + 1) % itemCount
                 if (position < 0) position += itemCount
 
                 //scarp：废品
                 val scrapItem = recycler.getViewForPosition(position)
+                scrapItem.scaleX=0.8f
+                scrapItem.scaleY=0.8f
+                scrapItem.rotationX=-45f
                 addView(scrapItem)
                 measureChildWithMargins(scrapItem, 0, 0)
                 val left = paddingLeft
                 val top = anchorView.bottom
-                val right = left + getDecoratedMeasuredWidth(scrapItem)-paddingRight
+                val right = left + getDecoratedMeasuredWidth(scrapItem) - paddingRight
                 val bottom = anchorView.bottom + getDecoratedMeasuredHeight(scrapItem)
                 layoutDecorated(scrapItem, left, top, right, bottom)
                 anchorView = scrapItem
@@ -90,20 +109,21 @@ class CircleLayoutManager : RecyclerView.LayoutManager() {
             // 填充首部
             var anchorView = getChildAt(0)
             val anchorPosition = getPosition(anchorView!!)
-            //            for (; anchorView.getLeft() > getPaddingLeft()-getWidth(); ) {
-//            while (anchorView!!.left > paddingLeft) {
-            while (anchorView!!.top > paddingTop) {
+            while (anchorView!!.bottom > paddingTop) {
                 var position = (anchorPosition - 1) % itemCount
                 if (position < 0) position += itemCount
                 val scrapItem = recycler.getViewForPosition(position)
+                scrapItem.scaleX=0.8f
+                scrapItem.scaleY=0.8f
+                scrapItem.rotationX=45f
                 addView(scrapItem, 0)
                 measureChildWithMargins(scrapItem, 0, 0)
 //                val left = anchorView.left - getDecoratedMeasuredWidth(scrapItem)
                 val left = paddingLeft
 //                val top = paddingTop
-                val top = anchorView.top-getDecoratedMeasuredHeight(scrapItem)
+                val top = anchorView.top - getDecoratedMeasuredHeight(scrapItem)
 //                val right = anchorView.left
-                val right = left+getDecoratedMeasuredWidth(scrapItem)-paddingRight
+                val right = left + getDecoratedMeasuredWidth(scrapItem) - paddingRight
 //                val bottom = top + getDecoratedMeasuredHeight(scrapItem) - paddingBottom
                 val bottom = anchorView.top
                 layoutDecorated(scrapItem, left, top, right, bottom)

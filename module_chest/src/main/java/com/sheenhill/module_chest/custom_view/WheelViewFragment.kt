@@ -1,6 +1,6 @@
 package com.sheenhill.module_chest.custom_view
 
-import android.annotation.SuppressLint
+import android.graphics.Canvas
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +35,12 @@ class WheelViewFragment : K_BaseJetpackFragment() {
 
         override fun onBindItem(binding: ItemWheelViewBinding, item: String, holder: RecyclerView.ViewHolder?) {
             binding.data = item
+        }
+    }
+
+    class MyItemDecoration:RecyclerView.ItemDecoration(){
+        override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+            super.onDrawOver(c, parent, state)
         }
     }
 }
