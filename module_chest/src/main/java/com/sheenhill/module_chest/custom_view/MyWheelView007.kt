@@ -13,7 +13,7 @@ import com.sheenhill.common.util.LogUtil
 import com.sheenhill.module_chest.R
 import com.sheenhill.module_chest.databinding.ItemWheelViewBinding
 
-class MyWheelView : RecyclerView {
+class MyWheelView007 : RecyclerView {
 
     var mLabelList: List<String>
 
@@ -89,17 +89,19 @@ class MyWheelView : RecyclerView {
                 return
             }
             detachAndScrapAttachedViews(recycler)
-            var itemTop = paddingTop - 20
+            var itemTop = paddingTop - 30
             var i = 0
-
             while (true) {
                 if (itemTop >= height - paddingBottom) break
                 val itemView = recycler.getViewForPosition(i % itemCount)
-
+////                if (i != 1) {
+//                    itemView.scaleX = 0.3f
+//                    itemView.scaleY = 0.3f
+////                }
                 // 添加子View
                 addView(itemView)
                 // 测量
-                measureChildWithMargins(itemView, 0, 0)
+                measureChildWithMargins(itemView, -10, -10)
 
                 val left = paddingLeft
                 val right = left + getDecoratedMeasuredWidth(itemView) - paddingRight
@@ -109,14 +111,16 @@ class MyWheelView : RecyclerView {
                 itemTop = bottom
                 i++
             }
-            for (i in 0 until childCount) {
-                val item = getChildAt(i)!!
-                val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
-                item.rotationX = percent * -90f
-                item.alpha = (-2.4f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
-                item.scaleX = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
-                item.scaleY = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
-            }
+//            for (i in 0 until childCount) {
+//                val item = getChildAt(i)!!
+//                val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
+//                item.rotationX = percent * -90f
+//                item.alpha = (-2.4f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
+//                item.scaleX = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
+//                item.scaleY = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
+//                measureChildWithMargins(item, 0, 0)
+//                layoutDecorated(item, item.left, item.top, item.right, item.bottom)
+//            }
         }
 
         override fun scrollVerticallyBy(dy: Int, recycler: Recycler, state: RecyclerView.State): Int {
@@ -125,10 +129,11 @@ class MyWheelView : RecyclerView {
             for (i in 0 until childCount) {
                 val item = getChildAt(i)!!
                 val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
+                // fixme:增加偏移，让组件看起来紧凑点
+//                item.pivotY=-10f
                 item.rotationX = percent * -90f
                 item.alpha = (-2.4f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
                 item.scaleX = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
-//                item.translationY=(-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
                 item.scaleY = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
             }
             recyclerChildView(dy > 0, recycler)

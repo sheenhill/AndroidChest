@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -18,19 +17,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        android:background="@drawable/bg_wheel"-->
-<!--        android:foreground="@drawable/fg_wheel"-->
-        <androidx.recyclerview.widget.RecyclerView
+        <com.sheenhill.module_chest.custom_view.MyWheelView
+            android:id="@+id/test_1"
             android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_65"
+            android:layout_height="@dimen/dp_54"
             android:layout_marginTop="@dimen/dp_30"
-            adapter="@{adapter}"
-            hasSnapHelper="@{true}"
-            resource="@{viewModel.arr1}"
-            app:layoutManager=".custom_view.CircleLayoutManager"
+            app:labels="0,1,2,3,4,5,6,7,8,9,10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/test_2"
+            app:layout_constraintHorizontal_bias="0.885"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.sheenhill.module_chest.custom_view.MyWheelView007
+            android:id="@+id/test_2"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_30"
+            app:labels="0,1,2,3,4,5,6,7,8,9,10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!--        android:background="@drawable/bg_wheel"-->
+<!--        android:foreground="@drawable/fg_wheel"-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:layout_width="@dimen/dp_50"-->
+<!--            android:layout_height="@dimen/dp_65"-->
+<!--            android:layout_marginTop="@dimen/dp_30"-->
+<!--            adapter="@{adapter}"-->
+<!--            hasSnapHelper="@{true}"-->
+<!--            resource="@{viewModel.arr1}"-->
+<!--            app:layoutManager=".custom_view.CircleLayoutManager"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

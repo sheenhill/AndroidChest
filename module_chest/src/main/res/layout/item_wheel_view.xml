@@ -10,12 +10,14 @@
     </data>
 
     <TextView
+        android:id="@+id/tv"
         android:layout_width="@dimen/dp_50"
         android:layout_height="wrap_content"
-        android:text="@{data}"
         android:gravity="center"
-        android:textSize="@dimen/dp_20"
-        tools:text="0"
+        android:text="@{data}"
         android:textColor="@color/text333"
-        android:background="@color/half_orange"/>
+        android:textSize="@dimen/dp_20"
+        android:background="@color/half_orange"
+        tools:text="0" />
+
 </layout>
