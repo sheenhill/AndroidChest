@@ -17,7 +17,7 @@
         android:text="@{data}"
         android:textColor="@color/text333"
         android:textSize="@dimen/dp_20"
-        android:background="@color/half_orange"
-        tools:text="0" />
 
+        tools:text="0" />
+<!--    android:background="@color/half_orange"-->
 </layout>

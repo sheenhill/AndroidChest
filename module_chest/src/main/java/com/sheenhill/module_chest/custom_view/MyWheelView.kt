@@ -37,7 +37,7 @@ class MyWheelView : RecyclerView {
     }
 
     private fun initThis() {
-        this.layoutManager = CircleLayoutManager()
+        this.layoutManager = wheelLayoutManager
         this.adapter = WheelViewAdapter(mLabelList)
         LinearSnapHelper().attachToRecyclerView(this)
     }
@@ -70,7 +70,7 @@ class MyWheelView : RecyclerView {
     /**
      * LayoutManager
      */
-    val wheelLayoutManager = object : RecyclerView.LayoutManager() {
+    private val wheelLayoutManager = object : RecyclerView.LayoutManager() {
         override fun generateDefaultLayoutParams(): LayoutParams {
             return LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
@@ -122,6 +122,7 @@ class MyWheelView : RecyclerView {
         override fun scrollVerticallyBy(dy: Int, recycler: Recycler, state: RecyclerView.State): Int {
             fill(recycler, dy > 0)
             offsetChildrenVertical(-dy)
+            LogUtil.d("scrollVerticallyBy  MyWheelView>>>>>>$dy")
             for (i in 0 until childCount) {
                 val item = getChildAt(i)!!
                 val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
@@ -137,7 +138,8 @@ class MyWheelView : RecyclerView {
 
         fun itemPercentage(item: View, totalLength: Int): Float {
             val percent = ((item.top + (item.bottom - item.top) / 2) - paddingTop) / totalLength.toFloat()
-            LogUtil.d("itemPercentage>>>>>>$percent  bottom=${item.bottom},top=${item.top},midLine=${item.bottom - item.top},totalLen=${totalLength}")
+//            LogUtil.d("itemPercentage  >>>>>>$percent  bottom=${item.bottom},top=${item.top},midLine=${item.bottom - item.top},totalLen=${totalLength}")
+            LogUtil.d("itemPercentage  >>>>>>$percent  top=${top},paddingTop=${paddingTop}")
             return percent
         }
 
@@ -149,6 +151,8 @@ class MyWheelView : RecyclerView {
                 var anchorView = getChildAt(childCount - 1) // anchorView:当前视图可见的最后一个View，锚点View
                 val anchorPosition = getPosition(anchorView!!) // anchorPosition:锚点View下标
                 //            for (; anchorView.getRight() < getWidth() - getPaddingRight(); ) { // 当锚点View右侧边界到RV最右边时，循环
+
+                LogUtil.d("fill>>>>>height=$height,paddingBottom=$paddingBottom")
                 while (anchorView!!.top < height - paddingBottom) {
                     // 此处可增加提前绘制区域，数据无法提前赋予
                     var position = (anchorPosition + 1) % itemCount

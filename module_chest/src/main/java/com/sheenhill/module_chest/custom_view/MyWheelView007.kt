@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.sheenhill.common.base.SingleTypeBaseRVAdapter
 import com.sheenhill.common.util.LogUtil
 import com.sheenhill.module_chest.R
-import com.sheenhill.module_chest.databinding.ItemWheelViewBinding
 
 class MyWheelView007 : RecyclerView {
 
@@ -37,7 +35,7 @@ class MyWheelView007 : RecyclerView {
     }
 
     private fun initThis() {
-        this.layoutManager = CircleLayoutManager()
+        this.layoutManager = wheelLayoutManager
         this.adapter = WheelViewAdapter(mLabelList)
         LinearSnapHelper().attachToRecyclerView(this)
     }
@@ -70,7 +68,7 @@ class MyWheelView007 : RecyclerView {
     /**
      * LayoutManager
      */
-    val wheelLayoutManager = object : RecyclerView.LayoutManager() {
+    private val wheelLayoutManager = object : RecyclerView.LayoutManager() {
         override fun generateDefaultLayoutParams(): LayoutParams {
             return LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
@@ -89,19 +87,18 @@ class MyWheelView007 : RecyclerView {
                 return
             }
             detachAndScrapAttachedViews(recycler)
-            var itemTop = paddingTop - 30
+            var itemTop = paddingTop - height / 6
             var i = 0
             while (true) {
                 if (itemTop >= height - paddingBottom) break
-                val itemView = recycler.getViewForPosition(i % itemCount)
-////                if (i != 1) {
-//                    itemView.scaleX = 0.3f
-//                    itemView.scaleY = 0.3f
-////                }
+                var position = (i - 1) % itemCount
+                position = if (position < 0) position + itemCount else position
+                val itemView = recycler.getViewForPosition(position)
+//                if(i=)
                 // 添加子View
                 addView(itemView)
                 // 测量
-                measureChildWithMargins(itemView, -10, -10)
+                measureChildWithMargins(itemView, 0, 0)
 
                 val left = paddingLeft
                 val right = left + getDecoratedMeasuredWidth(itemView) - paddingRight
@@ -111,39 +108,46 @@ class MyWheelView007 : RecyclerView {
                 itemTop = bottom
                 i++
             }
-//            for (i in 0 until childCount) {
+            for (i in 0 until childCount) {
 //                val item = getChildAt(i)!!
 //                val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
 //                item.rotationX = percent * -90f
 //                item.alpha = (-2.4f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
 //                item.scaleX = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
 //                item.scaleY = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
-//                measureChildWithMargins(item, 0, 0)
-//                layoutDecorated(item, item.left, item.top, item.right, item.bottom)
-//            }
+            }
         }
 
         override fun scrollVerticallyBy(dy: Int, recycler: Recycler, state: RecyclerView.State): Int {
             fill(recycler, dy > 0)
-            offsetChildrenVertical(-dy)
+            offsetChildrenVertical(-dy)  // dy<0:向下滑动   dy>0:向上滑动
             for (i in 0 until childCount) {
                 val item = getChildAt(i)!!
-                val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
-                // fixme:增加偏移，让组件看起来紧凑点
+                val pp = itemPercentage(item).toDouble()
+                LogUtil.d("scrollVerticallyBy  MyWheelView007 itemPercentage >>>>>>${pp} ")
+//                val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
+
 //                item.pivotY=-10f
-                item.rotationX = percent * -90f
-                item.alpha = (-2.4f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
-                item.scaleX = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
-                item.scaleY = (-0.8f * Math.pow(percent.toDouble(), 2.0) + 1f).toFloat()
+//                val scale = resources.displayMetrics.density * 160000
+//                item.cameraDistance = scale //设置镜头距离
+//                item.pivotY=-item.height/2f
+////                item.translationY = (Math.pow(pp, 3.0) * -item.height / 5f).toFloat()
+//                item.rotationX = (Math.pow(pp, 3.0) * -60).toFloat()
+                item.alpha = (Math.abs(pp) * -0.5f + 1).toFloat()
+                item.scaleX = (Math.abs(pp) * -0.1f + 1).toFloat()
+                item.scaleY = (Math.abs(pp) * -0.1f + 1).toFloat()
+                item.pivotY= if (pp>0) 1f else 0f // fixme:增加偏移，让组件看起来紧凑点  探究pivotY
+//                item.translationY = (Math.pow(pp, 3.0) * -item.height / 5f).toFloat()
+                item.rotationX = (Math.pow(pp, 3.0) * -60).toFloat()
             }
             recyclerChildView(dy > 0, recycler)
             return dy
         }
 
-        fun itemPercentage(item: View, totalLength: Int): Float {
-            val percent = ((item.top + (item.bottom - item.top) / 2) - paddingTop) / totalLength.toFloat()
-            LogUtil.d("itemPercentage>>>>>>$percent  bottom=${item.bottom},top=${item.top},midLine=${item.bottom - item.top},totalLen=${totalLength}")
-            return percent
+        //item的中点相对于RV中点位置的百分比= [-1,1]
+        fun itemPercentage(item: View): Float {
+//            return  ((item.height/2+item.top)-(height/2+paddingTop)).toFloat()/(height/2).toFloat()
+            return (item.height / 2 + item.top - paddingTop).toFloat() / (height / 2).toFloat() - 1f
         }
 
         // 滑动时填充可见的未填充的空间
@@ -161,9 +165,6 @@ class MyWheelView007 : RecyclerView {
 
                     //scarp：废品
                     val scrapItem = recycler.getViewForPosition(position)
-                    scrapItem.scaleX = 0.8f
-                    scrapItem.scaleY = 0.8f
-                    scrapItem.rotationX = -45f
                     addView(scrapItem)
                     measureChildWithMargins(scrapItem, 0, 0)
                     val left = paddingLeft
@@ -181,9 +182,6 @@ class MyWheelView007 : RecyclerView {
                     var position = (anchorPosition - 1) % itemCount
                     if (position < 0) position += itemCount
                     val scrapItem = recycler.getViewForPosition(position)
-                    scrapItem.scaleX = 0.8f
-                    scrapItem.scaleY = 0.8f
-                    scrapItem.rotationX = 45f
                     addView(scrapItem, 0)
                     measureChildWithMargins(scrapItem, 0, 0)
 //                val left = anchorView.left - getDecoratedMeasuredWidth(scrapItem)
