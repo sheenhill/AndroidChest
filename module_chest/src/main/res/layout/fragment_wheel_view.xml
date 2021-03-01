@@ -32,7 +32,7 @@
         <com.sheenhill.module_chest.custom_view.MyWheelView007
             android:id="@+id/test_2"
             android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_54"
+            android:layout_height="@dimen/dp_45"
             android:layout_marginTop="@dimen/dp_30"
             app:labels="00,10,20,30,40,50"
             app:layout_constraintStart_toStartOf="parent"

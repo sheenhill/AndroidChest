@@ -1,6 +1,7 @@
 package com.sheenhill.module_chest.custom_view
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sheenhill.common.util.LogUtil
 import com.sheenhill.module_chest.R
+import kotlinx.android.synthetic.main.item_study_record.view.*
 
 class MyWheelView007 : RecyclerView {
 
@@ -125,6 +127,7 @@ class MyWheelView007 : RecyclerView {
                 val item = getChildAt(i)!!
                 val pp = itemPercentage(item).toDouble()
                 LogUtil.d("scrollVerticallyBy  MyWheelView007 itemPercentage >>>>>>${pp} ")
+                LogUtil.d("item.height>>>>>> ih=${item.height}   ipt=${item.paddingTop}  it.top=${item.top} it.btm=${item.bottom}  i.translationY=${item.translationY}")
 //                val percent = itemPercentage(item, height) - 0.5f  // 距中点的距离比例 [-0.5,0.5]
 
 //                item.pivotY=-10f
@@ -134,20 +137,56 @@ class MyWheelView007 : RecyclerView {
 ////                item.translationY = (Math.pow(pp, 3.0) * -item.height / 5f).toFloat()
 //                item.rotationX = (Math.pow(pp, 3.0) * -60).toFloat()
                 item.alpha = (Math.abs(pp) * -0.5f + 1).toFloat()
-                item.scaleX = (Math.abs(pp) * -0.1f + 1).toFloat()
-                item.scaleY = (Math.abs(pp) * -0.1f + 1).toFloat()
-                item.pivotY= if (pp>0) 1f else 0f // fixme:增加偏移，让组件看起来紧凑点  探究pivotY
+                item.scaleX = (Math.abs(pp) * -0.2f + 1).toFloat()
+                item.scaleY = (Math.abs(pp) * -0.2f + 1).toFloat()
+//                item.pivotY= if (pp>0) 0f else 1f // fixme:增加偏移，让组件看起来紧凑点  先偏移h/2,再旋转，再偏移回来（不需偏移回来）
 //                item.translationY = (Math.pow(pp, 3.0) * -item.height / 5f).toFloat()
-                item.rotationX = (Math.pow(pp, 3.0) * -60).toFloat()
+//                item.translationY = if (pp>0) item.height/2f else -item.height/2f
+//                item.translationY = (Math.pow(pp,3.0) * -item.height/2).toFloat()
+//                item.translationY = when{
+//                    pp<0->(Math.pow(-pp,1/4.0) * item.height/4).toFloat()
+//                    pp>0->(-Math.pow(pp,1/4.0) * item.height/4).toFloat()
+//                    else->0f
+//                }
+                item.translationY = when {  // fixme: 无法找到符合translationY变化的连续函数，改用滚动值dy判断
+                    pp < 0 -> -item.height / 2f
+                    pp > 0 -> item.height / 2f
+                    else -> 0f
+                }
+                // fixme: 无法找到符合translationY变化的连续函数，改用滚动值dy判断
+//                item.translationY = if (dy > 0) {
+//                    if (pp < 0) -item.height / 2f else item.height / 2f
+//                } else {
+//                    if (pp > 0) item.height / 2f else -item.height / 2f
+//                }
+//                item.translationY = if (pp>0) item.top.toFloat() else  item.bottom.toFloat()
+                item.rotationX = (Math.pow(pp, 3.0) * -45).toFloat()
+                item.translationY = when {
+                    pp < 0 -> item.height / 2f
+                    pp > 0 -> -item.height / 2f
+                    else -> 0f
+                }
+//                item.translationY = if (dy > 0) {
+//                    if (pp < 0) item.height / 2f else -item.height / 2f
+//                } else {
+//                    if (pp > 0) -item.height / 2f else item.height / 2f
+//                }
+//                item.translationY = item.height/2f
+//                item.translationY = if (pp>0) -item.height/2f else item.height/2f
             }
             recyclerChildView(dy > 0, recycler)
             return dy
         }
 
-        //item的中点相对于RV中点位置的百分比= [-1,1]
+        //item的中点相对于RV中点位置的百分比= [-1,1]  fixme item中点到了边界才能是-1或者1
         fun itemPercentage(item: View): Float {
-//            return  ((item.height/2+item.top)-(height/2+paddingTop)).toFloat()/(height/2).toFloat()
-            return (item.height / 2 + item.top - paddingTop).toFloat() / (height / 2).toFloat() - 1f
+//            return  (item.height / 2 + item.top - paddingTop).toFloat() / (height / 2).toFloat() - 1f
+            val pp = (item.height / 2 + item.top - paddingTop).toFloat() / (height / 2).toFloat() - 1f
+            return when {
+                pp < -1 -> -1f
+                pp > 1 -> 1f
+                else -> pp
+            }
         }
 
         // 滑动时填充可见的未填充的空间
