@@ -9,12 +9,10 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.sheenhill.common.base.SingleTypeBaseRVAdapter
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
 import com.sheenhill.module_chest.BR
 import com.sheenhill.module_chest.R
-import com.sheenhill.module_chest.databinding.ItemWheelViewBinding
 import kotlinx.android.synthetic.main.fragment_wheel_view.view.*
 
 class WheelViewFragment : K_BaseJetpackFragment() {
@@ -26,12 +24,11 @@ class WheelViewFragment : K_BaseJetpackFragment() {
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
         return K_DataBindingConfig(R.layout.fragment_wheel_view, BR.viewModel, mViewModel)
-                .addBindingParam(BR.adapter,wheelViewAdapter)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        mBinding.root.test_2.setWheelListener(object : MyWheelView007.WheelListener {
+        mBinding.root.test_2.setWheelListener(object : MyWheelView.WheelListener {
             override fun popValue(str: String) {
                 mViewModel.mData.set(str)
             }
@@ -46,15 +43,7 @@ class WheelViewFragment : K_BaseJetpackFragment() {
         val mData=ObservableField<String>()
     }
 
-    val wheelViewAdapter = object : SingleTypeBaseRVAdapter<String, ItemWheelViewBinding>() {
-        override fun getLayoutResId(viewType: Int): Int {
-            return R.layout.item_wheel_view
-        }
 
-        override fun onBindItem(binding: ItemWheelViewBinding, item: String, holder: RecyclerView.ViewHolder?) {
-            binding.data = item
-        }
-    }
 
     class MyItemDecoration:RecyclerView.ItemDecoration(){
         override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {

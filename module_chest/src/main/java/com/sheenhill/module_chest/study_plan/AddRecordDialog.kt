@@ -7,8 +7,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.sheenhill.common.base.BaseDialog
+import com.sheenhill.common.util.LogUtil
 import com.sheenhill.module_chest.R
+import com.sheenhill.module_chest.custom_view.MyWheelView
 import com.sheenhill.module_chest.databinding.DialogAddRecordBinding
+import kotlinx.android.synthetic.main.dialog_add_record.view.*
+import kotlinx.android.synthetic.main.fragment_wheel_view.view.*
 
 class AddRecordDialog : BaseDialog<DialogAddRecordBinding, AddRecordDialog>() {
     lateinit var viewModel: StudyPlanViewModel
@@ -31,9 +35,22 @@ class AddRecordDialog : BaseDialog<DialogAddRecordBinding, AddRecordDialog>() {
         binding.listener= Listener()
         binding.viewModel=viewModel
         binding.nav=NavHostFragment.findNavController(this);
-        viewModel.currentRecordH.value="00"
-        viewModel.currentRecordM.value="00"
+//        viewModel.currentRecordH.value="00"
+//        viewModel.currentRecordM.value="00"
         viewModel.currentRecordNote.value=""
+        binding.root.rv_h.setWheelListener(object : MyWheelView.WheelListener {
+            override fun popValue(str: String) {
+
+                LogUtil.d(" MyWheelView.WheelListener   h$str")
+                viewModel.currentRecordH.set(str)
+            }
+        })
+        binding.root.rv_m.setWheelListener(object : MyWheelView.WheelListener {
+            override fun popValue(str: String) {
+                LogUtil.d(" MyWheelView.WheelListener   m$str")
+                viewModel.currentRecordM.set(str)
+            }
+        })
 //        viewModel: StudyPlanViewModel by navGraphViewModels(R.id.nav_module_chest) { factory }
 //        viewModel= ViewModelProvider(Stud)[StudyPlanViewModel::class.java]
     }

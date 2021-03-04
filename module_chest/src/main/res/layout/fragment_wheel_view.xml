@@ -9,9 +9,6 @@
             name="viewModel"
             type="com.sheenhill.module_chest.custom_view.WheelViewFragment.WheelViewModel" />
 
-        <variable
-            name="adapter"
-            type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,21 +16,10 @@
         android:layout_height="match_parent">
 
         <com.sheenhill.module_chest.custom_view.MyWheelView
-            android:id="@+id/test_1"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_54"
-            android:layout_marginTop="@dimen/dp_30"
-            app:labels="0,1,2,3,4,5,6,7,8,9,10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/test_2"
-            app:layout_constraintHorizontal_bias="0.885"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.sheenhill.module_chest.custom_view.MyWheelView007
             android:id="@+id/test_2"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_45"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_60"
+            app:itemHeight="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_30"
             app:labels="00,10,20,30,40,50"
             app:layout_constraintBottom_toBottomOf="parent"

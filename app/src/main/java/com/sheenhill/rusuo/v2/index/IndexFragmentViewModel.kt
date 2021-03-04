@@ -18,6 +18,27 @@ class IndexFragmentViewModel:ViewModel() {
     init {
         getBingPic()
         message.value=""
+        getTest()
+    }
+
+    private fun getTest() {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+                .url("http://192.168.0.7:3000/test/3")
+                .build()
+        client.newCall(request).enqueue(object : Callback {
+            //请求失败的回调方法
+            override fun onFailure(call: Call, e: IOException) {
+                LogUtil.i("找不到图链接啦，，，$e") //
+            }
+            //请求成功的回调方法
+            @Throws(IOException::class)
+            override fun onResponse(call: Call, response: Response) {
+                val data = response.body()!!.string()
+                LogUtil.i("getTest() 返回数据:$data")
+
+            }
+        })
     }
 
     fun getBingPic() {
