@@ -29,8 +29,4 @@
     <action
         android:id="@+id/action_global_showTextDialog"
         app:destination="@id/showTextDialog" />
-    <fragment
-        android:id="@+id/wheelViewFragment"
-        android:name="com.sheenhill.module_chest.custom_view.WheelViewFragment"
-        android:label="WheelViewFragment" />
 </navigation>

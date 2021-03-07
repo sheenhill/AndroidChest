@@ -1,5 +1,7 @@
 package com.sheenhill.rusuo.v2.index
 
+import android.content.Context
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -8,14 +10,15 @@ import android.view.ViewGroup
 import androidx.core.app.SharedElementCallback
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.sheenhill.common.share_view_model.MainActivityViewModel
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
 import com.sheenhill.common.lifecycle_observer.MyObserver
 import com.sheenhill.common.network_state.NetworkState
+import com.sheenhill.common.share_view_model.MainActivityViewModel
 import com.sheenhill.rusuo.BR
 import com.sheenhill.rusuo.R
 import kotlinx.android.synthetic.main.fragment_index_v2.view.*
+
 
 class V2_IndexFragment : K_BaseJetpackFragment() {
     private lateinit var viewModel: IndexFragmentViewModel
@@ -41,6 +44,16 @@ class V2_IndexFragment : K_BaseJetpackFragment() {
                 NetworkState.CELLULAR -> viewModel.getBingPic()
             }
         })
+        // 获取WiFi服务
+//        val wifiManager = mActivity.getApplicationContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
+//// 判断WiFi是否开启
+//        val wifiInfo = wifiManager.connectionInfo
+//        val ipAddress = wifiInfo.ipAddress
+//        val ip = (ipAddress and 0xFF).toString() + "." +
+//                (ipAddress shr 8 and 0xFF) + "." +
+//                (ipAddress shr 16 and 0xFF) + "." +
+//                (ipAddress shr 24 and 0xFF)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
