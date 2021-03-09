@@ -51,7 +51,7 @@ class AddRecordDialog : BaseDialog<DialogAddRecordBinding, AddRecordDialog>() {
                 viewModel.currentRecordM.set(str)
             }
         })
-//        viewModel: StudyPlanViewModel by navGraphViewModels(R.id.nav_module_chest) { factory }
+//        viewModel: StudyPlanViewModel by navGraphViewModels(R.id.nav_module_net) { factory }
 //        viewModel= ViewModelProvider(Stud)[StudyPlanViewModel::class.java]
     }
 

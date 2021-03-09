@@ -59,6 +59,9 @@ abstract class K_BaseJetpackFragment : Fragment() {
         for (i in 0 until bindingParams.size()) {
             mBinding.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i))
         }
+        val resourceId: Int = mActivity.resources.getIdentifier("status_bar_height", "dimen", "android")
+        val statusBarHeight: Int = mActivity.resources.getDimensionPixelSize(resourceId)
+        mBinding.root.setPadding(0,statusBarHeight,0,0)
         return mBinding.root
     }
 

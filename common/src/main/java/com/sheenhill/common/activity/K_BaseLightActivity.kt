@@ -2,9 +2,11 @@ package com.sheenhill.common.activity
 
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.sheenhill.common.network_state.NetworkLiveData
@@ -13,12 +15,13 @@ import com.sheenhill.common.share_view_model.MainActivityViewModel
 import com.sheenhill.common.util.LogUtil
 import com.sheenhill.common.util.ToastUtils
 
-abstract class K_BaseActivity : AppCompatActivity {
+abstract class K_BaseLightActivity : AppCompatActivity {
     private val shareViewModel by lazy { ViewModelProvider(this).get(MainActivityViewModel::class.java) }
 
     constructor(id:Int):super(id)
 
     constructor():super()
+
 
     init {
         INSTANCE = this
@@ -34,7 +37,7 @@ abstract class K_BaseActivity : AppCompatActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val flag = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        val flag :Int = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // 6.0 以上，状态栏支持字体变灰色

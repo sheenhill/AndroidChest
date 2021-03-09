@@ -16,6 +16,7 @@ import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
+import java.net.SocketTimeoutException
 import java.util.*
 
 class IndexFragmentViewModel : ViewModel() {
@@ -27,7 +28,7 @@ class IndexFragmentViewModel : ViewModel() {
         message.value = ""
         getTest()
 //        broadSocket()
-        receiverSocket()
+        startReceiver()
     }
 
     fun broadSocket() {
@@ -57,22 +58,63 @@ class IndexFragmentViewModel : ViewModel() {
         }
     }
 
-    fun receiverSocket() {
+    fun startReceiver() {
         viewModelScope.launch(Dispatchers.IO) {
             val buffer = ByteArray(20)
-            var server: DatagramSocket? = null
-            server = DatagramSocket(3000)
-            server.soTimeout = 1500   // 接收超时时间
             val packet = DatagramPacket(buffer, buffer.size)
-            if(server.isConnected){
-                server.receive(packet)
-                val ip = packet.address.hostAddress
-                val msg= String(packet.data)
-                val length=packet.length
-                LogUtil.d("receiverSocket>>>>>>>>ip=${ip},msg=${msg},length=${length}")
+            val socket = DatagramSocket(3000)
+            socket.soTimeout = 8000  // 接收超时时间
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    socket.receive(packet) // 阻塞接收
+                    LogUtil.i("socket.receive(packet)")
+                    if (packet.data != null) {
+                        val ip = packet.address.hostAddress
+                        val msg = String(packet.data)
+                        val length = packet.length
+                        LogUtil.d("startReceiver>>>>>>>>ip=${ip},msg=${msg},length=${length}")
+                        if (msg.contains("server.sheenhill.lan")) {
+                            LogUtil.d("startReceiver>>>>>>>>OK")
+                        }
+                    }
+                } catch (e: SocketTimeoutException) {  // 接收超时异常
+                    LogUtil.d("startReceiver>>>>>>>> timeout")
+                }
             }
-        }
+//            var count=5
+//            Timer().schedule(object : TimerTask() {
+//                override fun run() {
+//                    count--
+//                    if(count==0&&socket.isConnected)
+//                        socket.close()
+//                    // 拿不到socket状态
+//                    LogUtil.d("socket.isConnected=${socket.isConnected},isClosed=${socket.isClosed}")
+//                }
+//            }, 0, 1000)
 
+//                    if(time!=-1){
+//                        time--;
+//                    }else {
+//                        return;
+//                    }
+//            socket.close()
+//        }
+//            }, 0, 1000)
+        }
+    }
+
+    fun find(socket: DatagramSocket, packet: DatagramPacket) {
+        socket.receive(packet)
+        val ip = packet.address.hostAddress
+        val msg = String(packet.data)
+        val length = packet.length
+        LogUtil.d("startReceiver>>>>>>>>ip=${ip},msg=${msg},length=${length}")
+        if (msg.contains("server.sheenhill.lan")) {
+            LogUtil.d("startReceiver>>>>>>>>OK")
+            return
+        } else {
+            find(socket, packet)
+        }
     }
 
     private fun getTest() {

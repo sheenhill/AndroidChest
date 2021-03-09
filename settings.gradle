@@ -1,3 +1,4 @@
+include ':module_network'
 include ':module_chest'
 include ':module_test'
 include ':common'
