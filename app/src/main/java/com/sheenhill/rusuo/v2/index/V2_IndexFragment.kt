@@ -1,7 +1,5 @@
 package com.sheenhill.rusuo.v2.index
 
-import android.content.Context
-import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater

@@ -120,6 +120,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 
+    implementation project(path: ':common')
+
     // mvvm-jetpack最佳实践库
 //    api 'com.kunminx.archi:strict-databinding:3.6.2-beta1'
 

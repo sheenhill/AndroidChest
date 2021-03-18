@@ -16,9 +16,9 @@ import com.sheenhill.common.util.ToastUtils
 abstract class K_BaseActivity : AppCompatActivity {
     private val shareViewModel by lazy { ViewModelProvider(this).get(MainActivityViewModel::class.java) }
 
-    constructor(id:Int):super(id)
+    constructor(id: Int) : super(id)
 
-    constructor():super()
+    constructor() : super()
 
     init {
         INSTANCE = this
@@ -34,13 +34,13 @@ abstract class K_BaseActivity : AppCompatActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val flag = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // 6.0 以上，状态栏支持字体变灰色
-        window?.decorView?.systemUiVisibility = flag
-        window?.statusBarColor = Color.TRANSPARENT
-        window?.navigationBarColor = Color.TRANSPARENT
+//        val flag = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // 6.0 以上，状态栏支持字体变灰色
+//        window?.decorView?.systemUiVisibility = flag
+//        window?.statusBarColor = Color.TRANSPARENT
+//        window?.navigationBarColor = Color.TRANSPARENT
         var netState = NetworkState.CONNECT
         // 网络状态监听
         NetworkLiveData.getInstance().observe(this, {
@@ -61,6 +61,28 @@ abstract class K_BaseActivity : AppCompatActivity {
                     }
                 }
         })
+    }
+
+    // 设置状态栏样式  亮底黑字
+    fun setLightStatusBarStyle() {
+        val flag = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // 6.0 以上，状态栏支持字体变灰色
+        window?.decorView?.systemUiVisibility = flag
+        window?.statusBarColor = Color.TRANSPARENT
+        window?.navigationBarColor = Color.TRANSPARENT
+    }
+
+    // 设置状态栏样式  深底白字
+    fun setDarkStatusBarStyle() {
+        val flag = (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+//                or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // 6.0 以上，状态栏支持字体变灰色
+        window?.decorView?.systemUiVisibility = flag
+        window?.statusBarColor = Color.TRANSPARENT
+        window?.navigationBarColor = Color.TRANSPARENT
     }
 }
 

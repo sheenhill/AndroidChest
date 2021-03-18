@@ -12,7 +12,6 @@ import com.sheenhill.module_chest.R
 import com.sheenhill.module_chest.custom_view.MyWheelView
 import com.sheenhill.module_chest.databinding.DialogAddRecordBinding
 import kotlinx.android.synthetic.main.dialog_add_record.view.*
-import kotlinx.android.synthetic.main.fragment_wheel_view.view.*
 
 class AddRecordDialog : BaseDialog<DialogAddRecordBinding, AddRecordDialog>() {
     lateinit var viewModel: StudyPlanViewModel

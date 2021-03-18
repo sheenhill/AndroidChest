@@ -17,5 +17,4 @@ class LotteryVPAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
             else -> DLTFragment()
         }
     }
-
 }
