@@ -5,26 +5,15 @@
 
     <data>
 
-        <import type="java.util.List" />
-
         <variable
             name="data"
-            type="List&lt;String>" />
+            type="com.sheenhill.demo_lottery.LotteryBean" />
     </data>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_8"
-        android:layout_marginEnd="@dimen/dp_8"
-        android:layout_marginTop="@dimen/dp_8"
-        android:layout_marginBottom="@dimen/dp_8"
-        app:cardCornerRadius="@dimen/dp_8"
-        app:cardElevation="@dimen/dp_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginHorizontal="@dimen/dp_8">
 
 
             <TextView
@@ -33,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_24"
                 android:layout_marginTop="@dimen/dp_16"
-                android:text="@{data[0]??`xxxx-xx-xx`}"
+                android:text="@{data.lottery_time}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="2020-09-22" />
@@ -57,7 +46,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{data[9]??`:)`}"
+                    android:text="@{data.lottery_type}"
                     android:textColor="#333"
                     tools:text="双色球" />
             </androidx.cardview.widget.CardView>
@@ -80,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{data[1]??`xxxx-xx-xx`}"
+                    android:text="@{data.issue_number}"
                     android:textColor="#333"
                     tools:text="27003" />
             </androidx.cardview.widget.CardView>
@@ -92,7 +81,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginBottom="@dimen/dp_16"
-                android:text="@{data[2]??`xxxx-xx-xx`}"
+                android:text="@{data.front_num[0]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/num_red_2"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -104,7 +93,7 @@
                 style="@style/AppTheme.BlueRing"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="@{data[3]??`xxxx-xx-xx`}"
+                android:text="@{data.front_num[1]}"
                 app:layout_constraintBottom_toBottomOf="@+id/num_red_1"
                 app:layout_constraintEnd_toStartOf="@+id/num_red_3"
                 app:layout_constraintStart_toEndOf="@+id/num_red_1"
@@ -116,7 +105,7 @@
                 style="@style/AppTheme.BlueRing"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="@{data[4]??`xxxx-xx-xx`}"
+                android:text="@{data.front_num[2]}"
                 app:layout_constraintBottom_toBottomOf="@+id/num_red_2"
                 app:layout_constraintEnd_toStartOf="@+id/num_red_4"
                 app:layout_constraintStart_toEndOf="@+id/num_red_2"
@@ -128,7 +117,7 @@
                 style="@style/AppTheme.BlueRing"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="@{data[5]??`xxxx-xx-xx`}"
+                android:text="@{data.front_num[3]}"
                 app:layout_constraintBottom_toBottomOf="@+id/num_red_3"
                 app:layout_constraintEnd_toStartOf="@+id/num_red_5"
                 app:layout_constraintStart_toEndOf="@+id/num_red_3"
@@ -140,7 +129,7 @@
                 style="@style/AppTheme.BlueRing"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="@{data[6]??`xxxx-xx-xx`}"
+                android:text="@{data.front_num[4]}"
                 app:layout_constraintBottom_toBottomOf="@+id/num_red_4"
                 app:layout_constraintEnd_toEndOf="@+id/guideline"
                 app:layout_constraintStart_toEndOf="@id/num_red_4"
@@ -152,7 +141,7 @@
                 style="@style/AppTheme.RedRing"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="@{data[7]??`xxxx-xx-xx`}"
+                android:text="@{data.back_num[0]}"
                 app:layout_constraintBottom_toBottomOf="@+id/num_red_5"
                 app:layout_constraintEnd_toStartOf="@+id/num_red_7"
                 app:layout_constraintHorizontal_bias="0.7"
@@ -166,7 +155,7 @@
                 style="@style/AppTheme.RedRing"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:text="@{data[8]??`xxxx-xx-xx`}"
+                android:text="@{data.back_num[1]}"
                 app:layout_constraintBottom_toBottomOf="@+id/num_red_6"
                 app:layout_constraintEnd_toEndOf="@id/info_issue_num"
                 app:layout_constraintTop_toTopOf="@+id/num_red_6"
@@ -182,5 +171,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
 </layout>

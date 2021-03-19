@@ -1,30 +1,30 @@
 package com.sheenhill.demo_lottery
 
+import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.sheenhill.common.base.SingleTypeBaseRVAdapter
 import com.sheenhill.common.fragment.K_BaseJetpackFragment
 import com.sheenhill.common.fragment.K_DataBindingConfig
 import com.sheenhill.common.util.LogUtil
-import com.sheenhill.demo_lottery.adapter.LotteryDLTAdapter
-import com.sheenhill.demo_lottery.adapter.LotterySSQAdapter
-import kotlinx.android.synthetic.main.fragment_crawler.view.*
+import com.sheenhill.common.util.dp2px
+import com.sheenhill.demo_lottery.databinding.FragmentLotteryBinding
+import com.sheenhill.demo_lottery.databinding.ItemLotteryDltV2Binding
+import com.sheenhill.demo_lottery.databinding.ItemLotterySsqV2Binding
 
 /* 集成模式下的彩票模块入口，直接用了Navigation组件来导航 */
 class LotteryFragment : K_BaseJetpackFragment() {
     lateinit var vm: LotteryViewModel
     override fun initViewModel() {
         // 获取父级Fragment的ViewModel（从nav中拿）
-        val factory: ViewModelProvider.Factory = ViewModelProvider.NewInstanceFactory()
-        val owner: ViewModelStoreOwner = findNavController().getViewModelStoreOwner(R.id.nav_lottery)
-        vm = ViewModelProvider(owner, factory)[LotteryViewModel::class.java]
+        vm = getNavigationViewModel(LotteryViewModel::class.java, R.id.nav_lottery)
     }
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
@@ -32,12 +32,24 @@ class LotteryFragment : K_BaseJetpackFragment() {
                 .addBindingParam(BR.listener, Listener())
     }
 
+    override fun hasStatusBarHeight(): Boolean = true
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val lotteryAdapter = LotteryVPAdapter(this)
-        mBinding.root.vp_lottery.adapter = lotteryAdapter
-        mBinding.root.vp_lottery.setPageTransformer(vpAnimation)
-        mBinding.root.vp_lottery.offscreenPageLimit = 1
+        (mBinding as FragmentLotteryBinding).vpLottery.adapter = lotteryAdapter
+//        (mBinding as FragmentLotteryBinding).vpLottery.setPageTransformer(vpAnimation)
+        (mBinding as FragmentLotteryBinding).vpLottery.offscreenPageLimit = 1
+
+        // vp2 页面选择的监听
+        (mBinding as FragmentLotteryBinding).vpLottery.registerOnPageChangeCallback(
+                object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        vm.pageInfoType.value = position == 0
+                    }
+                }
+        )
         // 获取双色球数据
         vm.crawlerSsq(context, "http://datachart.500.com/ssq/history/history.shtml")
         // 获取大乐透数据
@@ -45,7 +57,7 @@ class LotteryFragment : K_BaseJetpackFragment() {
 
         vm.pageInfoType.observe(viewLifecycleOwner, { bool: Boolean ->
             LogUtil.d("pageInfoType>>>>>${bool}")
-            mBinding.root.vp_lottery.setCurrentItem(if (bool) 0 else 1)
+            (mBinding as FragmentLotteryBinding).vpLottery.setCurrentItem(if (bool) 0 else 1)
         })
         return mBinding.root
     }
@@ -141,32 +153,65 @@ class LotteryVPAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 }
 
 // 大乐透 fragment
-class DLTFragmentV2:K_BaseJetpackFragment() {
-    lateinit var vm:LotteryViewModel
+class DLTFragmentV2 : K_BaseJetpackFragment() {
+    lateinit var vm: LotteryViewModel
     override fun initViewModel() {
         // 获取父级Fragment的ViewModel（从nav中拿）
-        val factory: ViewModelProvider.Factory = ViewModelProvider.NewInstanceFactory()
-        val owner: ViewModelStoreOwner = findNavController().getViewModelStoreOwner(R.id.nav_lottery)
-        vm = ViewModelProvider(owner, factory)[LotteryViewModel::class.java]
+        vm = getNavigationViewModel(LotteryViewModel::class.java, R.id.nav_lottery)
     }
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
-        return K_DataBindingConfig(R.layout.fragment_dlt_v2,BR.viewModel,vm)
-                .addBindingParam(BR.adapterDLT, LotteryDLTAdapter())
+        return K_DataBindingConfig(R.layout.fragment_dlt_v2, BR.viewModel, vm)
+                .addBindingParam(BR.adapterDLT, LotteryDLTAdapterV2())
+                .addBindingParam(BR.itemDecoration, HeaderItemDecoration(requireContext()))
+    }
+
+    class LotteryDLTAdapterV2 : SingleTypeBaseRVAdapter<LotteryBean, ItemLotteryDltV2Binding>() {
+        override fun getLayoutResId(viewType: Int): Int {
+            return R.layout.item_lottery_dlt_v2
+        }
+
+        override fun onBindItem(binding: ItemLotteryDltV2Binding, item: LotteryBean, holder: RecyclerView.ViewHolder) {
+            binding.data = item
+        }
     }
 }
 
-class SSQFragmentV2 :K_BaseJetpackFragment() {
-    lateinit var vm:LotteryViewModel
+// 双色球 fragment
+class SSQFragmentV2 : K_BaseJetpackFragment() {
+    lateinit var vm: LotteryViewModel
     override fun initViewModel() {
         // 获取父级Fragment的ViewModel（从nav中拿）
-        val factory: ViewModelProvider.Factory = ViewModelProvider.NewInstanceFactory()
-        val owner: ViewModelStoreOwner = findNavController().getViewModelStoreOwner(R.id.nav_lottery)
-        vm = ViewModelProvider(owner, factory)[LotteryViewModel::class.java]
+        vm = getNavigationViewModel(LotteryViewModel::class.java, R.id.nav_lottery)
     }
 
     override fun getDataBindingConfig(): K_DataBindingConfig {
-        return K_DataBindingConfig(R.layout.fragment_ssq_v2,BR.viewModel,vm)
-                .addBindingParam(BR.adapterSSQ, LotterySSQAdapter())
+        return K_DataBindingConfig(R.layout.fragment_ssq_v2, BR.viewModel, vm)
+                .addBindingParam(BR.adapterSSQ, LotterySSQAdapterV2())
+                .addBindingParam(BR.itemDecoration, HeaderItemDecoration(requireContext()))
+    }
+
+    class LotterySSQAdapterV2 : SingleTypeBaseRVAdapter<LotteryBean, ItemLotterySsqV2Binding>() {
+        override fun getLayoutResId(viewType: Int): Int {
+            return R.layout.item_lottery_ssq_v2
+        }
+
+        override fun onBindItem(binding: ItemLotterySsqV2Binding, item: LotteryBean, holder: RecyclerView.ViewHolder) {
+            binding.data = item
+        }
+    }
+}
+
+class HeaderItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
+    val margin = dp2px(context, 8)
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        super.getItemOffsets(outRect, view, parent, state)
+        val position = parent.getChildLayoutPosition(view)
+        val count = parent.adapter!!.itemCount //  获取准确的Item总个数
+        when (position) {
+            0 -> outRect.set(0, margin*3, 0,0)
+            (count-1) -> outRect.set(0, 0, 0, margin)
+        }
     }
 }

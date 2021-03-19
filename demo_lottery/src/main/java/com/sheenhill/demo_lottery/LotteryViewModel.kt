@@ -18,13 +18,13 @@ class LotteryViewModel : ViewModel() {
     val pageInfoType = MutableLiveData(SSQ)
 
     // 双色球集合
-    val infoListSsq = MutableLiveData<List<List<String>>>()
+    val infoListSsq = MutableLiveData<List<LotteryBean>>()
 
     // 大乐透集合
-    val infoListDlt = MutableLiveData<List<List<String>>>()
+    val infoListDlt = MutableLiveData<List<LotteryBean>>()
 
     /* 爬取双色球彩票数据 */
-    fun crawlerSsq(context: Context?, url: String?) {
+    fun crawlerSsq(context: Context?, url: String) {
         val client = OkHttpClient()
         val request = Request.Builder()
                 .url(url)
@@ -44,13 +44,18 @@ class LotteryViewModel : ViewModel() {
                     ToastUtils.showShort(context, "不能爬")
                     return
                 }
-                val arr: MutableList<List<String>> = ArrayList()
+                val arr: MutableList<LotteryBean> = ArrayList()
                 val doc = Jsoup.parse(data)
                 val list = doc.getElementById("tablelist").getElementById("tdata").getElementsByClass("t_tr1")
                 for (element in list) {
 //                    LogUtil.i("element:"+element.text());
                     val tempArr = element.text().split(" ".toRegex()).toTypedArray()
-                    arr.add(ArrayList(Arrays.asList(tempArr[tempArr.size - 1], tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6], tempArr[7], "双")))
+                    arr.add(LotteryBean("双",
+                            tempArr[tempArr.size - 1],
+                            tempArr[0],
+                            listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5]),
+                            listOf(tempArr[6], tempArr[7]
+                            )))
                 }
                 infoListSsq.postValue(arr)
                 //                LogUtil.i("list:"+arr);
@@ -59,7 +64,7 @@ class LotteryViewModel : ViewModel() {
     }
 
     /* 爬取大乐透彩票数据 */
-    fun crawlerDLT(context: Context?, url: String?) {
+    fun crawlerDLT(context: Context?, url: String) {
         val client = OkHttpClient()
         val request = Request.Builder()
                 .url(url)
@@ -79,17 +84,21 @@ class LotteryViewModel : ViewModel() {
                     ToastUtils.showShort(context, "不能爬")
                     return
                 }
-                val arr: MutableList<List<String>> = ArrayList()
+                val arr: MutableList<LotteryBean> = ArrayList()
                 val doc = Jsoup.parse(data)
                 val list = doc.getElementById("tablelist").getElementById("tdata").getElementsByTag("tr")
                 //                LogUtil.i("crawlerDLT.list.size():"+list.size());
                 for (element in list) {
 //                    LogUtil.i("element:"+element.text());
                     val tempArr = element.text().split(" ".toRegex()).toTypedArray()
-                    arr.add(ArrayList(Arrays.asList(tempArr[tempArr.size - 1], tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6], tempArr[7], "大")))
+                    arr.add(LotteryBean("乐",
+                            tempArr[tempArr.size - 1],
+                            tempArr[0],
+                            listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6]),
+                            listOf(tempArr[7]
+                            )))
                 }
                 infoListDlt.postValue(arr)
-                //                LogUtil.i("list:"+arr);
             }
         })
     }

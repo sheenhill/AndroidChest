@@ -33,6 +33,7 @@ abstract class K_BaseJetpackFragment : Fragment() {
     protected val mFragmentProvider: ViewModelProvider by lazy { ViewModelProvider(this) } // fragment级VMP
     protected val mActivityProvider: ViewModelProvider by lazy { ViewModelProvider(mActivity) } // Activity级VMP
 
+    protected var hasStatusBarHeight=false
 
     // 此方法之后执行onCreate
     override fun onAttach(context: Context) {
@@ -43,6 +44,7 @@ abstract class K_BaseJetpackFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewModel()
+        hasStatusBarHeight=hasStatusBarHeight()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,11 +61,16 @@ abstract class K_BaseJetpackFragment : Fragment() {
         for (i in 0 until bindingParams.size()) {
             mBinding.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i))
         }
-        val resourceId: Int = mActivity.resources.getIdentifier("status_bar_height", "dimen", "android")
-        val statusBarHeight: Int = mActivity.resources.getDimensionPixelSize(resourceId)
-        mBinding.root.setPadding(0,statusBarHeight,0,0)
+        if(hasStatusBarHeight){
+            val resourceId: Int = mActivity.resources.getIdentifier("status_bar_height", "dimen", "android")
+            val statusBarHeight: Int = mActivity.resources.getDimensionPixelSize(resourceId)
+            mBinding.root.setPadding(0,statusBarHeight,0,0)
+        }
         return mBinding.root
     }
+
+    /* 为顶部状态栏留高度 */
+    protected open fun hasStatusBarHeight():Boolean=false
 
 
     /**
@@ -77,16 +84,25 @@ abstract class K_BaseJetpackFragment : Fragment() {
     protected abstract fun getDataBindingConfig(): K_DataBindingConfig
 
 
+    /**
+     * 获取Fragment级ViewModel,用作单fragment数据来源
+     */
     protected open fun <T : ViewModel> getFragmentViewModel(modelClass: Class<T>): T {
         return mFragmentProvider[modelClass]
     }
 
+    /**
+     * 获取navigation级ViewModel,用作模块级数据来源和多fragment间通信
+     */
     protected open fun <T : ViewModel> getNavigationViewModel(modelClass: Class<T>,@IdRes navId:Int):T{
         val factory: ViewModelProvider.Factory= ViewModelProvider.NewInstanceFactory()
         val owner: ViewModelStoreOwner =findNavController().getViewModelStoreOwner(navId)
         return ViewModelProvider(owner,factory)[modelClass]
     }
 
+    /**
+     * 获取Activity级ViewModel，用作APP级数据来源和多fragment间通信
+     */
     fun <T : ViewModel> getActivityViewModel(modelClass: Class<T>): T {
         return mActivityProvider[modelClass]
     }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.sheenhill.demo_lottery.LotteryViewModel" />
@@ -11,19 +12,32 @@
         <variable
             name="adapterSSQ"
             type="com.sheenhill.common.base.SingleTypeBaseRVAdapter" />
+
+        <variable
+            name="itemDecoration"
+            type="androidx.recyclerview.widget.RecyclerView.ItemDecoration" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_margin="@dimen/dp_16"-->
+        <!--            app:cardCornerRadius="@dimen/dp_16"-->
+        <!--            app:cardElevation="@dimen/dp_8">-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_ssq"
             adapter="@{adapterSSQ}"
+            itemDecoration="@{itemDecoration}"
             resource="@{viewModel.infoListSsq}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:visibility="visible" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        </androidx.cardview.widget.CardView>-->
+    </RelativeLayout>
 </layout>
