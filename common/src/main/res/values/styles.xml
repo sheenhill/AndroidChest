@@ -74,4 +74,5 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
     <!--<style name="AppTheme.Dark"></style>-->
+    <dimen name="dp_13">13dp</dimen>
 </resources>

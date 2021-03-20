@@ -12,7 +12,21 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <!--    彩票字体样式-灰色圆环，蓝字-->
+    <style name="AppTheme.GrayRingBlueText">
+        <item name="android:textSize">@dimen/dp_12</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/lottery_blue</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_ring_gray</item>
+    </style>
+    <!--    彩票字体样式-灰色圆环，红字-->
+    <style name="AppTheme.GrayRingRedText">
+        <item name="android:textSize">@dimen/dp_12</item>
+        <item name="android:textColor">@color/lottery_red</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_ring_gray</item>
+    </style>
 <!--    彩票圆环-蓝-->
     <style name="AppTheme.BlueRing">
         <item name="android:textSize">14dp</item>

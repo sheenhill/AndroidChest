@@ -16,8 +16,7 @@ import com.sheenhill.common.fragment.K_DataBindingConfig
 import com.sheenhill.common.util.LogUtil
 import com.sheenhill.common.util.dp2px
 import com.sheenhill.demo_lottery.databinding.FragmentLotteryBinding
-import com.sheenhill.demo_lottery.databinding.ItemLotteryDltV2Binding
-import com.sheenhill.demo_lottery.databinding.ItemLotterySsqV2Binding
+import com.sheenhill.demo_lottery.databinding.ItemLotteryV3Binding
 
 /* 集成模式下的彩票模块入口，直接用了Navigation组件来导航 */
 class LotteryFragment : K_BaseJetpackFragment() {
@@ -46,7 +45,7 @@ class LotteryFragment : K_BaseJetpackFragment() {
                 object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
-                        vm.pageInfoType.value = position == 0
+                        vm.pageInfoType.value = position
                     }
                 }
         )
@@ -55,9 +54,14 @@ class LotteryFragment : K_BaseJetpackFragment() {
         // 获取大乐透数据
         vm.crawlerDLT(context, "http://datachart.500.com/dlt/history/history.shtml")
 
-        vm.pageInfoType.observe(viewLifecycleOwner, { bool: Boolean ->
-            LogUtil.d("pageInfoType>>>>>${bool}")
-            (mBinding as FragmentLotteryBinding).vpLottery.setCurrentItem(if (bool) 0 else 1)
+        vm.pageInfoType.observe(viewLifecycleOwner, { type: Int ->
+            val lotteryType = when (type) {
+                vm.TYPE_SSQ -> "双色球"
+                vm.TYPE_DLT -> "大乐透"
+                else -> ""
+            }
+            LogUtil.d("pageInfoType>>>>>${lotteryType}")
+            (mBinding as FragmentLotteryBinding).vpLottery.currentItem = type
         })
         return mBinding.root
     }
@@ -66,7 +70,7 @@ class LotteryFragment : K_BaseJetpackFragment() {
         // 页面转换
         fun convert(vm: LotteryViewModel) {
             LogUtil.i("click convert")
-            vm.pageInfoType.value = !vm.pageInfoType.value!!
+            vm.pageInfoType.value = if(vm.pageInfoType.value==vm.TYPE_SSQ) vm.TYPE_DLT else vm.TYPE_SSQ
         }
     }
 
@@ -152,7 +156,7 @@ class LotteryVPAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     }
 }
 
-// 大乐透 fragment
+/* 大乐透 fragment */
 class DLTFragmentV2 : K_BaseJetpackFragment() {
     lateinit var vm: LotteryViewModel
     override fun initViewModel() {
@@ -166,18 +170,18 @@ class DLTFragmentV2 : K_BaseJetpackFragment() {
                 .addBindingParam(BR.itemDecoration, HeaderItemDecoration(requireContext()))
     }
 
-    class LotteryDLTAdapterV2 : SingleTypeBaseRVAdapter<LotteryBean, ItemLotteryDltV2Binding>() {
+    class LotteryDLTAdapterV2 : SingleTypeBaseRVAdapter<LotteryBean, ItemLotteryV3Binding>() {
         override fun getLayoutResId(viewType: Int): Int {
-            return R.layout.item_lottery_dlt_v2
+            return R.layout.item_lottery_v3
         }
 
-        override fun onBindItem(binding: ItemLotteryDltV2Binding, item: LotteryBean, holder: RecyclerView.ViewHolder) {
+        override fun onBindItem(binding: ItemLotteryV3Binding, item: LotteryBean, holder: RecyclerView.ViewHolder) {
             binding.data = item
         }
     }
 }
 
-// 双色球 fragment
+/* 双色球 fragment */
 class SSQFragmentV2 : K_BaseJetpackFragment() {
     lateinit var vm: LotteryViewModel
     override fun initViewModel() {
@@ -191,17 +195,18 @@ class SSQFragmentV2 : K_BaseJetpackFragment() {
                 .addBindingParam(BR.itemDecoration, HeaderItemDecoration(requireContext()))
     }
 
-    class LotterySSQAdapterV2 : SingleTypeBaseRVAdapter<LotteryBean, ItemLotterySsqV2Binding>() {
+    class LotterySSQAdapterV2 : SingleTypeBaseRVAdapter<LotteryBean, ItemLotteryV3Binding>() {
         override fun getLayoutResId(viewType: Int): Int {
-            return R.layout.item_lottery_ssq_v2
+            return R.layout.item_lottery_v3
         }
 
-        override fun onBindItem(binding: ItemLotterySsqV2Binding, item: LotteryBean, holder: RecyclerView.ViewHolder) {
+        override fun onBindItem(binding: ItemLotteryV3Binding, item: LotteryBean, holder: RecyclerView.ViewHolder) {
             binding.data = item
         }
     }
 }
 
+/* 彩票 RV item 装饰 */
 class HeaderItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
     val margin = dp2px(context, 8)
 
@@ -210,8 +215,8 @@ class HeaderItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
         val position = parent.getChildLayoutPosition(view)
         val count = parent.adapter!!.itemCount //  获取准确的Item总个数
         when (position) {
-            0 -> outRect.set(0, margin*3, 0,0)
-            (count-1) -> outRect.set(0, 0, 0, margin)
+            0 -> outRect.set(0, margin * 3, 0, 0)
+            (count - 1) -> outRect.set(0, 0, 0, margin)
         }
     }
 }

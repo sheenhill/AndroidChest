@@ -1,6 +1,7 @@
 package com.sheenhill.demo_lottery
 
 import android.content.Context
+import android.util.SparseArray
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sheenhill.common.util.LogUtil
@@ -8,14 +9,15 @@ import com.sheenhill.common.util.ToastUtils
 import okhttp3.*
 import org.jsoup.Jsoup
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class LotteryViewModel : ViewModel() {
-    val SSQ = true
-    val DLT = false
+    val TYPE_SSQ = 0
+    val TYPE_DLT = 1
 
     // 页面类型
-    val pageInfoType = MutableLiveData(SSQ)
+    val pageInfoType = MutableLiveData(TYPE_SSQ)
 
     // 双色球集合
     val infoListSsq = MutableLiveData<List<LotteryBean>>()
@@ -50,17 +52,35 @@ class LotteryViewModel : ViewModel() {
                 for (element in list) {
 //                    LogUtil.i("element:"+element.text());
                     val tempArr = element.text().split(" ".toRegex()).toTypedArray()
-                    arr.add(LotteryBean("双",
-                            tempArr[tempArr.size - 1],
-                            tempArr[0],
-                            listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5]),
-                            listOf(tempArr[6], tempArr[7]
-                            )))
+                    arr.add(LotteryBean(TYPE_SSQ,
+                            "双色球", "双",
+                            "${tempArr[0]}期",
+                            getDayofWeek(tempArr[tempArr.size - 1]),
+                            listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6]),
+                            listOf(tempArr[7])
+                    ))
                 }
                 infoListSsq.postValue(arr)
                 //                LogUtil.i("list:"+arr);
             }
         })
+    }
+
+    private fun getDayofWeek(date: String): String {
+        val cal = Calendar.getInstance()
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        cal.time = sdf.parse(date)
+//        return "星期${(cal.get(Calendar.DAY_OF_WEEK)-1)%7}"
+        return when (cal.get(Calendar.DAY_OF_WEEK)) {
+            1 -> "${date}(周日)"
+            2 -> "${date}(周一)"
+            3 -> "${date}(周二)"
+            4 -> "${date}(周三)"
+            5 -> "${date}(周四)"
+            6 -> "${date}(周五)"
+            7 -> "${date}(周六)"
+            else -> date
+        }
     }
 
     /* 爬取大乐透彩票数据 */
@@ -91,12 +111,13 @@ class LotteryViewModel : ViewModel() {
                 for (element in list) {
 //                    LogUtil.i("element:"+element.text());
                     val tempArr = element.text().split(" ".toRegex()).toTypedArray()
-                    arr.add(LotteryBean("乐",
-                            tempArr[tempArr.size - 1],
-                            tempArr[0],
-                            listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6]),
-                            listOf(tempArr[7]
-                            )))
+                    arr.add(LotteryBean(TYPE_DLT,
+                            "超级大乐透", "乐",
+                            "${tempArr[0]}期",
+                            getDayofWeek(tempArr[tempArr.size - 1]),
+                            listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5]),
+                            listOf(tempArr[6], tempArr[7])
+                    ))
                 }
                 infoListDlt.postValue(arr)
             }

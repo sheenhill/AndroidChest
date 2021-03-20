@@ -2,7 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval"
     android:useLevel="false">
-    <solid android:color="@color/white"/>
+    <solid android:color="@color/lottery_red"/>
     <size android:width="20dp"
     android:height="20dp"/>
 </shape>
+

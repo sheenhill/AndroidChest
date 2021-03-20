@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="data"
+            type="com.sheenhill.demo_lottery.LotteryBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_82"
+        android:layout_marginHorizontal="@dimen/dp_8">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/lottery_name"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginStart="@dimen/dp_16"
+            app:cardBackgroundColor="@color/lottery_pink"
+            app:cardCornerRadius="@dimen/dp_25"
+            app:cardElevation="@dimen/dp_8"
+            app:contentPadding="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               android:background="@drawable/round_white"
+                android:gravity="center"
+                android:text="@{data.lottery_sign}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_26"
+                android:textStyle="bold"
+                tools:text="乐" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/info_issue_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="@{data.issue_number}"
+            android:textSize="@dimen/dp_10"
+            android:textColor="@color/text666"
+            app:layout_constraintStart_toEndOf="@id/lottery_name"
+            app:layout_constraintTop_toTopOf="@id/lottery_name"
+            tools:text="27003期" />
+
+
+        <TextView
+            android:id="@+id/lottery_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_3"
+            android:textSize="@dimen/dp_9"
+            android:text="@{data.lottery_time}"
+            android:textColor="@color/text999"
+            app:layout_constraintBottom_toBottomOf="@id/info_issue_num"
+            app:layout_constraintStart_toEndOf="@id/info_issue_num"
+            tools:text="2020-09-22(周一)" />
+
+
+
+        <TextView
+            android:id="@+id/front_num1"
+            style="@style/AppTheme.GrayRingBlueText"
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:text="@{data.front_num[0]}"
+            android:layout_marginBottom="@dimen/dp_3"
+            app:layout_constraintStart_toStartOf="@id/info_issue_num"
+            app:layout_constraintBottom_toBottomOf="@id/lottery_name"
+            tools:text="00" />
+        <TextView
+            android:id="@+id/front_num2"
+            style="@style/AppTheme.GrayRingBlueText"
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:layout_marginStart="@dimen/dp_3"
+            android:text="@{data.front_num[1]}"
+            app:layout_constraintStart_toEndOf="@id/front_num1"
+            app:layout_constraintBottom_toBottomOf="@id/front_num1"
+            tools:text="01" />
+        <TextView
+            android:id="@+id/front_num3"
+            style="@style/AppTheme.GrayRingBlueText"
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:layout_marginStart="@dimen/dp_3"
+            android:text="@{data.front_num[2]}"
+            app:layout_constraintStart_toEndOf="@id/front_num2"
+            app:layout_constraintBottom_toBottomOf="@id/front_num1"
+            tools:text="02" />
+        <TextView
+        android:id="@+id/front_num4"
+        style="@style/AppTheme.GrayRingBlueText"
+        android:layout_width="@dimen/dp_26"
+        android:layout_height="@dimen/dp_26"
+        android:layout_marginStart="@dimen/dp_3"
+        android:text="@{data.front_num[3]}"
+        app:layout_constraintStart_toEndOf="@id/front_num3"
+        app:layout_constraintBottom_toBottomOf="@id/front_num1"
+        tools:text="03" />
+        <TextView
+            android:id="@+id/front_num5"
+            style="@style/AppTheme.GrayRingBlueText"
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:layout_marginStart="@dimen/dp_3"
+            android:text="@{data.front_num[4]}"
+            app:layout_constraintStart_toEndOf="@id/front_num4"
+            app:layout_constraintBottom_toBottomOf="@id/front_num1"
+            tools:text="04" />
+        <TextView
+            android:id="@+id/front_num6"
+            style="@style/AppTheme.GrayRingBlueText"
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:layout_marginStart="@dimen/dp_3"
+            android:visibility="@{data.lottery_type==0?View.VISIBLE:View.GONE}"
+            android:text="@{data.front_num[5]??``}"
+            app:layout_constraintStart_toEndOf="@id/front_num5"
+            app:layout_constraintBottom_toBottomOf="@id/front_num1"
+            tools:text="04" />
+
+        <View
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:id="@+id/holder_view"
+            app:layout_constraintStart_toEndOf="@id/front_num6"
+            app:layout_constraintBottom_toBottomOf="@id/front_num1"/>
+        <TextView
+            android:id="@+id/back_num1"
+            style="@style/AppTheme.GrayRingRedText"
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:text="@{data.back_num[0]}"
+            app:layout_constraintStart_toEndOf="@id/holder_view"
+            app:layout_constraintBottom_toBottomOf="@id/front_num1"
+            tools:text="01" />
+        <TextView
+            android:id="@+id/back_num2"
+            style="@style/AppTheme.GrayRingRedText"
+            android:layout_width="@dimen/dp_26"
+            android:layout_height="@dimen/dp_26"
+            android:layout_marginStart="@dimen/dp_3"
+            android:visibility="@{data.lottery_type==1?View.VISIBLE:View.GONE}"
+            android:text="@{data.back_num[1]??``}"
+            app:layout_constraintStart_toEndOf="@id/back_num1"
+            app:layout_constraintBottom_toBottomOf="@id/front_num1"
+            tools:text="02" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
