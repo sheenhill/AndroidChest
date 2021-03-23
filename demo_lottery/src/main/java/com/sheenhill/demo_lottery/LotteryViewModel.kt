@@ -52,12 +52,12 @@ class LotteryViewModel : ViewModel() {
                 for (element in list) {
 //                    LogUtil.i("element:"+element.text());
                     val tempArr = element.text().split(" ".toRegex()).toTypedArray()
-                    arr.add(LotteryBean(TYPE_SSQ,
-                            "双色球", "双",
-                            "${tempArr[0]}期",
-                            getDayofWeek(tempArr[tempArr.size - 1]),
-                            listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6]),
-                            listOf(tempArr[7])
+                    arr.add(LotteryBean(lottery_type = TYPE_SSQ,
+                            lottery_name = "双色球", lottery_sign = "双",
+                            issue_number = "${tempArr[0]}期",
+                            lottery_time = getDayofWeek(tempArr[tempArr.size - 1]),
+                            front_num = listOf(tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6]),
+                            back_num = listOf(tempArr[7])
                     ))
                 }
                 infoListSsq.postValue(arr)

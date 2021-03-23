@@ -65,9 +65,7 @@
             app:layout_constraintBottom_toBottomOf="@id/info_issue_num"
             app:layout_constraintStart_toEndOf="@id/info_issue_num"
             tools:text="2020-09-22(周一)" />
-
-
-
+        
         <TextView
             android:id="@+id/front_num1"
             style="@style/AppTheme.GrayRingBlueText"

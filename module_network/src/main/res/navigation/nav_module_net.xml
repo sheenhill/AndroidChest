@@ -3,10 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_module_net"
-    app:startDestination="@id/netTestFragment">
+    app:startDestination="@id/webSocketTestFragment">
 
     <fragment
         android:id="@+id/netTestFragment"
         android:name="com.sheenhill.module_network.NetTestFragment"
         android:label="NetTestFragment" />
+    <fragment
+        android:id="@+id/webSocketTestFragment"
+        android:name="com.sheenhill.module_network.test_webSocket.WebSocketTestFragment"
+        android:label="WebSocketTestFragment" />
 </navigation>
